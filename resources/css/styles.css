@@ -1,0 +1,20 @@
+/* styles.css */
+/* Custom colors for red brick and creamy tones */
+.bg-red-brick {
+    background-color: #8B0000; /* Dark red brick color */
+  }
+  .text-red-brick {
+    color: #8B0000;
+  }
+  .bg-creamy {
+    background-color: #FFFDD0; /* Creamy color */
+  }
+  .text-creamy {
+    color: #FFFDD0;
+  }
+  .hover\:bg-red-brick:hover {
+    background-color: #6B0000; /* Slightly darker red brick for hover */
+  }
+  .hover\:text-red-brick:hover {
+    color: #6B0000;
+  }
