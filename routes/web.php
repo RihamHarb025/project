@@ -5,15 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 
 Route::get('/', function () {
-
-    return view('recipes.index');
-});
+    return view('welcome');
+})->name('welcome');
 
 Route::resource('recipes',RecipeController::class);
 
-Route::get('/recipes', function () {
-    return view('recipes.show');
-});
 
 Route::get('/contact', function () {
     return view('recipes.contact');
