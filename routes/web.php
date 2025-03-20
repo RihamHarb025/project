@@ -1,23 +1,21 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\RecipeController;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
 Route::resource('recipes',RecipeController::class);
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/contact', function () {
-    return view('recipes.contact');
-});
-Route::get('/login', function () {
-    return view('recipes.login');
-});
-Route::get('/signup', function () {
-    return view('recipes.signup');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+require __DIR__.'/auth.php';
