@@ -3,27 +3,18 @@ $(document).ready(function () {
     let index = 0;
 
     function changeText() {
-        // Fade out the text and move it up
         $("#animated-text").css({ transform: "translateY(-20px)", opacity: 0 });
-
-        // Wait a bit before changing text
         setTimeout(() => {
-            index = (index + 1) % texts.length; // Cycle through the texts array
+            index = (index + 1) % texts.length;
             $("#animated-text").text(texts[index]).css({ transform: "translateY(20px)" });
-
-            // After changing the text, fade it back in and move it to original position
             setTimeout(() => {
                 $("#animated-text").css({ transform: "translateY(0)", opacity: 1 });
-            }, 200); // Small delay to ensure smooth transition
-        }, 800); // Wait time before changing the text
+            }, 200);
+        }, 800);
     }
-
-    // Fade in the initial text
     setTimeout(() => {
         $("#animated-text").css({ opacity: 1 });
-    }, 500); // Fade in delay (ensure text appears after a short delay)
-
-    // Change the text every 3 seconds
+    }, 500);
     setInterval(changeText, 3000);
 
     function checkVisibility() {
@@ -38,12 +29,9 @@ $(document).ready(function () {
           }
         });
       }
-  
-      // Trigger the checkVisibility function when the page is scrolled
       $(window).on('scroll', function() {
         checkVisibility();
       });
   
-      // Initial check for visibility
       checkVisibility();
 });

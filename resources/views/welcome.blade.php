@@ -2,23 +2,8 @@
 @section('content')
 
 <section class="w-full bg-orange-50 h-[800px] relative  flex justify-center items-center">
-  <div class=" w-full h-[800px] relative flex justify-center items-center bg-[url('{{asset('imgs/overlay.png')}}')] bg-cover bg-center"
-  <div class="bg-green-950 text-center text-white z-10 relative">
-  <!-- <p class="text-white font-bold h-20 py-5">LIMITED TIME: 30% off + free gift in every delivery Learn More </p>
-  </div> -->
-  <!-- <div class="absolute top-0 left-0  z-0">
-    <img src="{{asset('imgs/salad.png')}}" class="lg: w-[600px] h-[600px]">
-  </div>
-  <div class="absolute top-64 right-10 z-0">
-    <img src="{{asset('imgs/omlette.png')}}" class="lg: w-[600px] h-[600px]">
-  </div>
-  <div class="absolute top-0 right-0 z-0">
-    <img src="{{asset('imgs/basil.png')}}" class="lg: w-[200px] h-[200px]">
-  </div>
-  <div class="absolute bottom-0 left-0 z-0">
-    <img src="{{asset('imgs/bowl1.png')}}" class="lg: w-[650px] h-[700px]">
-  </div> -->
-
+  <div class=" w-full h-[800px] relative flex justify-center items-center bg-[url('{{asset('imgs/overlay.png')}}')] bg-cover bg-center">
+  
   <div class="flex flex-col justify-center items-center  gap-5">
     <h1 class="text-7xl text-green-950 max-w-xl text-center font-bold">The easiest way to eat healthy </h1>
       <div class="flex flex-col gap-2  items-center">
@@ -26,7 +11,7 @@
      </h3>
      <h3 class="text-2xl text-green-900 font-bold">for you and your family</h3>
       </div>
-    <button class="bg-green-900 text-white rounded-full text-2xl px-5 py-5  hover:bg-green-950 transition">Get Started</button>
+    <button class="bg-green-900 text-white rounded-full text-2xl px-6 py-3  hover:bg-green-950 transition duration-300 ease-in-out">Get Started</button>
     </div>
 </div>
 </section>
@@ -133,27 +118,27 @@
   </div>
 
   <div class="grid grid-cols-3 gap-6 w-full max-w-7xl mx-auto mt-16">
-  <!-- Box 1: Meal Plans -->
+  
   <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg col-span-2 h-[500px]">
     <h2 class="text-4xl font-bold text-white opacity-80">Meal Plans</h2>
     <p class="mt-6 text-xl text-white font-semibold">With Tasty Nest Premium, get personalized meal plans for every week. Take the stress out of planning meals for you and your family!</p>
-    <!-- Meal Plan Image -->
+  
     <img src="{{asset('imgs/meal-plan-example.jpg')}}" alt="Meal Plan" class="mt-6 rounded-lg w-full h-[300px] object-cover">
   </div>
 
-  <!-- Box 2: Exclusive Recipes -->
+ 
   <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg h-[500px]">
     <h2 class="text-4xl font-bold text-white opacity-80">Exclusive Recipes</h2>
     <p class="mt-6">Gain access to over 100+ exclusive recipes that will elevate your cooking skills and taste buds.</p>
-    <!-- Recipe Image -->
+    
     <img src="https://via.placeholder.com/500x300?text=Exclusive+Recipes" alt="Exclusive Recipes" class="mt-6 rounded-lg w-full h-[200px] object-cover">
   </div>
 
-  <!-- Box 3: All the Benefits (Spanning Full Width) -->
+ 
   <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg col-span-3 h-[300px]">
     <h2 class="text-4xl font-bold text-white opacity-80">All the Benefits of Premium</h2>
     <p class="mt-6">Subscribe to Tasty Nest Premium and enjoy meal plans, exclusive recipes, grocery shopping lists, and much more to make your cooking life easier!</p>
-    <!-- All Benefits Image -->
+    
     <img src="https://via.placeholder.com/1000x400?text=All+Benefits" alt="All Benefits" class="mt-6 rounded-lg w-full h-[200px] object-cover">
   </div>
 </div>
