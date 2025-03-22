@@ -1,218 +1,165 @@
 @extends('layouts.main')
 @section('content')
 
-
-<section class="flex justify-between min-h-[200px] md:min-h-[300px] lg:min-h-[600px]  w-full mt-10 px-4 py-4 gap-10 relative bg-no-repeat bg-center bg-cover" style="background-image:url('{{ asset('imgs/overlay.jpg') }}');">
-
-    <!-- <div class="absolute left-0 top-0 z-0">
-    <img src="{{ asset('imgs/basil.png') }}" alt="Basil" class="w-32 h-auto sm:w-48 lg:w-64">
-        </div>
-
-    <div class="absolute right-24 top-0 z-0">
-    <img src="{{ asset('imgs/lemon.png') }}" alt="lemon" class="w-32 h-auto sm:w-48 lg:w-64">
-        </div> -->
-
-  <div class="flex flex-col gap-4 max-w-3xl  py-5 px-5 ml-10 z-10 border items-center justify-center bg-black bg-opacity-50 rounded-lg text-center h-auto w-auto">
-    <h1 class="font-[Playfair_Display] text-6xl text-white">Simple and Tasty Recipes</h1>
-    <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae quisquam magni sunt aperiam veniam a eum totam, facilis delectus nostrum maxime ullam, vero sed ipsum amet consequatur esse voluptatum quasi?</p>
-    <button class="bg-red-800 hover:bg-red-900 text-white rounded py-2 px-3 max-w-fit mt-3">Get Started</button>
+<section class="w-full bg-orange-50 h-[800px] relative  flex justify-center items-center">
+  <div class=" w-full h-[800px] relative flex justify-center items-center bg-[url('{{asset('imgs/overlay.png')}}')] bg-cover bg-center"
+  <div class="bg-green-950 text-center text-white z-10 relative">
+  <!-- <p class="text-white font-bold h-20 py-5">LIMITED TIME: 30% off + free gift in every delivery Learn More </p>
+  </div> -->
+  <!-- <div class="absolute top-0 left-0  z-0">
+    <img src="{{asset('imgs/salad.png')}}" class="lg: w-[600px] h-[600px]">
   </div>
-
-  <!-- <div class="rounded border absolute bottom-10 right-20 w-80  px-5 py-5 z-10 bg-white bg-opacity-80">
-      <div class="flex flex-col gap-2">
-          <div class="w-16 h-16 rounded-full border">
-              <img src="#">
-          </div>
-
-          <div class="flex flex-col border">
-              <h4>Name</h4>
-              <p>Description</p>
-          </div>
-      </div>
-
-
-      <div id="feedback"></div>
+  <div class="absolute top-64 right-10 z-0">
+    <img src="{{asset('imgs/omlette.png')}}" class="lg: w-[600px] h-[600px]">
+  </div>
+  <div class="absolute top-0 right-0 z-0">
+    <img src="{{asset('imgs/basil.png')}}" class="lg: w-[200px] h-[200px]">
+  </div>
+  <div class="absolute bottom-0 left-0 z-0">
+    <img src="{{asset('imgs/bowl1.png')}}" class="lg: w-[650px] h-[700px]">
   </div> -->
 
-  <!-- <div class="flex justify-center items-center flex-1 mb-10 md:mb-16 lg:mb-0 z-0 ">
-    <img class="w-[90%] h-full " src="{{ asset('imgs/saladbowl.png') }}" alt="salad bowl" />
-  </div> -->
-</section>
-
-   <section class="flex flex-col flex-wrap justify-center items-center gap-16 mt-32">
-   <div class="text-center  flex flex-col justify-center items-center gap-5">
-<h2 class="text-5xl text-red-800">Browse Our Collection of Recipe Categories</h2>
-<h4 class="text-3xl text-red-900">From Breakfast to Dinner and More!</h4>
-    </div>
-
-
-  <div class="flex justify-between gap-5">
-
-    <div class="bg-white border border-gray-200 rounded-lg shadow-lg hover:scale-105 transform transition-all hover:shadow-xl w-64 max-w-[16rem]">
-      <img src="#" alt="Category 1" class="w-full h-48 object-cover rounded-t-lg">
-      <div class="p-4 text-center">
-        <h3 class="text-2xl font-semibold text-gray-800">Breakfast</h3>
-        <p class="text-gray-600 mt-2">Description</p>
-        <button class="bg-red-800 hover:bg-red-900 text-white rounded py-2 px-3 max-w-fit mt-3">Get Started</button>
+  <div class="flex flex-col justify-center items-center  gap-5">
+    <h1 class="text-7xl text-green-950 max-w-xl text-center font-bold">The easiest way to eat healthy </h1>
+      <div class="flex flex-col gap-2  items-center">
+     <h3 id="animated-text" class="scroll-up text-2xl text-green-900 opacity-0 font-bold">The best recipes
+     </h3>
+     <h3 class="text-2xl text-green-900 font-bold">for you and your family</h3>
       </div>
-        </div>
-
-      <div class="bg-white border border-gray-200 rounded-lg shadow-lg hover:scale-105 transform transition-all hover:shadow-xl w-64 max-w-[16rem]">
-      <img src="#" alt="Category 2" class="w-full h-48 object-cover rounded-t-lg">
-      <div class="p-4 text-center">
-        <h3 class="text-2xl font-semibold text-gray-800">Lunch</h3>
-        <p class="text-gray-600 mt-2">Description</p>
-        <button class="bg-red-800 hover:bg-red-900 text-white rounded py-2 px-3 max-w-fit mt-3">Get Started</button>
-      </div>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-lg shadow-lg hover:scale-105 transform transition-all hover:shadow-xl w-64 max-w-[16rem]">
-      <img src="#" alt="Category 3" class="w-full h-48 object-cover rounded-t-lg">
-      <div class="p-4 text-center">
-        <h3 class="text-2xl font-semibold text-gray-800">Dinner</h3>
-        <p class="text-gray-600 mt-2">Description</p>
-        <button class="bg-red-800 hover:bg-red-900 text-white rounded py-2 px-3 max-w-fit mt-3">Get Started</button>
-      </div>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-lg shadow-lg hover:scale-105 transform transition-all hover:shadow-xl w-64 max-w-[16rem]">
-      <img src="#" alt="Category 4" class="w-full h-48 object-cover rounded-t-lg">
-      <div class="p-4 text-center">
-        <h3 class="text-2xl font-semibold text-gray-800">Snacks</h3>
-        <p class="text-gray-600 mt-2">Description</p>
-        <button class="bg-red-800 hover:bg-red-900 text-white rounded py-2 px-3 max-w-fit mt-3">Get Started</button>
-      </div>
-</div>
-
-<div class="bg-white border border-gray-200 rounded-lg shadow-lg hover:scale-105 transform transition-all hover:shadow-xl w-64 max-w-[16rem]">
-      <img src="#" alt="Category 3" class="w-full h-48 object-cover rounded-t-lg">
-      <div class="p-4 text-center">
-        <h3 class="text-2xl font-semibold text-gray-800">Dessert</h3>
-        <p class="text-gray-600 mt-2">Description</p>
-        <button class="bg-red-800 hover:bg-red-900 text-white rounded py-2 px-3 max-w-fit mt-3">Get Started</button>
-      </div>
-        </div>
-
-
-
-</div>
-</section>
-
-<section class="w-full h-auto flex flex-col flex-wrap justify-center gap-16 mt-32">
-    <div class="text-center  flex flex-col justify-center items-center gap-5">
-<h2 class="text-5xl text-red-800">Never Run Out of Meal Ideas</h2>
-<h4 class="text-3xl text-red-900"> Choose From 100+ Recipes</h4>
-    </div>
-
-    <div class="flex justify-center gap-10 flex-wrap">
-    <!-- Recipe Card 1 -->
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-        <div class="flex justify-center mt-6">
-            <img src="your-recipe-image.jpg" alt="Recipe" class="w-32 h-32 object-cover rounded-full shadow-md border-4 border-gray-200 transition-transform duration-300 hover:scale-105">
-        </div>
-        <div class="p-6 text-center">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2 transition-colors duration-300 hover:text-red-700">Delicious Recipe</h3>
-            <p class="text-gray-600 text-sm">A short description of the recipe that looks tasty and inviting.</p>
-            <button class="mt-4 bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full shadow-md transition-all duration-300">View Recipe</button>
-        </div>
-    </div>
-
-    <!-- Recipe Card 2 -->
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-        <div class="flex justify-center mt-6">
-            <img src="your-recipe-image.jpg" alt="Recipe" class="w-32 h-32 object-cover rounded-full shadow-md border-4 border-gray-200 transition-transform duration-300 hover:scale-105">
-        </div>
-        <div class="p-6 text-center">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2 transition-colors duration-300 hover:text-red-700">Delicious Recipe</h3>
-            <p class="text-gray-600 text-sm">A short description of the recipe that looks tasty and inviting.</p>
-            <button class="mt-4 bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full shadow-md transition-all duration-300">View Recipe</button>
-        </div>
-    </div>
-
-    <!-- Recipe Card 3 -->
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-        <div class="flex justify-center mt-6">
-            <img src="your-recipe-image.jpg" alt="Recipe" class="w-32 h-32 object-cover rounded-full shadow-md border-4 border-gray-200 transition-transform duration-300 hover:scale-105">
-        </div>
-        <div class="p-6 text-center">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2 transition-colors duration-300 hover:text-red-700">Delicious Recipe</h3>
-            <p class="text-gray-600 text-sm">A short description of the recipe that looks tasty and inviting.</p>
-            <button class="mt-4 bg-red-800 hover:bg-red-900 text-white font-semibold py-2 px-4 rounded-full shadow-md transition-all duration-300">View Recipe</button>
-        </div>
+    <button class="bg-green-900 text-white rounded-full text-2xl px-5 py-5  hover:bg-green-950 transition">Get Started</button>
     </div>
 </div>
 </section>
 
-<section class="border h-auto w-full flex flex-col justify-center items-center mt-32 gap-16">
-<div class="text-center  flex flex-col justify-center items-center gap-5">
-<h2 class="text-5xl text-red-800">Fresh Weekly Meal Plans</h2>
-<h4 class="text-3xl text-red-900">100+ Ways to Eat Healthy</h4>
+<section class="relative">
+
+  <div class="absolute top-10 left-20 w-[200px] h-[200px]">
+    <img src="{{asset('imgs/drawnBasil1.png')}}" class="w-full h-full">
+  </div>
+
+  <div class="flex flex-col items-center gap-4 mt-20">
+  <h2 class="text-5xl text-green-950 max-w-xl text-center font-bold">Browse Our Collection of Recipe Categories</h2>
+  <h4 class="text-3xl text-green-900 text-center font-bold">from breakfast to dinner and more!</h4>
+  </div>
+
+  <div class="absolute top-40 right-20 w-[200px] h-[200px]">
+    <img src="{{asset('imgs/drawnBasil2.png')}}" class="w-full h-full">
+  </div>
+
+ 
+
+  <div class="flex justify-center gap-10 mt-20 z-10">
+
+  <div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out opacity-0 translate-y-12 card">
+  <div class="p-6">
+    <div class="flex justify-center mb-4">
+      <img src="your-icon-url.png" alt="Icon" class="w-16 h-16 rounded-full object-cover">
     </div>
-
-
-<div class="flex justify-center gap-10 flex-wrap">
-<div class="relative bg-white shadow-lg rounded-lg p-6 w-80">
-  <!-- Sticker -->
-  <div class="absolute -top-4 -left-4 bg-red-500 text-xs font-bold px-4 py-2 rounded-full bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-100
-     transform transition-all hover:scale-105  animate-glow 
-  ">
-    PREMUIM
+    <h2 class="text-2xl font-bold text-center text-green-950 mb-2">Category</h2>
+    <p class="text-green-900 font-semibold text-center text-base">A brief description of the recipe or meal goes here, explaining the unique features or benefits. Keep it concise and appealing!</p>
   </div>
-  <!-- Card Content -->
-  <div class="w-full h-48">
-    <img src="https://via.placeholder.com/300" alt="Card Image" class="w-full h-full object-cover">
-  </div>
-  <h2 class="text-lg font-semibold">Awesome Card</h2>
-  <p class="text-gray-600 mt-2">This is an example of a card with a round sticker on the top-left.</p>
-  <button class="mt-4 bg-red-800 text-white px-4 py-2 rounded-lg">Check Out</button>
 </div>
 
-<div class="relative bg-white shadow-lg rounded-lg p-6 w-80">
-  <!-- Sticker -->
-  <div class="absolute -top-4 -left-4 bg-red-500 text-xs font-bold px-4 py-2 rounded-full bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-100
-     transform transition-all hover:scale-105  animate-glow 
-  ">
-    PREMUIM
+<div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out opacity-0 translate-y-12 card">
+  <div class="p-6">
+    <div class="flex justify-center mb-4">
+      <img src="your-icon-url.png" alt="Icon" class="w-16 h-16 rounded-full object-cover">
+    </div>
+    <h2 class="text-2xl font-bold text-center text-green-950 mb-2">Category</h2>
+    <p class="text-green-900 font-semibold text-center text-base">A brief description of the recipe or meal goes here, explaining the unique features or benefits. Keep it concise and appealing!</p>
   </div>
-  <!-- Card Content -->
-  <div class="w-full h-48">
-    <img src="https://via.placeholder.com/300" alt="Card Image" class="w-full h-full object-cover">
-  </div>
-  <h2 class="text-lg font-semibold">Awesome Card</h2>
-  <p class="text-gray-600 mt-2">This is an example of a card with a round sticker on the top-left.</p>
-  <button class="mt-4 bg-red-800 text-white px-4 py-2 rounded-lg">Check Out</button>
 </div>
 
-<div class="relative bg-white shadow-lg rounded-lg p-6 w-80">
-  <!-- Sticker -->
-  <div class="absolute -top-4 -left-4 bg-red-500 text-xs font-bold px-4 py-2 rounded-full bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-100
-     transform transition-all hover:scale-105  animate-glow 
-  ">
-    PREMUIM
+<div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out opacity-0 translate-y-12 card">
+  <div class="p-6">
+    <div class="flex justify-center mb-4">
+      <img src="your-icon-url.png" alt="Icon" class="w-16 h-16 rounded-full object-cover">
+    </div>
+    <h2 class="text-2xl font-bold text-center text-green-950 mb-2">Category</h2>
+    <p class="text-green-900 font-semibold text-center text-base">A brief description of the recipe or meal goes here, explaining the unique features or benefits. Keep it concise and appealing!</p>
   </div>
-  <!-- Card Content -->
-  <div class="w-full h-48">
-    <img src="https://via.placeholder.com/300" alt="Card Image" class="w-full h-full object-cover">
+</div>
+
+
+
   </div>
-  <h2 class="text-lg font-semibold">Awesome Card</h2>
-  <p class="text-gray-600 mt-2">This is an example of a card with a round sticker on the top-left.</p>
-  <button class="mt-4 bg-red-800 text-white px-4 py-2 rounded-lg">Check Out</button>
+  
+</section>
+
+<section class="relative h-auto mt-40">
+<div class="flex flex-col items-center gap-4 mt-20">
+  <h2 class="text-5xl text-green-950 max-w-xl text-center font-bold">Never Run Out of Meal Ideas</h2>
+  <h4 class="text-3xl text-green-900 text-center font-bold">Choose From 100+ Recipes!</h4>
+  </div>
+
+  <div class="flex justify-center gap-10 mt-10">
+  <div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out opacity-0 translate-y-12 card">
+  <div class="p-6">
+    <div class="flex justify-center mb-4">
+      <img src="your-recipe-image-url.jpg" alt="Recipe Image" class="w-32 h-32 rounded-lg object-cover">
+    </div>
+    <h2 class="text-2xl font-bold text-center text-green-950 mb-2">Category</h2>
+    <p class="text-green-900 font-semibold text-center text-base">A brief description of the recipe or meal goes here, explaining the unique features or benefits. Keep it concise and appealing!</p>
+  </div>
+</div>
+
+<div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out opacity-0 translate-y-12 card">
+  <div class="p-6">
+    <div class="flex justify-center mb-4">
+      <img src="your-recipe-image-url.jpg" alt="Recipe Image" class="w-32 h-32 rounded-lg object-cover">
+    </div>
+    <h2 class="text-2xl font-bold text-center text-green-950 mb-2">Category</h2>
+    <p class="text-green-900 font-semibold text-center text-base">A brief description of the recipe or meal goes here, explaining the unique features or benefits. Keep it concise and appealing!</p>
+  </div>
+</div>
+
+<div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out opacity-0 translate-y-12 card">
+  <div class="p-6">
+    <div class="flex justify-center mb-4 border">
+      <img src="{{asset('imgs/bowl1.png')}}" alt="Recipe Image" class="w-32 h-32 rounded-lg object-cover">
+    </div>
+    <h2 class="text-2xl font-bold text-center text-green-950 mb-2">Category</h2>
+    <p class="text-green-900 font-semibold text-center text-base">A brief description of the recipe or meal goes here, explaining the unique features or benefits. Keep it concise and appealing!</p>
+  </div>
 </div>
 
 </div>
 </section>
+<section class="mt-40">
 
-<section class="mt-32">
-<div class="relative w-full h-96 bg-cover bg-center flex items-center justify-center" style="background-image: url('{{ asset('imgs/overlay2.jpg') }}');">
-    <!-- <div class="bg-black bg-opacity-50 p-6 rounded-lg text-center"> -->
-    <div class="text-center border flex flex-col gap-5 items-center mt-16">
-        <h2 class="text-5xl font-bold">Delicious Recipes Await!</h2>
-        <p class="mt-2 text-lg">Explore our premium recipes and elevate your cooking skills.</p>
-        <button class="mt-4 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-full">Get Premium</button>
-    </div>
+<div class="flex flex-col items-center gap-4 mt-20 ">
+  <h2 class="text-5xl text-green-950 max-w-2xl text-center font-bold">Enjoy Tasty Nest with</h2>
+  <h4 class="text-3xl text-green-900 text-center font-bold">PREMUIM</h4>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6 w-full max-w-7xl mx-auto mt-16">
+  <!-- Box 1: Meal Plans -->
+  <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg col-span-2 h-[500px]">
+    <h2 class="text-4xl font-bold text-white opacity-80">Meal Plans</h2>
+    <p class="mt-6 text-xl text-white font-semibold">With Tasty Nest Premium, get personalized meal plans for every week. Take the stress out of planning meals for you and your family!</p>
+    <!-- Meal Plan Image -->
+    <img src="{{asset('imgs/meal-plan-example.jpg')}}" alt="Meal Plan" class="mt-6 rounded-lg w-full h-[300px] object-cover">
+  </div>
+
+  <!-- Box 2: Exclusive Recipes -->
+  <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg h-[500px]">
+    <h2 class="text-4xl font-bold text-white opacity-80">Exclusive Recipes</h2>
+    <p class="mt-6">Gain access to over 100+ exclusive recipes that will elevate your cooking skills and taste buds.</p>
+    <!-- Recipe Image -->
+    <img src="https://via.placeholder.com/500x300?text=Exclusive+Recipes" alt="Exclusive Recipes" class="mt-6 rounded-lg w-full h-[200px] object-cover">
+  </div>
+
+  <!-- Box 3: All the Benefits (Spanning Full Width) -->
+  <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg col-span-3 h-[300px]">
+    <h2 class="text-4xl font-bold text-white opacity-80">All the Benefits of Premium</h2>
+    <p class="mt-6">Subscribe to Tasty Nest Premium and enjoy meal plans, exclusive recipes, grocery shopping lists, and much more to make your cooking life easier!</p>
+    <!-- All Benefits Image -->
+    <img src="https://via.placeholder.com/1000x400?text=All+Benefits" alt="All Benefits" class="mt-6 rounded-lg w-full h-[200px] object-cover">
+  </div>
 </div>
+
+
+
 </section>
-
-
 
 @endsection

@@ -14,3 +14,6 @@
   .animate-glow {
     animation: glow 1.5s infinite ease-in-out;
   }
+  .scroll-up {
+    transition: transform 1s ease-in-out, opacity 1s;
+}
