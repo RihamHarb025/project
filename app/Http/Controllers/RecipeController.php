@@ -10,11 +10,19 @@ class RecipeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $recipes = Recipe::all();
-        return view('recipes.index',compact('recipes'));
+        $search = $request->input('search');
+
+    $recipes = Recipe::when($search, function ($query, $search) {
+        return $query->where('title', 'like', '%' . $search . '%');
+    })->get();
+
+    if ($request->ajax()) {
+        return view('recipes._recipe_cards', compact('recipes'))->render();
+    }
+
+    return view('recipes.index', compact('recipes', 'search'));
     }
 
     /**
@@ -38,7 +46,11 @@ class RecipeController extends Controller
      */
     public function show(string $id)
     {
-        //
+         // Find the recipe by ID
+         $recipe = Recipe::findOrFail($id);
+
+         // Pass the recipe to the view
+         return view('recipes.show', compact('recipe'));
     }
 
     /**

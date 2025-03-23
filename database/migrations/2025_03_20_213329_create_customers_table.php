@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username');
             $table->boolean('is_admin')->default(false);
             $table->string('email');
-            $table->string('password');
+            $table->string('password',60)->change();
             $table->text('bio');
             $table->string('image-profile')->nullable();
             $table->string('preference');

@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image')->nullable();
+            $table->string('categories')->nullable(); 
             $table->timestamps();
+            $table->string('categories')->nullable()->after('image');
         });
     }
 
@@ -28,5 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('recipes');
+        $table->dropColumn('categories');
     }
 };

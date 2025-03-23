@@ -2,12 +2,18 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RecipeController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::resource('recipes',RecipeController::class);
 
+Route::get('/about', function () {
+    return view('recipes.about');
+});
+Route::get('/contact', function () {
+    return view('recipes.contact');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
