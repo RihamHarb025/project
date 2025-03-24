@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MealPlan extends Model
+class Category extends Model
 {
     //
-    protected $fillable =['name'];
+    protected $fillable = ['name'];
 }
