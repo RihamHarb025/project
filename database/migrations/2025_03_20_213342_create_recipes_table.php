@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             // $table->unsignedBigInteger('customerID');
-            $table->foreignId('customerID')->constrained('customers')->onDelete('cascade');
+            // $table->foreignId('customerID')->constrained('customers')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->string('image')->nullable();
-            $table->string('categories')->nullable(); 
+            $table->integer('calories')->nullable();
+            $table->integer('servings')->nullable();
+            $table->string('prep_time')->nullable();
+            // $table->string('categories')->nullable(); 
             $table->timestamps();
             // $table->string('categories')->nullable()->after('image');
         });

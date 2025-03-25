@@ -15,11 +15,15 @@
 
                 <!-- Additional Attributes -->
                 <ul class="list-group mb-4">
-                    <li class="list-group-item"><strong>Category:</strong> {{ $recipe->categories }}</li>
+                    <li class="list-group-item"><strong>Category:</strong> {{ $recipe->categories->pluck('name')->join(', ') }}</li>
                     <li class="list-group-item"><strong>Created At:</strong> {{ $recipe->created_at->format('M d, Y') }}</li>
                 </ul>
-
-                <!-- Back Button -->
+                <ul>
+                        @foreach ($recipe->tags as $tag)
+                            <li>{{ $tag->name }}</li>
+                        @endforeach
+                    </ul>
+                                    <!-- Back Button -->
                 <a href="{{ route('recipes.index') }}" class="btn btn-secondary">Back to Recipes</a>
             </div>
         </div>

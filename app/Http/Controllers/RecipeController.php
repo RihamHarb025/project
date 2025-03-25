@@ -47,10 +47,14 @@ class RecipeController extends Controller
     public function show(string $id)
     {
          // Find the recipe by ID
-         $recipe = Recipe::findOrFail($id);
+        //  $recipe = Recipe::findOrFail($id);
 
-         // Pass the recipe to the view
-         return view('recipes.show', compact('recipe'));
+        //  // Pass the recipe to the view
+        //  return view('recipes.show', compact('recipe'));
+        $recipe = Recipe::with(['categories', 'tags'])->findOrFail($id);
+
+        // Return the view and pass the recipe data
+        return view('recipes.show', compact('recipe'));
     }
 
     /**

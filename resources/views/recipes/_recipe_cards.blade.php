@@ -8,6 +8,11 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $recipe->title }}</h5>
                 <p class="card-text">{{ Str::limit($recipe->description, 100) }}</p>
+                <ul>
+                    @foreach ($recipe->tags as $tag)
+                        <li>{{ $tag->name }}</li>
+                    @endforeach
+                </ul>
                 <a href="{{ route('recipes.show', $recipe->id) }}" class="btn btn-primary">View Recipe</a>
             </div>
         </div>
