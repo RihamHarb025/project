@@ -15,5 +15,13 @@
     animation: glow 1.5s infinite ease-in-out;
   }
   .scroll-up {
-    transition: transform 1s ease-in-out, opacity 1s;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+#animated-text {
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out; /* Smooth transition */
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px); /* Start slightly below */
+}
+#header.sticky {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }

@@ -8,4 +8,5 @@ class Recipe extends Model
 {
     //
     protected $fillable = ['title','description','recipe-image','categories'];
+
 }

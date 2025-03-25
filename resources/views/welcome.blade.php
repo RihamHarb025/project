@@ -7,7 +7,7 @@
   <div class="flex flex-col justify-center items-center  gap-5">
     <h1 class="text-7xl text-green-950 max-w-xl text-center font-bold">The easiest way to eat healthy </h1>
       <div class="flex flex-col gap-2  items-center">
-     <h3 id="animated-text" class="scroll-up text-2xl text-green-900 opacity-0 font-bold">The best recipes
+     <h3 id="animated-text" class=" text-2xl text-green-900  font-bold">The best recipes
      </h3>
      <h3 class="text-2xl text-green-900 font-bold">for you and your family</h3>
       </div>
@@ -19,7 +19,7 @@
 <section class="relative">
 
   <div class="absolute top-10 left-20 w-[200px] h-[200px]">
-    <img src="{{asset('imgs/drawnBasil1.png')}}" class="w-full h-full">
+    <img src="{{asset('imgs/drawnBasil1.png')}}" class="w-full h-full loading="lazy">
   </div>
 
   <div class="flex flex-col items-center gap-4 mt-20">
@@ -28,7 +28,7 @@
   </div>
 
   <div class="absolute top-40 right-20 w-[200px] h-[200px]">
-    <img src="{{asset('imgs/drawnBasil2.png')}}" class="w-full h-full">
+    <img src="{{asset('imgs/drawnBasil2.png')}}" class="w-full h-full loading="lazy">
   </div>
 
  
