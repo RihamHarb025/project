@@ -132,17 +132,22 @@ class RecipesSeeder extends Seeder
                 'updated_at' => now(),
             ]);
 
-            // Find the category by name (this is assuming your categories already exist)
-            $category = Category::where('name', $data['category_name'])->first();
-
-            // Link the recipe to the category using the pivot table (many-to-many relationship)
-            if ($category) {
-                $recipe->categories()->attach($category->id); 
+            $category = Category::firstOrCreate(
+                ['name' => $data['category_name']],  // Find or create the category
+                ['image' => 'imgs/' . strtolower(str_replace(' ', '_', $data['category_name'])) . '.jpeg']  // You can customize image logic if needed
+            );
+    
+            // Step 3: Attach the category to the recipe using the pivot table
+            $recipe->categories()->syncWithoutDetaching([$category->id]); // syncWithoutDetaching ensures the relationship is added
+    
+            // Step 4: Ensure the tags exist (create if not)
+            foreach ($data['tags'] as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);  // Find or create each tag
+                $recipe->tags()->attach($tag->id);  // Attach the tag to the recipe
             }
-
             // Attach tags to the recipe
-            $tags = Tag::whereIn('name', $data['tags'])->pluck('id'); // Get tag IDs
-            $recipe->tags()->attach($tags); 
+            // $tags = Tag::whereIn('name', $data['tags'])->pluck('id'); // Get tag IDs
+            // $recipe->tags()->attach($tags); 
         }
     }
 }

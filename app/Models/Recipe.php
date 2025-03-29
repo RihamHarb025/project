@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Recipe extends Model
 {
     //
-    protected $fillable = ['title','description','recipe-image','calories','servings','prep_time'];
+    protected $fillable = ['title','description','recipe_image','calories','servings','prep_time'];
 
 
     public function categories()

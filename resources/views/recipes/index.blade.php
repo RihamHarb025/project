@@ -4,15 +4,20 @@
 <body>
     <div class="container mt-5">
         <!-- Search Input -->
-        <form id="searchForm" class="mb-4">
-            <div class="input-group">
-                <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search by recipe name..." value="{{ $search }}">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-        </form>
+        <form id="searchForm" class="mb-4 w-full">
+        <div class="flex justify-center items-center space-x-4">
+            <input type="text" name="search" id="searchInput" 
+                   class="form-input px-4 py-2 border rounded-lg shadow-sm w-full md:w-full lg:w-1/2 xl:w-1/3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" 
+                   placeholder="Search by recipe name..." value="{{ $search }}">
+            <button type="submit" 
+                    class="bg-green-900 text-white rounded-lg px-6 py-2 hover:bg-green-950 transition duration-300">
+                    Search
+            </button>
+        </div>
+    </form>
 
         <!-- Recipe Cards -->
-        <div id="recipeContainer" class="row">
+        <div id="recipeContainer" class="row mt-10">
             @include('recipes._recipe_cards', ['recipes' => $recipes])
         </div>
     </div>
