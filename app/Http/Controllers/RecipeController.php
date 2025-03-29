@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Recipe;
+use App\Models\Category;
+use App\Models\Tag;
 
 class RecipeController extends Controller
 {
@@ -13,16 +15,36 @@ class RecipeController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+    $category = $request->input('category');
+    $tag = $request->input('tag');
 
     $recipes = Recipe::when($search, function ($query, $search) {
         return $query->where('title', 'like', '%' . $search . '%');
-    })->get();
+    })
+    ->when($category, function ($query, $category) {
+        return $query->whereHas('categories', function($q) use ($category) {
+            $q->where('categories.id', $category);
+        });
+    })
+    ->when($tag, function ($query, $tag) {
+        return $query->whereHas('tags', function($q) use ($tag) {
+            $q->where('tags.id', $tag);
+        });
+    })
+    ->get();
 
+    // Fetch categories and tags to populate the dropdowns
+    $categories = Category::all();
+    $tags = Tag::all();
+
+    // If the request is AJAX, return the recipe cards only
     if ($request->ajax()) {
         return view('recipes._recipe_cards', compact('recipes'))->render();
     }
 
-    return view('recipes.index', compact('recipes', 'search'));
+    // Otherwise, return the full view
+    return view('recipes.index', compact('recipes', 'search', 'categories', 'tags', 'category', 'tag'));
+   
     }
 
     /**

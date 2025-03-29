@@ -3,60 +3,85 @@
 
 <body>
     <div class="container mt-5">
-        <!-- Search Input -->
-        <form id="searchForm" class="mb-4 w-full">
-        <div class="flex justify-center items-center space-x-4">
-            <input type="text" name="search" id="searchInput" 
-                   class="form-input px-4 py-2 border rounded-lg shadow-sm w-full md:w-full lg:w-1/2 xl:w-1/3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" 
+       
+        <form id="searchForm" class="mb-6 w-full bg-white p-6 rounded-lg shadow-md">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div class="relative">
+            <input type="text" name="search" id="searchInput"
+                   class="form-input w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                    placeholder="Search by recipe name..." value="{{ $search }}">
-            <button type="submit" 
-                    class="bg-green-900 text-white rounded-lg px-6 py-2 hover:bg-green-950 transition duration-300">
-                    Search
-            </button>
+            <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
+                🔍
+            </span>
         </div>
-    </form>
-
-        <!-- Recipe Cards -->
-        <div id="recipeContainer" class="row mt-10">
+        <select name="category" id="category"
+                class="form-select w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white">
+            <option value="">Select Category</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+        <select name="tag" id="tag"
+                class="form-select w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white">
+            <option value="">Select Tag</option>
+            @foreach($tags as $tag)
+                <option value="{{ $tag->id }}" {{ request('tag') == $tag->id ? 'selected' : '' }}>
+                    {{ $tag->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <div class="flex justify-center mt-4">
+        <button type="submit"
+                class="bg-green-900 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-950 transition duration-300">
+            Search
+        </button>
+    </div>
+</form>
+        <div id="recipeContainer" class="row">
             @include('recipes._recipe_cards', ['recipes' => $recipes])
         </div>
     </div>
 
-    <!-- Add Bootstrap JS (optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- AJAX Search Script -->
     <script>
-        $(document).ready(function () {
-            $('#searchForm').on('submit', function (e) {
-                e.preventDefault();
+       $(document).ready(function () {
+            function fetchRecipes() {
+                var search = $('#searchInput').val();
+                var category = $('#category').val();
+                var tag = $('#tag').val();
 
-                const searchTerm = $('#searchInput').val();
-
-                // Send an AJAX request
                 $.ajax({
                     url: "{{ route('recipes.index') }}",
-                    type: "GET",
-                    data: { search: searchTerm },
+                    method: "GET",
+                    data: {
+                        search: search,
+                        category: category,
+                        tag: tag
+                    },
                     success: function (response) {
-                        // Update the recipe container with the new data
                         $('#recipeContainer').html(response);
                     },
                     error: function (xhr) {
                         console.log(xhr.responseText);
                     }
                 });
+            }
+
+            $('#searchInput').on('input', function () {
+                fetchRecipes();
             });
 
-            let timer;
-        $('#searchInput').on('keyup', function () {
-            clearTimeout(timer); // Clear the previous timer
-            timer = setTimeout(function () {
-                $('#searchForm').submit(); // Submit the form after 300ms
-            }, 100); 
+            $('#category').on('change', function () {
+                fetchRecipes();
+            });
+
+            $('#tag').on('change', function () {
+                fetchRecipes();
+            });
         });
-    });
 </script>
 </body>
 
