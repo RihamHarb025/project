@@ -19,20 +19,24 @@
 
 <body>
 <header id="header" class="text-green-900 p-3 w-full">
-  <div class="flex py-4 px-6 justify-between items-center">
+  <div class="flex py-4 px-6 justify-between items-center relative">
     <div class="flex items-center gap-4">
       <a href="#" class="text-lg font-bold">
         <img src="your-logo-url-here.png" alt="Logo" class="h-10">
       </a>
     </div>
-    <nav class="flex gap-16 ml-24">
+    
+    <button id="menu-toggle" class="md:hidden text-green-900">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+
+    <nav id="menu" class="md:flex gap-16 ml-24">
       <a href="{{ route('welcome') }}" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Home</a>
       <a href="recipes" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Recipes</a>
       <a href="about" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">About Us</a>
       <a href="contact" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Contact Us</a>
     </nav>
 
-    <!-- Authentication links -->
     <div class="flex items-center gap-5 ml-auto">
       @guest
         <a href="{{ route('register') }}">
@@ -44,7 +48,6 @@
       @endguest
 
       @auth
-        <!-- If the user is authenticated, show the logout button -->
         <form action="{{ route('logout') }}" method="POST" class="inline">
           @csrf
           <button type="submit" class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out">Logout</button>
@@ -54,11 +57,64 @@
   </div>
 </header>
 
- 
-  <!-- Main content area -->
+
   @yield('content')
 
-  <!-- Custom Scripts -->
+ <footer class="bg-green-950 text-white py-14 mt-40">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-10">
+    
+   
+    <div class="flex flex-col items-center md:items-start">
+      <img src="{{ asset('imgs/logo.png') }}" alt="Tasty Nest Logo" class="w-36 mb-4">
+      <p class="text-lg opacity-80 text-center md:text-left">
+        A collection of simple, delicious, and healthy recipes to inspire your kitchen.
+      </p>
+    </div>
+
+    <div class="flex flex-col text-center md:text-left">
+      <h3 class="text-lg font-semibold mb-4 text-orange-300">Quick Links</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Home</a></li>
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Recipes</a></li>
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Premium</a></li>
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="flex flex-col text-center md:text-left">
+      <h3 class="text-lg font-semibold mb-4 text-orange-300">Resources</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Cooking Tips</a></li>
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Meal Planning</a></li>
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Healthy Eating</a></li>
+        <li><a href="#" class="hover:text-orange-300 transition duration-300">Newsletter</a></li>
+      </ul>
+    </div>
+
+
+    <div class="flex flex-col items-center md:items-end">
+      <h3 class="text-lg font-semibold mb-4 text-orange-300">Follow Us</h3>
+      <div class="flex space-x-4">
+        <a href="#" class="hover:text-orange-300 transition duration-300">
+          <i class="fab fa-facebook text-2xl"></i>
+        </a>
+        <a href="#" class="hover:text-orange-300 transition duration-300">
+          <i class="fab fa-instagram text-2xl"></i>
+        </a>
+        <a href="#" class="hover:text-orange-300 transition duration-300">
+          <i class="fab fa-pinterest text-2xl"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="border-t border-white border-opacity-20 mt-10 pt-6 text-center text-sm opacity-60">
+    &copy; 2025 Tasty Nest. All Rights Reserved.
+  </div>
+</footer>
+
+
   <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
