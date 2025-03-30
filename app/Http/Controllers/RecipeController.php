@@ -53,6 +53,10 @@ class RecipeController extends Controller
     public function create()
     {
         //
+        $categories = Category::all();
+        $tags = Tag::all(); 
+    
+        return view('recipes.create', compact('categories', 'tags'));
     }
 
     /**
@@ -61,6 +65,38 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
+            'image' => 'nullable|image|max:2048', // Only allow image files, max 2MB
+        ]);
+    
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('imgs'), $imageName);
+            $imagePath = 'imgs/' . $imageName;
+        } else {
+            $imagePath = null;
+        }
+        // Create recipe
+        $recipe = Recipe::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'category_id' => $request->category_id, // Make sure category_id exists in your recipes table
+            'image' => $imagePath, // Save image path
+        ]);
+    
+        // Attach selected tags to the recipe
+        if ($request->tags) {
+            $recipe->tags()->attach($request->tags);
+        }
+    
+        // Redirect with success message
+        return redirect()->route('recipes.index')->with('success', 'Recipe added successfully!');
     }
 
     /**

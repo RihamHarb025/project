@@ -35,6 +35,8 @@
       <a href="recipes" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Recipes</a>
       <a href="about" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">About Us</a>
       <a href="contact" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Contact Us</a>
+      <a href="{{route('recipes.create')}}" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Create Recipe</a>
+      <a href="mealPlans" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Meal Pland</a>
     </nav>
 
     <div class="flex items-center gap-5 ml-auto">
