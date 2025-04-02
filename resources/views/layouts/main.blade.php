@@ -13,7 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+  <script>
+    let isAuthenticated = @json(Auth::check());
+</script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -36,7 +38,27 @@
       <a href="about" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">About Us</a>
       <a href="contact" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Contact Us</a>
       <a href="{{route('recipes.create')}}" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Create Recipe</a>
-      <a href="mealPlans" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Meal Pland</a>
+      <a href="mealPlans" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Meal Plans</a>
+      <a href="{{ route('profile.show') }}" id="profile-btn"
+   class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">
+    Me
+</a>
+
+<!-- Modal (Hidden by Default) -->
+<div id="register-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-[9999]">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <p class="text-lg font-bold mb-4">You need to log in first!</p>
+        <div class="flex justify-center gap-4">
+            <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800">
+                Log In
+            </a>
+            <a href="{{ route('register') }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-800">
+                Sign Up
+            </a>
+        </div>
+        <button id="close-modal" class="mt-4 text-gray-600 hover:text-gray-800">Cancel</button>
+    </div>
+</div>
     </nav>
 
     <div class="flex items-center gap-5 ml-auto">

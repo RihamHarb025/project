@@ -94,5 +94,31 @@ $(window).scroll(function () {
         });
     }
 });
+
+const modal = $("#register-modal");
+const closeModal = $("#close-modal");
+const profileBtn = $("#profile-btn");
+
+profileBtn.click(function (event) {
+    if (!isAuthenticated) {
+        event.preventDefault(); // Prevent navigation
+        modal.removeClass("hidden");
+        $("body").css("overflow", "hidden"); // Disable scrolling
+    }
+});
+
+closeModal.click(function () {
+    modal.addClass("hidden");
+    $("body").css("overflow", "auto"); // Enable scrolling
+});
+
+// Close modal if user clicks outside of it
+$(window).click(function (event) {
+    if ($(event.target).is(modal)) {
+        modal.addClass("hidden");
+        $("body").css("overflow", "auto"); // Enable scrolling
+    }
+});
+
 });
 
