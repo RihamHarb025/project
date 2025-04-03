@@ -39,7 +39,7 @@
       <a href="contact" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Contact Us</a>
       <a href="{{route('recipes.create')}}" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Create Recipe</a>
       <a href="mealPlans" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Meal Plans</a>
-      <a href="{{ route('profile.show') }}" id="profile-btn"
+      <a href="{{ route('profile.edit') }}" id="profile-btn"
    class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">
     Me
 </a>
