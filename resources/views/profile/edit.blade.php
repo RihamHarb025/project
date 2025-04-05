@@ -61,9 +61,9 @@
         <div class="p-6 bg-white shadow-md rounded-lg">
             <h3 class="text-2xl font-semibold text-green-800 mb-4">Your Recipes</h3>
 
-            @if(Auth::user()->recipes && Auth::user()->recipes->count() > 0)
+            @if($recipes && $recipes->count() > 0)
                 <ul class="space-y-4">
-                    @foreach(Auth::user()->recipes as $recipe)
+                @foreach($recipes as $recipe)
                         <li class="flex justify-between items-center p-4 border border-gray-300 rounded-lg bg-white shadow">
                             <span class="text-lg font-medium">{{ $recipe->title }}</span>
 

@@ -65,6 +65,8 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         //
+        // dd(auth()->id());
+        // dd($request->all());
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
@@ -87,7 +89,8 @@ class RecipeController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'category_id' => $request->category_id, // Make sure category_id exists in your recipes table
-            'image' => $imagePath, // Save image path
+            'image' => $imagePath,
+            'user_id' => auth()->id(), 
         ]);
     
         // Attach selected tags to the recipe

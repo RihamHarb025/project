@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User; 
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class FollowController extends Controller
@@ -33,7 +33,6 @@ class FollowController extends Controller
     public function toggle(User $user)
 {
    
-    $user = User::findOrFail($userId);
     $currentUser = Auth::user();
 
     // Check if the current user is already following the user

@@ -48,7 +48,7 @@ public function followers()
     // To check if the current user is following a specific user
     public function isFollowing(User $user)
     {
-        return $this->following()->where('following.user_id', $user->id)->exists();
+        return $this->following()->where('followers.user_id', $user->id)->exists();
     }
 
     /**
