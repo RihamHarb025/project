@@ -21,13 +21,17 @@ class CategorySeeder extends Seeder
             ['name' => 'Dessert', 'image' => 'imgs/dessert.jpeg'],
             ['name' => 'Snacks', 'image' => 'imgs/snacks.jpeg'],
         ];
+
         foreach ($categories as $category) {
-            DB::table('categories')->insert([
-                'name' => $category['name'],
-                'image' => $category['image'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            // Check if category exists before inserting
+            if (!DB::table('categories')->where('name', $category['name'])->exists()) {
+                DB::table('categories')->insert([
+                    'name' => $category['name'],
+                    'image' => $category['image'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
 }

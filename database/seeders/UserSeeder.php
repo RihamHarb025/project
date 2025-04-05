@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         //
         $faker = Faker::create();
         User::create([
+            'name' => 'adminuser',
             'username' => 'adminuser',
             'email' => 'admin@example.com',
             'password' => Hash::make('adminpassword'), 
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
         $tags = Tag::pluck('name')->toArray(); 
         for ($i = 0; $i < 10; $i++) { 
             $user = User::create([
+                'name'=>$faker->name,
                 'username' => $faker->userName,
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password123'), 

@@ -10,6 +10,10 @@ class Recipe extends Model
     //
     protected $fillable = ['title','description','recipe_image','calories','servings','prep_time'];
 
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 
     public function categories()
     {

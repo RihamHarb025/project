@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('is_admin')->default(false);
             $table->text('bio')->nullable();
+            $table->string('preference')->nullable(); 
             $table->string('image-profile')->nullable();
+            $table->unsignedBigInteger('followers_count')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

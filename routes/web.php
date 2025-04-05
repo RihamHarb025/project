@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/follow/{user}', [FollowController::class, 'toggle'])->name('follow.toggle');
 Route::get('/profile/{user}/followers', [FollowController::class, 'followers'])->name('follow.followers');
 Route::get('/profile/{user}/followings', [FollowController::class, 'followings'])->name('follow.followings');
-
+Route::post('/follow/{userId}', [FollowController::class, 'toggle'])->name('follow.toggle');
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
 
 

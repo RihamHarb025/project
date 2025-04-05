@@ -18,6 +18,30 @@
                     @endforeach
                 </div>
 
+                <!-- Created by User -->
+                <div class="mt-3 text-gray-500 text-sm">
+                    <span class="font-semibold text-gray-700">Created by: </span>
+                    <a href="{{ route('profile.show', $recipe->user->id) }}" class="text-green-600 hover:text-green-800">
+                        {{ $recipe->user->username }}
+                    </a>
+                </div>
+
+                <!-- Follow Button (Visible if not already following) -->
+                @auth
+                    @if(auth()->user()->isFollowing($recipe->user))
+                        <button class="bg-gray-300 text-gray-700 rounded-full px-6 py-2 mt-3 w-full cursor-not-allowed" disabled>
+                            Following
+                        </button>
+                    @else
+                        <form action="{{ route('follow.toggle', $recipe->user->id) }}" method="POST" class="mt-3">
+                            @csrf
+                            <button type="submit" class="bg-green-900 text-white rounded-full px-6 py-2 w-full hover:bg-green-950">
+                                Follow
+                            </button>
+                        </form>
+                    @endif
+                @endauth
+
                 <!-- View Recipe Button -->
                 <a href="{{ route('recipes.show', $recipe->id) }}" 
                    class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out text-center mt-auto">

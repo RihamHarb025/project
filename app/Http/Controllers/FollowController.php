@@ -32,10 +32,21 @@ class FollowController extends Controller
 
     public function toggle(User $user)
 {
-    if (Auth::user()->isFollowing($user)) {
-        Auth::user()->following()->detach($user->id);
+   
+    $user = User::findOrFail($userId);
+    $currentUser = Auth::user();
+
+    // Check if the current user is already following the user
+    if ($currentUser->isFollowing($user)) {
+        // Unfollow
+        $currentUser->following()->detach($user);
+        // Decrease the follower count for the user being followed
+        $user->decrement('followers_count');
     } else {
-        Auth::user()->following()->attach($user->id);
+        // Follow
+        $currentUser->following()->attach($user);
+        // Increase the follower count for the user being followed
+        $user->increment('followers_count');
     }
 
     return back();

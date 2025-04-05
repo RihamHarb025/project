@@ -117,7 +117,7 @@ class RecipesSeeder extends Seeder
                 'prep_time' => '10 minutes',
             ]
         ];
-
+        $user = \App\Models\User::first();
         // Iterate through each recipe
         foreach ($recipes as $data) {
             // Create the recipe first
@@ -128,6 +128,7 @@ class RecipesSeeder extends Seeder
                 'calories' => $data['calories'],
                 'servings' => $data['servings'],
                 'prep_time' => $data['prep_time'],
+                'user_id' => $user->id,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

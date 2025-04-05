@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('calories')->nullable();
             $table->integer('servings')->nullable();
             $table->string('prep_time')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
             // $table->string('categories')->nullable(); 
             $table->timestamps();
             // $table->string('categories')->nullable()->after('image');

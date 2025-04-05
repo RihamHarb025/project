@@ -30,6 +30,10 @@ class User extends Authenticatable
     return $this->belongsToMany(Tag::class,'tags_users');
 }
 
+public function recipes()
+{
+    return $this->hasMany(Recipe::class);
+}
 public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
