@@ -24,4 +24,16 @@ class Recipe extends Model
     {
         return $this->belongsToMany(Tag::class, 'recipe_tag');
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+    
+    public function likes() {
+        return $this->belongsToMany(User::class, 'likes', 'recipe_id', 'user_id');
+    }
+    public function isLikedBy(User $user)
+{
+    return $this->likes()->where('user_id', $user->id)->exists();
+}
 }

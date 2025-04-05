@@ -48,8 +48,17 @@ public function followers()
     // To check if the current user is following a specific user
     public function isFollowing(User $user)
     {
-        return $this->following()->where('followers.user_id', $user->id)->exists();
+        return $this->following()->where('following.user_id', $user->id)->exists();
     }
+
+    public function likes()
+{
+    return $this->belongsToMany(Recipe::class, 'likes', 'user_id', 'recipe_id');
+}
+public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
 
     /**
      * The attributes that should be hidden for serialization.

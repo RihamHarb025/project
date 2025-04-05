@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +33,12 @@ Route::get('/profile/{user}/followers', [FollowController::class, 'followers'])-
 Route::get('/profile/{user}/followings', [FollowController::class, 'followings'])->name('follow.followings');
 Route::post('/follow/{userId}', [FollowController::class, 'toggle'])->name('follow.toggle');
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
+// Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like'])->name('recipes.like');
+});
 
 
 require __DIR__.'/auth.php';

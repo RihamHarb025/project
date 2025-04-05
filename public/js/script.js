@@ -120,5 +120,52 @@ $(window).click(function (event) {
     }
 });
 
+
+$('#like-form').on('submit', function(e) {
+    e.preventDefault();  // Prevent the form from submitting normally
+    
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function(response) {
+            // Toggle the like button text
+            if (response.liked) {
+                $('#like-btn').html('❤️ Liked');
+            } else {
+                $('#like-btn').html('🤍 Like');
+            }
+            
+            // Update the like count
+            $('#like-count').text(response.like_count);
+        }
+    });
+});
+
+$('#comment-form').on('submit', function(e) {
+    e.preventDefault();  // Prevent the form from submitting normally
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function(response) {
+            // Append the new comment to the comments section
+            $('#comments-section').prepend(`
+                <div class="mb-4 border-b pb-3">
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold text-gray-800">${response.comment.user_name}</span>
+                        <span class="text-sm text-gray-500">${response.comment.created_at}</span>
+                    </div>
+                    <p class="mt-2 text-gray-700">${response.comment.body}</p>
+                </div>
+            `);
+
+            // Clear the comment textarea after submission
+            $('textarea[name="body"]').val('');
+        }
+    });
+});
+
 });
 

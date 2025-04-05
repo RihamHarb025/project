@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Recipe;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
@@ -112,15 +113,31 @@ class RecipeController extends Controller
 
         //  // Pass the recipe to the view
         //  return view('recipes.show', compact('recipe'));
-        $recipe = Recipe::with(['categories', 'tags'])->findOrFail($id);
+        $recipe = Recipe::with(['categories', 'tags','comments.user'])->findOrFail($id);
 
         // Return the view and pass the recipe data
         return view('recipes.show', compact('recipe'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function like(Recipe $recipe)
+    {
+        $user = auth()->user();
+    
+        if ($recipe->likes()->where('user_id', $user->id)->exists()) {
+            // If already liked, remove like
+            $recipe->likes()->detach($user->id);
+            $liked = false;
+        } else {
+            // Otherwise, add like
+            $recipe->likes()->attach($user->id);
+            $liked = true;
+        }
+    
+        return response()->json([
+            'liked' => $liked,
+            'like_count' => $recipe->likes->count(),
+        ]);
+    }
     public function edit(string $id)
     {
         //

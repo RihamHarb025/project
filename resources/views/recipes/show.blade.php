@@ -13,6 +13,21 @@
                 <!-- Recipe Title -->
                 <h1 class="text-3xl font-semibold text-gray-900 mb-4">{{ $recipe->title }}</h1>
 
+                <!-- Like Button -->
+                @auth
+                <form action="{{ route('recipes.like', $recipe->id) }}" method="POST" class="mb-4" id="like-form">
+                    @csrf
+                    <button type="submit" class="flex items-center gap-2 bg-pink-100 text-pink-700 px-4 py-2 rounded-full hover:bg-pink-200 transition" id="like-btn">
+                        @if ($recipe->isLikedBy(auth()->user())) 
+                            ❤️ Liked 
+                        @else 
+                            🤍 Like 
+                        @endif
+                        (<span id="like-count">{{ $recipe->likes->count() }}</span>)
+                    </button>
+                </form>
+                @endauth
+
                 <!-- Recipe Description -->
                 <p class="text-lg text-gray-600 mb-4">{{ $recipe->description }}</p>
 
@@ -39,6 +54,34 @@
                 </a>
             </div>
         </div>
+
+        <!-- Comment Section -->
+        <div class="max-w-4xl mx-auto mt-8 bg-white shadow-md rounded-lg p-6">
+            <h4 class="text-2xl font-semibold mb-4 text-gray-800">Comments</h4>
+
+            <!-- Comment Form -->
+            @auth
+<form id="comment-form" action="{{ route('comments.store', $recipe->id) }}" method="POST">
+    @csrf
+    <textarea name="body" required></textarea>
+    <button type="submit">Submit Comment</button>
+</form>
+@else
+    <p class="text-gray-600 mb-4">You must be <a href="{{ route('login') }}" class="text-green-800 font-semibold hover:underline">logged in</a> to comment.</p>
+@endauth
+
+<!-- Comments List -->
+<div id="comments-section">
+    @foreach ($recipe->comments as $comment)
+        <div class="mb-4 border-b pb-3">
+            <div class="flex items-center justify-between">
+                <span class="font-semibold text-gray-800">{{ $comment->user->name }}</span>
+                <span class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+            </div>
+            <p class="mt-2 text-gray-700">{{ $comment->body }}</p>
+        </div>
+    @endforeach
+</div>
     </div>
 </body>
 @endsection
