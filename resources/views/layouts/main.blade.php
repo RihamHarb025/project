@@ -25,57 +25,66 @@
   <div class="flex py-4 px-6 justify-between items-center relative">
     <div class="flex items-center gap-4">
       <a href="#" class="text-lg font-bold">
-        <img src="your-logo-url-here.png" alt="Logo" class="h-10">
+        <img src="{{ asset('imgs/logo.png') }}" alt="Logo" class="h-16 md:h-20 transition-all duration-300 transform hover:scale-110 hover:translate-y-2">
       </a>
     </div>
-    
+
     <button id="menu-toggle" class="md:hidden text-green-900">
       <i class="fas fa-bars text-2xl"></i>
     </button>
 
-    <nav id="menu" class="md:flex gap-16 ml-24">
-      <a href="{{ route('welcome') }}" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Home</a>
-      <a href="recipes" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Recipes</a>
-      <a href="about" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">About Us</a>
-      <a href="contact" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Contact Us</a>
-      <a href="{{route('recipes.create')}}" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Create Recipe</a>
-      <a href="mealPlans" class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">Meal Plans</a>
-      <a href="{{ route('profile.edit') }}" id="profile-btn"
-   class="hover:text-green-950 transition-colors duration-100 ease-in-out font-bold">
+    <nav id="menu" class="md:flex gap-16 ml-24  hidden">
+  <a href="{{ route('welcome') }}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+    Home
+    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+  </a>
+  <a href="recipes" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+    Recipes
+    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+  </a>
+  <a href="about" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+    About Us
+    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+  </a>
+  <a href="contact" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+    Contact Us
+    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+  </a>
+  <a href="{{route('recipes.create')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+    Create Recipe
+    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+  </a>
+  <a href="mealPlans" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+    Meal Plans
+    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+  </a>
+  <a href="{{ route('profile.edit') }}" id="profile-btn" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
     Me
-</a>
+    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+  </a>
+</nav>
 
-<!-- Modal (Hidden by Default) -->
-<div id="register-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-[9999]">
-    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-        <p class="text-lg font-bold mb-4">You need to log in first!</p>
-        <div class="flex justify-center gap-4">
-            <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800">
-                Log In
-            </a>
-            <a href="{{ route('register') }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-800">
-                Sign Up
-            </a>
-        </div>
-        <button id="close-modal" class="mt-4 text-gray-600 hover:text-gray-800">Cancel</button>
-    </div>
-</div>
-    </nav>
 
     <div class="flex items-center gap-5 ml-auto">
       @guest
         <a href="{{ route('register') }}">
-          <button class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out">Register</button>
+        <button class="bg-green-900 text-white rounded-full hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+  Register
+</button>
         </a>
         <a href="{{ route('login') }}">
-          <button class="text-green-950 rounded-full border-2 border-green-950 hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out">Login</button>
+        <button class="text-green-950 rounded-full border-2 border-green-950 hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+  Login
+</button>
         </a>
       @endguest
 
       @auth
         <form action="{{ route('logout') }}" method="POST" class="inline">
           @csrf
-          <button type="submit" class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out">Logout</button>
+          <button type="submit" class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+    Logout
+  </button>
         </form>
       @endauth
     </div>
@@ -83,17 +92,18 @@
 </header>
 
 
+
   @yield('content')
 
-  <footer class="bg-white text-white py-16 mt-40">
+  <footer class="bg-white text-white py-16 mt-40 ">
   <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-12">
     <!-- Logo and Description Section -->
-    <div class="flex flex-col items-center md:items-start mb-10 md:mb-0">
-      <img src="{{ asset('imgs/logo.png') }}" alt="Tasty Nest Logo" class="w-36 mb-4">
-      <p class="text-lg opacity-80 text-center md:text-left text-green-900 font-bold">
-        A collection of simple, delicious, and healthy recipes to inspire your kitchen.
-      </p>
-    </div>
+    <div class="flex flex-col items-center text-center mb-10">
+  <img src="{{ asset('imgs/logo.png') }}" alt="Tasty Nest Logo" class="w-44 h-auto mb-4">
+  <p class="text-lg opacity-80 text-green-900 font-bold max-w-md">
+    A collection of simple, delicious, and healthy recipes to inspire your kitchen.
+  </p>
+</div>
 
     <!-- Quick Links Section -->
     <div class="flex flex-col text-center md:text-left">

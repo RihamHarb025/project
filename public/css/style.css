@@ -28,7 +28,9 @@
 
 @media (max-width: 768px) {
   #menu {
-    display: none;
+    visibility: hidden; /* Initially hidden */
+    opacity: 0; /* Initially hidden */
+    display: flex;
     flex-direction: column;
     background: white;
     position: absolute;
@@ -37,10 +39,19 @@
     width: 100%;
     padding: 10px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* Ensures the menu is on top of other elements */
+    transform: translateY(-100%); /* Starts off-screen */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out; 
   }
   #menu a {
     padding: 10px;
     text-align: center;
     display: block;
   }
+  #menu.show {
+    visibility: visible; /* Makes the menu visible */
+    opacity: 1; /* Makes the menu fade in */
+    transform: translateY(0); /* Slide the menu into view */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
 }

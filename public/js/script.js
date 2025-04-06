@@ -1,10 +1,8 @@
 $(document).ready(function () {
 
-    $('#menu-toggle').click(function () {
-        $('#mobile-menu').slideToggle();
-      });
-
-
+    $('#menu-toggle').click(function() {
+        $('#menu').toggleClass('show'); // Toggle the 'show' class
+    });
   let texts = ["The best recipes", "The best premium meals", "The best dishes for every occasion"];
   let index = 0;
 
