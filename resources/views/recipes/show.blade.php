@@ -57,31 +57,34 @@
 
         <!-- Comment Section -->
         <div class="max-w-4xl mx-auto mt-8 bg-white shadow-md rounded-lg p-6">
-            <h4 class="text-2xl font-semibold mb-4 text-gray-800">Comments</h4>
+    <h4 class="text-2xl font-semibold mb-6 text-gray-800">Comments</h4>
 
-            <!-- Comment Form -->
-            @auth
-<form id="comment-form" action="{{ route('comments.store', $recipe->id) }}" method="POST">
-    @csrf
-    <textarea name="body" required></textarea>
-    <button type="submit">Submit Comment</button>
-</form>
-@else
-    <p class="text-gray-600 mb-4">You must be <a href="{{ route('login') }}" class="text-green-800 font-semibold hover:underline">logged in</a> to comment.</p>
-@endauth
+    <!-- Comment Form -->
+    @auth
+    <form id="comment-form" action="{{ route('comments.store', $recipe->id) }}" method="POST" class="space-y-4">
+        @csrf
+        <textarea name="body" required rows="4" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800" placeholder="Write your comment..."></textarea>
+        <button type="submit" class="w-full bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">Submit Comment</button>
+    </form>
+    @else
+        <p class="text-gray-600 mb-4">You must be <a href="{{ route('login') }}" class="text-green-800 font-semibold hover:underline">logged in</a> to comment.</p>
+    @endauth
 
-<!-- Comments List -->
-<div id="comments-section">
-    @foreach ($recipe->comments as $comment)
-        <div class="mb-4 border-b pb-3">
-            <div class="flex items-center justify-between">
-                <span class="font-semibold text-gray-800">{{ $comment->user->name }}</span>
-                <span class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+    <!-- Comments List -->
+    <div id="comments-section">
+        @foreach ($recipe->comments as $comment)
+            <div class="mb-6 mt-6 border-b pb-4">
+                <div class="flex items-center justify-between space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <img src="{{ $comment->user->profile_picture }}" alt="{{ $comment->user->name }}" class="w-10 h-10 rounded-full object-cover">
+                        <span class="font-semibold text-gray-800">{{ $comment->user->name }}</span>
+                    </div>
+                    <span class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+                </div>
+                <p class="mt-2 text-gray-700">{{ $comment->body }}</p>
             </div>
-            <p class="mt-2 text-gray-700">{{ $comment->body }}</p>
-        </div>
-    @endforeach
-</div>
+        @endforeach
     </div>
+</div>
 </body>
 @endsection

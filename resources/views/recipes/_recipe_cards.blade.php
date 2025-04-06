@@ -23,43 +23,45 @@
                     </div>
                 @endif
 
-                <!-- Created by User -->
-                <div class="mt-3 text-gray-500 text-sm">
-                    <span class="font-semibold text-gray-700">Created by: </span>
-                    <a href="{{ route('profile.show', $recipe->user->id) }}" class="text-green-600 hover:text-green-800">
-                        {{ $recipe->user->name }}
-                    </a>
-                </div>
-
                 <!-- Spacer to push buttons to the bottom -->
                 <div class="flex-grow"></div>
-
-                <!-- Follow Button (Visible if not already following) -->
-                @auth
-                    @if(auth()->user()->id == $recipe->user->id)
-                        <!-- If the recipe owner is the logged-in user, hide the follow button -->
-                        <button class="bg-gray-300 text-gray-700 rounded-full px-6 py-2 mt-3 cursor-not-allowed mx-auto block w-3/4">
-                            You're the creator
-                        </button>
-                    @elseif(auth()->user()->isFollowing($recipe->user))
-                        <button class="bg-gray-300 text-gray-700 rounded-full px-6 py-2 mt-3 cursor-not-allowed mx-auto block w-3/4">
-                            Following
-                        </button>
-                    @else
-                        <form action="{{ route('follow.toggle', $recipe->user->id) }}" method="POST" class="mt-3">
-                            @csrf
-                            <button type="submit" class="bg-green-900 text-white rounded-full px-6 py-2 mx-auto block w-3/4 hover:bg-green-950">
-                                Follow
-                            </button>
-                        </form>
-                    @endif
-                @endauth
 
                 <!-- View Recipe Button -->
                 <a href="{{ route('recipes.show', $recipe->id) }}" 
                    class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out text-center mt-4 mx-auto block w-3/4">
                     View Recipe
                 </a>
+            </div>
+
+            <!-- Footer: User Profile Section -->
+            <div class="bg-gray-50 py-4 px-5 flex items-center justify-between mt-4 rounded-b-lg">
+                <div class="flex items-center space-x-4">
+                    <a href="{{ route('profile.show', $recipe->user->id) }}" class="flex items-center space-x-2">
+                        <img src="{{ $recipe->user->profile_picture }}" alt="{{ $recipe->user->name }}" class="w-10 h-10 rounded-full object-cover">
+                        <span class="text-green-900 font-semibold">{{ $recipe->user->name }}</span>
+                    </a>
+                </div>
+
+                <!-- Follow Button (Visible if not already following) -->
+                @auth
+                    @if(auth()->user()->id == $recipe->user->id)
+                        <!-- If the recipe owner is the logged-in user, hide the follow button -->
+                        <button class="bg-gray-300 text-gray-700 rounded-full px-6 py-2 mt-3 cursor-not-allowed">
+                            You're the creator
+                        </button>
+                    @elseif(auth()->user()->isFollowing($recipe->user))
+                        <button class="bg-gray-300 text-gray-700 rounded-full px-6 py-2 mt-3 cursor-not-allowed">
+                            Following
+                        </button>
+                    @else
+                        <form action="{{ route('follow.toggle', $recipe->user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">
+                                Follow
+                            </button>
+                        </form>
+                    @endif
+                @endauth
             </div>
         </div>
     @endforeach

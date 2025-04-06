@@ -90,44 +90,44 @@
     <!-- Logo and Description Section -->
     <div class="flex flex-col items-center md:items-start mb-10 md:mb-0">
       <img src="{{ asset('imgs/logo.png') }}" alt="Tasty Nest Logo" class="w-36 mb-4">
-      <p class="text-lg opacity-80 text-center md:text-left text-green-900">
+      <p class="text-lg opacity-80 text-center md:text-left text-green-900 font-bold">
         A collection of simple, delicious, and healthy recipes to inspire your kitchen.
       </p>
     </div>
 
     <!-- Quick Links Section -->
     <div class="flex flex-col text-center md:text-left">
-      <h3 class="text-lg font-semibold mb-4 text-green-950">Quick Links</h3>
+      <h3 class="text-lg font-semibold mb-4 text-green-950 font-bold">Quick Links</h3>
       <ul class="space-y-2">
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Home</a></li>
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Recipes</a></li>
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Premium</a></li>
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Contact</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Home</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Recipes</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Premium</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Contact</a></li>
       </ul>
     </div>
 
     <!-- Resources Section -->
     <div class="flex flex-col text-center md:text-left">
-      <h3 class="text-lg font-semibold mb-4 text-green-950">Resources</h3>
+      <h3 class="text-lg font-semibold mb-4 text-green-950 font-bold">Resources</h3>
       <ul class="space-y-2">
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Cooking Tips</a></li>
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Meal Planning</a></li>
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Healthy Eating</a></li>
-        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Newsletter</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Cooking Tips</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Meal Planning</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Healthy Eating</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Newsletter</a></li>
       </ul>
     </div>
 
     <!-- Social Media Section -->
     <div class="flex flex-col items-center md:items-end">
-      <h3 class="text-lg font-semibold mb-4 text-green-950">Follow Us</h3>
+      <h3 class="text-lg font-semibold mb-4 text-green-950 font-bold">Follow Us</h3>
       <div class="flex space-x-6 justify-center md:justify-end">
-        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300">
+        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">
           <i class="fab fa-facebook text-2xl"></i>
         </a>
-        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300">
+        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">
           <i class="fab fa-instagram text-2xl"></i>
         </a>
-        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300">
+        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">
           <i class="fab fa-pinterest text-2xl"></i>
         </a>
       </div>
@@ -139,8 +139,6 @@
     &copy; 2025 Tasty Nest. All Rights Reserved.
   </div>
 </footer>
-
-
 
   <script src="{{ asset('js/script.js') }}"></script>
 </body>

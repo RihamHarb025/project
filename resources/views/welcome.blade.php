@@ -71,7 +71,7 @@
         <div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out opacity-0 translate-y-12 card">
             <div class="p-6 h-full flex flex-col justify-between">
                 <div class="flex justify-center mb-4">
-                    <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="{{ $recipe->title }}" class="w-32 h-32 rounded-lg object-cover">
+                    <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}" class="w-32 h-32 rounded-lg object-cover">
                 </div>
                 <h2 class="text-2xl font-bold text-center text-green-950 mb-2">{{ $recipe->title }}</h2>
                 <p class="text-green-900 font-semibold text-center text-base mb-4">{{ $recipe->description }}</p>
