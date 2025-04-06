@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
@@ -84,59 +85,61 @@
 
   @yield('content')
 
- <footer class="bg-green-950 text-white py-14 mt-40">
-  <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-10">
-    
-   
-    <div class="flex flex-col items-center md:items-start">
+  <footer class="bg-white text-white py-16 mt-40">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <!-- Logo and Description Section -->
+    <div class="flex flex-col items-center md:items-start mb-10 md:mb-0">
       <img src="{{ asset('imgs/logo.png') }}" alt="Tasty Nest Logo" class="w-36 mb-4">
-      <p class="text-lg opacity-80 text-center md:text-left">
+      <p class="text-lg opacity-80 text-center md:text-left text-green-900">
         A collection of simple, delicious, and healthy recipes to inspire your kitchen.
       </p>
     </div>
 
+    <!-- Quick Links Section -->
     <div class="flex flex-col text-center md:text-left">
-      <h3 class="text-lg font-semibold mb-4 text-orange-300">Quick Links</h3>
+      <h3 class="text-lg font-semibold mb-4 text-green-950">Quick Links</h3>
       <ul class="space-y-2">
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Home</a></li>
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Recipes</a></li>
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Premium</a></li>
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Contact</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Home</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Recipes</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Premium</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Contact</a></li>
       </ul>
     </div>
 
+    <!-- Resources Section -->
     <div class="flex flex-col text-center md:text-left">
-      <h3 class="text-lg font-semibold mb-4 text-orange-300">Resources</h3>
+      <h3 class="text-lg font-semibold mb-4 text-green-950">Resources</h3>
       <ul class="space-y-2">
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Cooking Tips</a></li>
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Meal Planning</a></li>
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Healthy Eating</a></li>
-        <li><a href="#" class="hover:text-orange-300 transition duration-300">Newsletter</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Cooking Tips</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Meal Planning</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Healthy Eating</a></li>
+        <li><a href="#" class="text-green-900 hover:text-green-950 transition duration-300">Newsletter</a></li>
       </ul>
     </div>
 
-
+    <!-- Social Media Section -->
     <div class="flex flex-col items-center md:items-end">
-      <h3 class="text-lg font-semibold mb-4 text-orange-300">Follow Us</h3>
-      <div class="flex space-x-4">
-        <a href="#" class="hover:text-orange-300 transition duration-300">
+      <h3 class="text-lg font-semibold mb-4 text-green-950">Follow Us</h3>
+      <div class="flex space-x-6 justify-center md:justify-end">
+        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300">
           <i class="fab fa-facebook text-2xl"></i>
         </a>
-        <a href="#" class="hover:text-orange-300 transition duration-300">
+        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300">
           <i class="fab fa-instagram text-2xl"></i>
         </a>
-        <a href="#" class="hover:text-orange-300 transition duration-300">
+        <a href="#" class="text-green-900 hover:text-green-950 transition duration-300">
           <i class="fab fa-pinterest text-2xl"></i>
         </a>
       </div>
     </div>
-
   </div>
 
-  <div class="border-t border-white border-opacity-20 mt-10 pt-6 text-center text-sm opacity-60">
+  <!-- Bottom Text -->
+  <div class="mt-10 pt-6 text-center text-sm opacity-60 text-green-950 font-bold">
     &copy; 2025 Tasty Nest. All Rights Reserved.
   </div>
 </footer>
+
 
 
   <script src="{{ asset('js/script.js') }}"></script>
