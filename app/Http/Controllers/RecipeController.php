@@ -141,7 +141,16 @@ class RecipeController extends Controller
     public function edit(string $id)
     {
         //
+        $recipe = Recipe::findOrFail($id);
+
+        // Check if the user is admin or the owner of the recipe
+        if(auth()->user()->is_admin || auth()->user()->id === $recipe->user_id) {
+            return view('recipes.edit', compact('recipe'));
+        }
+
+        return redirect()->route('recipes.index')->with('error', 'Unauthorized');
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -149,6 +158,23 @@ class RecipeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $recipe = Recipe::findOrFail($id);
+
+        // Validate input
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            // Add validation rules for other fields if needed
+        ]);
+
+        // Update recipe data
+        $recipe->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            // Update other fields as necessary
+        ]);
+
+        return redirect()->route('recipes.index')->with('success', 'Recipe updated successfully');
     }
 
     /**
@@ -157,5 +183,14 @@ class RecipeController extends Controller
     public function destroy(string $id)
     {
         //
+        $recipe = Recipe::findOrFail($id);
+
+    // Make sure the user is an admin (or the owner of the recipe)
+    if (Auth::user()->is_admin) {
+        $recipe->delete();
+        return response()->json(['message' => 'Recipe deleted successfully']);
+    }
+
+    return response()->json(['error' => 'Unauthorized'], 403);
     }
 }

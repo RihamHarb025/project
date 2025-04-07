@@ -90,6 +90,65 @@
             $('#tag').on('change', function () {
                 fetchRecipes();
             });
+            $('.delete-button').on('click', function() {
+        var recipeId = $(this).data('recipe-id');
+
+        if (confirm('Are you sure you want to delete this recipe?')) {
+            // Send a request to delete the recipe
+            $.ajax({
+                url: '/recipes/' + recipeId,  // Assuming you're using a resource controller
+                method: 'DELETE',
+                success: function(response) {
+                    alert('Recipe deleted!');
+                    // You can also remove the recipe from the DOM after successful delete
+                    $(this).closest('.recipe-card').remove();
+                },
+                error: function(xhr, status, error) {
+                    alert('Error deleting recipe');
+                }
+            });
+        }
+    });
+
+    $('.edit-button').click(function() {
+        var recipeId = $(this).data('recipe-id');
+        
+        // Toggle visibility of title and description inputs
+        $('#recipe-title-' + recipeId).toggleClass('hidden');
+        $('#recipe-description-' + recipeId).toggleClass('hidden');
+        $('#edit-title-' + recipeId).toggleClass('hidden');
+        $('#edit-description-' + recipeId).toggleClass('hidden');
+        
+        // Toggle Edit/Save Button text
+        if ($(this).text() == 'Edit') {
+            $(this).text('Save');
+        } else {
+            // On Save, you can perform the saving action (e.g., AJAX call to save changes)
+            var newTitle = $('#edit-title-' + recipeId).val();
+            var newDescription = $('#edit-description-' + recipeId).val();
+
+            // Example: Saving the new title and description via AJAX (you can customize this)
+            $.ajax({
+                url: '/recipes/' + recipeId,  // Adjust the URL for your route
+                method: 'PUT',                // Use PUT or PATCH depending on your backend
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    title: newTitle,
+                    description: newDescription
+                },
+                success: function(response) {
+                    // Upon success, update the card content
+                    $('#recipe-title-' + recipeId).text(newTitle);
+                    $('#recipe-description-' + recipeId).text(newDescription);
+                    
+                    // Optionally, show a success message
+                    alert('Recipe updated!');
+                }
+            });
+
+            $(this).text('Edit');  // Change button back to "Edit" after saving
+        }
+    });
         });
 </script>
 </body>
