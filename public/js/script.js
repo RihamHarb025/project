@@ -118,6 +118,35 @@ $(window).click(function (event) {
     }
 });
 
+const logoutBtn = $("#logout-btn");
+const logoutModal = $("#logout-modal");
+const cancelBtn = $("#cancel-btn");
+const cancelLogout = $("#cancel-logout");
+
+logoutBtn.click(function () {
+  logoutModal.removeClass("hidden");
+  $("body").css("overflow", "hidden"); // Disable scroll
+});
+
+cancelBtn.click(function () {
+  logoutModal.addClass("hidden");
+  $("body").css("overflow", "auto"); // Enable scroll
+});
+
+cancelLogout.click(function () {
+  logoutModal.addClass("hidden");
+  $("body").css("overflow", "auto"); // Enable scroll
+});
+
+// Optional: click outside modal to close
+$(window).click(function (event) {
+  if ($(event.target).is(logoutModal)) {
+    logoutModal.addClass("hidden");
+    $("body").css("overflow", "auto");
+  }
+});
+
+
 
 $('#like-form').on('submit', function(e) {
     e.preventDefault();  // Prevent the form from submitting normally
