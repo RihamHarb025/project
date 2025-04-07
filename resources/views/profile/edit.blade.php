@@ -22,11 +22,11 @@
             </a>
 
             <!-- Following Count and Link -->
-            <a href="{{ route('follow.followers', Auth::user()->id) }}">
+            <a href="{{ route('follow.followings', Auth::user()->id) }}">
                 <p class="mt-2 text-gray-600 bg-orange-300 rounded-lg p-2">
-                    <strong>Followers:</strong>
+                    <strong>Following:</strong>
                     <span>
-                        {{ $user->followers->count() ?: 0 }}
+                        {{ $user->following->count() ?: 0 }}
                     </span>
                 </p>
             </a>
