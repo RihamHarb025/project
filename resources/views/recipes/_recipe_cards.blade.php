@@ -11,37 +11,35 @@
                     {{ $recipe->title }}
                 </h3>
 
-                <!-- Editable Title (hidden by default) -->
-                <input type="text" class="edit-title-input hidden w-full px-4 py-2 mb-4 border rounded-lg" 
-                       id="edit-title-{{ $recipe->id }}" value="{{ $recipe->title }}" />
+                
 
                 <!-- Recipe Description -->
                 <p class="text-gray-600 mb-4" id="recipe-description-{{ $recipe->id }}">
                     {{ Str::limit($recipe->description, 100) }}
                 </p>
 
-                <!-- Editable Description (hidden by default) -->
-                <textarea class="edit-description-input hidden w-full px-4 py-2 mb-4 border rounded-lg" 
-                          id="edit-description-{{ $recipe->id }}">{{ $recipe->description }}</textarea>
+                <div class="flex flex-wrap gap-2 mb-4">
+                @foreach ($recipe->categories as $category)
+                    <span class="text-green-950 font-bold text-2xl">{{ $category->name }}</span>
+                @endforeach
+            </div>
 
+            
                 <!-- Tags -->
                 @if($recipe->tags->count())
                     <div class="flex flex-wrap gap-2 mb-4" id="tags-{{ $recipe->id }}">
                         @foreach ($recipe->tags as $tag)
                             <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full tag-item-{{ $tag->id }}">
                                 {{ $tag->name }}
-                                <button class="remove-tag text-red-600 ml-2" data-tag-id="{{ $tag->id }}">✖</button>
+                             
                             </span>
                         @endforeach
                     </div>
                 @endif
 
-                <!-- Add Tag Button (Visible when admin clicks edit) -->
-                <div class="flex items-center mb-4 hidden" id="add-tag-container-{{ $recipe->id }}">
-                    <input type="text" class="add-tag-input w-full px-4 py-2 mb-2 border rounded-lg" placeholder="Add a new tag" id="add-tag-input-{{ $recipe->id }}">
-                    <button class="add-tag-btn bg-green-600 text-white px-4 py-2 rounded-lg ml-2">+</button>
-                </div>
+                
 
+            
                 <!-- Spacer to push buttons to the bottom -->
                 <div class="flex-grow"></div>
 
@@ -53,7 +51,7 @@
             </div>
 
             <!-- Footer: User Profile Section -->
-            <div class="bg-gray-50 py-4 px-5 flex items-center justify-between mt-4 rounded-b-lg">
+            <div class="bg-gray-50 py-4 px-5 flex items-center justify-between mt-2 rounded-b-lg">
                 <div class="flex items-center space-x-4">
                     <a href="{{ route('profile.show', $recipe->user->id) }}" class="flex items-center space-x-2">
                         <img src="{{ $recipe->user->profile_picture }}" alt="{{ $recipe->user->name }}" class="w-10 h-10 rounded-full object-cover">
@@ -82,21 +80,6 @@
                     @endif
                 @endauth
             </div>
-
-            <!-- Admin Controls (visible only for admin) -->
-            @if(Auth::user() && Auth::user()->is_admin)
-                <div class="admin-controls mt-4 px-4 py-3 flex justify-evenly space-x-4 border-t border-gray-300">
-                    <button class="edit-button bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg transition-all duration-200 ease-in-out" 
-                            data-recipe-id="{{ $recipe->id }}">
-                        Edit
-                    </button>
-
-                    <button class="delete-button bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-lg transition-all duration-200 ease-in-out" 
-                            data-recipe-id="{{ $recipe->id }}">
-                        Delete
-                    </button>
-                </div>
-            @endif
         </div>
     @endforeach
 </div>

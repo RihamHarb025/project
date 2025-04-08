@@ -64,10 +64,10 @@
 
             <!-- Profile Image -->
             <div>
-                <x-input-label for="image-profile" value="Profile Image" class="text-lg font-semibold text-zinc-800" />
-                <x-text-input id="image-profile" type="file" name="image-profile" accept="image/*"
+                <x-input-label for="image_profile" value="Profile Image" class="text-lg font-semibold text-zinc-800" />
+                <x-text-input id="image_profile" type="file" name="image_profile" accept="image/*"
                     class="mt-2 w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400" />
-                <x-input-error :messages="$errors->get('image-profile')" class="mt-1" />
+                <x-input-error :messages="$errors->get('image_profile')" class="mt-1" />
             </div>
 
             <!-- Tags -->

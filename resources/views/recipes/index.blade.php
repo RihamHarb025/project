@@ -39,17 +39,10 @@
                 @endforeach
             </select>
         </div>
-
-        <div class="flex justify-center mt-6">
-            <button type="submit"
-                    class="bg-green-900 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-green-950 transition duration-300 ease-in-out transform hover:scale-105">
-                Search
-            </button>
-        </div>
     </form>
 
     <!-- Recipe Container -->
-    <div id="recipeContainer" class="row">
+    <div id="recipeContainer" class="row mt-10">
         @include('recipes._recipe_cards', ['recipes' => $recipes])
     </div>
 </div>

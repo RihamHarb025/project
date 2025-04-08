@@ -58,10 +58,12 @@
     Meal Plans
     <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
   </a>
-  <a href="{{ route('profile.edit') }}" id="profile-btn" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    Me
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
+  @auth
+        <!-- Display User's Profile Image -->
+        <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 group">
+    <img src="{{ Auth::user()->profile_image ? asset(Auth::user()->profile_image) : asset('imgs/defaultprofile.png') }}" alt="Profile" class="h-10 w-10 rounded-full border-2 border-transparent group-hover:border-green-950 transition-all duration-300 ease-in-out">
+</a>
+      @endauth
 </nav>
 <div id="register-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] hidden">
   <!-- Modal Content -->
@@ -86,6 +88,7 @@
           Login
         </button>
       </a>
+      
     </div>
   </div>
 </div>

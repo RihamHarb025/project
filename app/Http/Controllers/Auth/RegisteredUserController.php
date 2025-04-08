@@ -41,6 +41,12 @@ class RegisteredUserController extends Controller
             'tags' => ['nullable', 'array'],
             'tags.*' => ['exists:tags,id'],
         ]);
+        
+        $imagePath = null;
+        if ($request->hasFile('image-profile')) {
+            // Store image in the public disk (storage/app/public)
+            $imagePath = $request->file('image-profile')->store('profile_images', 'public');
+        }
 
         $user = User::create([
             'name' => $request->name,

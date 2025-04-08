@@ -3,7 +3,7 @@
 @section('content')
 <section class="max-w-4xl mx-auto mt-16 p-8 bg-white/70 backdrop-blur-lg rounded-xl shadow-xl">
     <div class="flex items-center gap-6">
-        <img src="{{ Auth::user()->profile_picture ?? asset('imgs/default-avatar.png') }}" 
+        <img src="{{ Auth::user()->profile_picture ?? asset('imgs/defaultprofile.png') }}" 
              class="w-24 h-24 rounded-full border-4 border-green-900 shadow-md" 
              alt="Profile Picture">
 
