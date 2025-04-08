@@ -10,15 +10,13 @@ class FollowController extends Controller
     //
     public function followers($id)
     {
-        // Retrieve user and their followers
         $user = User::findOrFail($id);
-        $followers = $user->followers; // Get the followers of the user
+        $followers = $user->followers;
         return view('profile.followers', compact('user', 'followers'));
     }
 
     public function followings($id)
     {
-        // Retrieve user and their followings
         $user = User::findOrFail($id);
         $followings = $user->following; // Get the following of the user
         return view('profile.following', compact('user', 'followings'));

@@ -33,17 +33,14 @@ class RecipeController extends Controller
         });
     })
     ->get();
-
-    // Fetch categories and tags to populate the dropdowns
     $categories = Category::all();
     $tags = Tag::all();
 
-    // If the request is AJAX, return the recipe cards only
+
     if ($request->ajax()) {
         return view('recipes._recipe_cards', compact('recipes'))->render();
     }
 
-    // Otherwise, return the full view
     return view('recipes.index', compact('recipes', 'search', 'categories', 'tags', 'category', 'tag'));
    
     }
@@ -65,16 +62,14 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd(auth()->id());
-        // dd($request->all());
+    
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
             'category_id' => 'required|exists:categories,id',
             'tags' => 'array',
             'tags.*' => 'exists:tags,id',
-            'image' => 'nullable|image|max:2048', // Only allow image files, max 2MB
+            'image' => 'nullable|image|max:2048',
         ]);
     
         // Handle image upload
@@ -85,21 +80,20 @@ class RecipeController extends Controller
         } else {
             $imagePath = null;
         }
-        // Create recipe
+       
         $recipe = Recipe::create([
             'title' => $request->title,
             'description' => $request->description,
-            'category_id' => $request->category_id, // Make sure category_id exists in your recipes table
+            'category_id' => $request->category_id, 
             'image' => $imagePath,
             'user_id' => auth()->id(), 
         ]);
     
-        // Attach selected tags to the recipe
         if ($request->tags) {
             $recipe->tags()->attach($request->tags);
         }
     
-        // Redirect with success message
+        
         return redirect()->route('recipes.index')->with('success', 'Recipe added successfully!');
     }
 
@@ -108,14 +102,9 @@ class RecipeController extends Controller
      */
     public function show(string $id)
     {
-         // Find the recipe by ID
-        //  $recipe = Recipe::findOrFail($id);
-
-        //  // Pass the recipe to the view
-        //  return view('recipes.show', compact('recipe'));
+        
         $recipe = Recipe::with(['categories', 'tags','comments.user'])->findOrFail($id);
 
-        // Return the view and pass the recipe data
         return view('recipes.show', compact('recipe'));
     }
 
@@ -124,11 +113,9 @@ class RecipeController extends Controller
         $user = auth()->user();
     
         if ($recipe->likes()->where('user_id', $user->id)->exists()) {
-            // If already liked, remove like
             $recipe->likes()->detach($user->id);
             $liked = false;
         } else {
-            // Otherwise, add like
             $recipe->likes()->attach($user->id);
             $liked = true;
         }
@@ -143,7 +130,6 @@ class RecipeController extends Controller
         //
         $recipe = Recipe::findOrFail($id);
 
-        // Check if the user is admin or the owner of the recipe
         if(auth()->user()->is_admin || auth()->user()->id === $recipe->user_id) {
             return view('recipes.edit', compact('recipe'));
         }
@@ -160,18 +146,15 @@ class RecipeController extends Controller
         //
         $recipe = Recipe::findOrFail($id);
 
-        // Validate input
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            // Add validation rules for other fields if needed
         ]);
 
-        // Update recipe data
         $recipe->update([
             'title' => $request->title,
             'description' => $request->description,
-            // Update other fields as necessary
+            
         ]);
 
         return redirect()->route('recipes.index')->with('success', 'Recipe updated successfully');
@@ -184,8 +167,6 @@ class RecipeController extends Controller
     {
         //
         $recipe = Recipe::findOrFail($id);
-
-    // Make sure the user is an admin (or the owner of the recipe)
     if (Auth::user()->is_admin) {
         $recipe->delete();
         return response()->json(['message' => 'Recipe deleted successfully']);

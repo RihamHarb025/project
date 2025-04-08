@@ -93,24 +93,22 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl mx-auto mt-16">
   
-    <!-- Meal Plans Section -->
-    <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-1 h-[500px] flex flex-col justify-between">
-      <h2 class="text-4xl font-bold text-white opacity-80 font-serif">Meal Plans</h2>
-      <p class="mt-6 text-xl text-white font-semibold">With Tasty Nest Premium, get personalized meal plans for every week. Take the stress out of planning meals for you and your family!</p>
+    <div class="bg-orange-400 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-1 h-[500px] flex flex-col justify-between">
+      <h2 class="text-4xl font-bold text-green-950 opacity-80 font-serif">Meal Plans</h2>
+      <p class="mt-6 text-xl text-green-900 font-semibold">With Tasty Nest Premium, get personalized meal plans for every week. Take the stress out of planning meals for you and your family!</p>
       <img src="{{asset('imgs/meal-plan-example.jpg')}}" alt="Meal Plan" class="mt-6 rounded-lg w-full h-[300px] object-cover">
     </div>
 
-    <!-- Exclusive Recipes Section (Wider) -->
-    <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-2 h-[500px] flex flex-col justify-between">
-      <h2 class="text-4xl font-bold text-white opacity-80 font-serif">Exclusive Recipes</h2>
-      <p class="mt-6 text-xl text-white">Gain access to over 100+ exclusive recipes that will elevate your cooking skills and taste buds.</p>
+    <div class="bg-orange-400 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-2 h-[500px] flex flex-col justify-between">
+      <h2 class="text-4xl font-bold text-green-950 opacity-80 font-serif">Exclusive Recipes</h2>
+      <p class="mt-6 text-xl text-green-900 font-semibold">Gain access to over 100+ exclusive recipes that will elevate your cooking skills and taste buds.</p>
       <img src="https://via.placeholder.com/500x300?text=Exclusive+Recipes" alt="Exclusive Recipes" class="mt-6 rounded-lg w-full h-[200px] object-cover">
     </div>
 
-    <!-- All Benefits Section -->
-    <div class="bg-green-900 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-3 h-[300px] flex flex-col justify-between">
-      <h2 class="text-4xl font-bold text-white opacity-80 font-serif">All the Benefits of Premium</h2>
-      <p class="mt-6 text-xl text-white">Subscribe to Tasty Nest Premium and enjoy meal plans, exclusive recipes, grocery shopping lists, and much more to make your cooking life easier!</p>
+    
+    <div class="bg-orange-400 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-3 h-[300px] flex flex-col justify-between">
+      <h2 class="text-4xl font-bold text-green-950 opacity-80 font-serif">All the Benefits of Premium</h2>
+      <p class="mt-6 text-xl text-green-900">Subscribe to Tasty Nest Premium and enjoy meal plans, exclusive recipes, grocery shopping lists, and much more to make your cooking life easier!</p>
       <img src="https://via.placeholder.com/1000x400?text=All+Benefits" alt="All Benefits" class="mt-6 rounded-lg w-full h-[200px] object-cover">
     </div>
 

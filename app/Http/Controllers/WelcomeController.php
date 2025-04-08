@@ -15,17 +15,10 @@ class WelcomeController extends Controller
     {
         //
         $categories = Category::all();
-
-        
-        // Retrieve 6 random recipes
-        $recipes = Recipe::with('categories') // Eager load the categories relationship
+        $recipes = Recipe::with('categories')
         ->inRandomOrder()  // Get random recipes
         ->take(6)  // Limit to 6 recipes
         ->get();
-       
-        // dd($recipes->first()->categories);
-
-        // Return the 'welcome' view and pass the data
         return view('welcome', compact('categories', 'recipes'));
     }
 
