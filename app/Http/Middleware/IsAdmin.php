@@ -15,12 +15,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        dd('Middleware reached!');
-        // dd(Auth::user()->is_admin);
-        if (Auth::check() && Auth::user()->is_admin) {
-            return $next($request);
+        if (!auth()->check() || !auth()->user()->is_admin) {
+            abort(403, 'Unauthorized');
         }
 
-        abort(403, 'Unauthorized');
+        return $next($request);
     }
 }
