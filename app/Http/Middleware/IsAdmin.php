@@ -15,6 +15,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
+        $response = $next($request);
+    $response->headers->set('X-Content-Type-Options', 'nosniff');
+    return $response;
+    
         dd('Middleware reached!');
         // dd(Auth::user()->is_admin);
         if (Auth::check() && Auth::user()->is_admin) {
