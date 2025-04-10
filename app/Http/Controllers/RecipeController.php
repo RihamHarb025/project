@@ -8,11 +8,12 @@ use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 
+
+
+
 class RecipeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
     {
         $search = $request->input('search');
