@@ -17,8 +17,19 @@ class IsAdmin
     {
         if (!auth()->check() || !auth()->user()->is_admin) {
             abort(403, 'Unauthorized');
+
+        $response = $next($request);
+    $response->headers->set('X-Content-Type-Options', 'nosniff');
+    return $response;
+    
+        dd('Middleware reached!');
+        // dd(Auth::user()->is_admin);
+        if (Auth::check() && Auth::user()->is_admin) {
+            return $next($request);
+
         }
 
         return $next($request);
     }
+}
 }
