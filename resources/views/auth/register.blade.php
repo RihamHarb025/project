@@ -1,10 +1,67 @@
 @extends('layouts.main')
 
 @section('content')
-<section class="w-full bg-green-50 py-20 flex justify-center items-center min-h-screen px-4">
-    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden h-auto md:h-[600px]">
+<style>
+    .page-enter {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 
-        <!-- Right: Registration Form -->
+    .page-enter-active {
+        transition: all 0.7s ease-in-out;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+    .page-exit {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+    .page-exit-active {
+        transition: all 0.7s ease-in-out;
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    /* New Animation for Slide Back */
+    .page-back-enter {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    .page-back-enter-active {
+        transition: all 0.7s ease-in-out;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+    .page-back-exit {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+    .page-back-exit-active {
+        transition: all 0.7s ease-in-out;
+        transform: translateX(100%);
+        opacity: 0;
+    }
+</style>
+
+<section class="page-wrapper w-full bg-green-50 py-20 flex justify-center items-center min-h-screen px-4">
+    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden h-auto">
+        
+        <!-- Right: Welcome Text (now on the right side) -->
+        <div class="bg-[url('{{ asset('imgs/basilBg.png') }}')] bg-cover bg-center flex items-center justify-center p-12">
+            <div class="bg-white/70 p-8 rounded-xl shadow-xl text-center max-w-md">
+                <h2 class="text-5xl text-green-950 mb-6 font-serif font-bold leading-snug">Create Your Nest</h2>
+                <p class="text-green-900 text-xl font-medium">
+                    Discover, cook & share your favorite recipes in your own food haven.
+                </p>
+            </div>
+        </div>
+
+        <!-- Left: Registration Form (now on the left side) -->
         <div class="p-12 flex flex-col justify-between">
             <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-6 flex-grow">
                 @csrf
@@ -56,30 +113,43 @@
 
                 <!-- Register Button -->
                 <div class="mt-6">
-                    <x-primary-button class="bg-green-900 text-orange-300 hover:bg-green-950 px-4 py-2 w-full">
+                    <x-primary-button class="bg-green-900 text-orange-300 hover:bg-green-950 px-6 py-3 w-full">
                         Register
                     </x-primary-button>
                 </div>
 
                 <!-- Footer -->
                 <div class="flex flex-col md:flex-row items-center justify-between mt-8 gap-4">
-                    <a href="{{ route('login') }}" class="text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
-                        Log In
+                    <a href="{{ route('login') }}" class="transition-link text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
+                        Already have an account? Log In
                     </a>
                 </div>
             </form>
         </div>
-
-        <!-- Left: Welcome Text -->
-        <div class="bg-[url('{{ asset('imgs/basilBg.png') }}')] bg-cover bg-center flex items-center justify-center p-12">
-            <div class="bg-white/70 p-8 rounded-xl shadow-xl text-center max-w-md">
-                <h2 class="text-5xl text-green-950 mb-6 font-serif font-bold leading-snug">Create Your Nest</h2>
-                <p class="text-green-900 text-xl font-medium">
-                    Discover, cook & share your favorite recipes in your own food haven.
-                </p>
-            </div>
-        </div>
-
     </div>
 </section>
+
+<!-- jQuery + Slide Effect Script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initial page load animation
+        $('.page-wrapper').addClass('page-enter page-enter-active');
+
+        // Handle transition to login page
+        $('.transition-link').on('click', function (e) {
+            e.preventDefault();
+            const targetUrl = $(this).attr('href');
+
+            // Adding slide-back animation for login transition
+            $('.page-wrapper')
+                .removeClass('page-enter page-enter-active')
+                .addClass('page-back-exit page-back-exit-active');
+
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 700); // Matches the duration of the animation
+        });
+    });
+</script>
 @endsection

@@ -1,75 +1,104 @@
-<x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center bg-green-50 px-4">
-        <!-- Main container -->
-        <div class="w-full max-w-6xl h-[600px] bg-white rounded-2xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+@extends('layouts.main')
 
-            <!-- Left side (welcome message) -->
-            <div class="bg-cover bg-center p-12 flex flex-col justify-center"
-                style="background-image: url('{{ asset('imgs/basilBg.png') }}')">
-                <div class="bg-white/70 p-8 rounded-lg shadow-lg">
-                    <h2 class="text-5xl text-green-950 mb-6 leading-tight font-serif font-bold">
-                        Welcome Back
-                    </h2>
-                    <p class="text-green-900 text-2xl font-semibold">
-                        Log in to share your favorite recipes, discover new dishes, and cook up something magical.
-                    </p>
-                </div>
-            </div>
+@section('content')
+<style>
+    .page-enter {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 
-            <!-- Right side (login form) -->
-            <div class="bg-white p-12 flex flex-col justify-between items-center">
-                <form method="POST" action="{{ route('login') }}" class="w-full max-w-md space-y-6">
-                    @csrf
+    .page-enter-active {
+        transition: all 0.7s ease-in-out;
+        transform: translateX(0%);
+        opacity: 1;
+    }
 
-                    <!-- Session Status -->
-                    <x-auth-session-status class="mb-4" :status="session('status')" />
+    .page-exit {
+        transform: translateX(0%);
+        opacity: 1;
+    }
 
-                    <!-- Email -->
-                    <div>
-                        <x-input-label for="email" :value="__('Email')" class="text-sm font-semibold text-gray-700" />
-                        <x-text-input id="email" class="mt-1 block w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
+    .page-exit-active {
+        transition: all 0.7s ease-in-out;
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+</style>
 
-                    <!-- Password -->
-                    <div>
-                        <x-input-label for="password" :value="__('Password')" class="text-sm font-semibold text-gray-700" />
-                        <x-text-input id="password" class="mt-1 block w-full" type="password" name="password" required autocomplete="current-password" />
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                    </div>
-
-                    <!-- Remember Me & Forgot -->
-                    <div class="flex items-center justify-between text-sm">
-                        <label for="remember_me" class="inline-flex items-center">
-                            <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-green-600 shadow-sm focus:ring-green-500" name="remember">
-                            <span class="ml-2 text-gray-600">Remember me</span>
-                        </label>
-                        @if (Route::has('password.request'))
-                            <a class="text-green-700 hover:text-green-900 transition duration-200 ease-in-out underline" href="{{ route('password.request') }}">
-                                Forgot password?
-                            </a>
-                        @endif
-                    </div>
-
-                    <!-- Login Button -->
-                    <div>
-                        <x-primary-button class="w-full justify-center bg-green-900 text-orange-300 hover:bg-green-950">
-                            {{ __('Log in') }}
-                        </x-primary-button>
-                    </div>
-                </form>
-
-                <!-- Sign up link -->
-                <div class="mt-8 text-center">
-                    <p class="text-sm text-gray-600">
-                        New user?
-                        <a href="{{ route('register') }}" 
-                           class="ml-1 text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
-                            Create an account
-                        </a>
-                    </p>
-                </div>
+<section class="page-wrapper w-full bg-green-50 py-20 flex justify-center items-center min-h-screen px-4">
+    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden h-[600px]">
+        
+        <!-- Left: Welcome Message -->
+        <div class="bg-[url('{{ asset('imgs/basilBg.png') }}')] bg-cover bg-center flex items-center justify-center p-12">
+            <div class="bg-white/70 p-8 rounded-xl shadow-xl text-center max-w-md">
+                <h2 class="text-5xl text-green-950 mb-6 font-serif font-bold leading-snug">Welcome Back</h2>
+                <p class="text-green-900 text-xl font-medium">
+                We’re so happy to have you back. Let’s get you back to where you left off!
+                </p>
             </div>
         </div>
+
+        <!-- Right: Login Form -->
+        <div class="p-12 flex items-center justify-center">
+            <form method="POST" action="{{ route('login') }}" class="space-y-6 w-full max-w-md">
+                @csrf
+
+                <h2 class="text-3xl font-bold text-green-950 mb-6 text-center">Log In</h2>
+
+                <!-- Email -->
+                <div>
+                    <x-input-label for="email" value="Email" class="text-sm font-semibold text-gray-700" />
+                    <x-text-input id="email" name="email" type="email" required autofocus
+                        class="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
+                        placeholder="you@example.com" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <x-input-label for="password" value="Password" class="text-sm font-semibold text-gray-700" />
+                    <x-text-input id="password" name="password" type="password" required
+                        class="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
+                        placeholder="Enter your password" />
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                </div>
+
+                <!-- Login Button -->
+                <div class="mt-6">
+                    <x-primary-button class="bg-green-900 text-orange-300 hover:bg-green-950 px-6 py-3 w-full text-center">
+                        Log In
+                    </x-primary-button>
+                </div>
+
+                <!-- Footer -->
+                <div class="flex flex-col md:flex-row items-center justify-between mt-8 gap-4">
+                    <a href="{{ route('register') }}" class="transition-link text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
+                        New user? Register
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</x-guest-layout>
+</section>
+
+<!-- jQuery + Slide Effect Script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Entrance animation
+        $('.page-wrapper').addClass('page-enter page-enter-active');
+
+        // Click to switch pages
+        $('.transition-link').on('click', function (e) {
+            e.preventDefault();
+            const targetUrl = $(this).attr('href');
+
+            $('.page-wrapper').removeClass('page-enter page-enter-active').addClass('page-exit page-exit-active');
+
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 700);
+        });
+    });
+</script>
+@endsection
