@@ -7,6 +7,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes',RecipeController::class);
@@ -26,6 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{username}', [UserController::class, 'show'])->name('users.show');
+
+
 Route::post('/follow/{user}', [FollowController::class, 'toggle'])->name('follow.toggle');
 Route::get('/profile/{user}/followers', [FollowController::class, 'followers'])->name('follow.followers');
 Route::get('/profile/{user}/followings', [FollowController::class, 'followings'])->name('follow.followings');
