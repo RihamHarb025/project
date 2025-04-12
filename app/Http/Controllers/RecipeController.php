@@ -15,36 +15,48 @@ class RecipeController extends Controller
 {
 
     public function index(Request $request)
-    {
-        $search = $request->input('search');
+{
+    $search = $request->input('search');
     $category = $request->input('category');
     $tag = $request->input('tag');
+    $name_order = $request->input('name_order'); // 'asc' or 'desc' (A-Z or Z-A)
+    $date_order = $request->input('date_order'); // 'asc' or 'desc' (Oldest or Newest)
 
     $recipes = Recipe::when($search, function ($query, $search) {
         return $query->where('title', 'like', '%' . $search . '%');
     })
     ->when($category, function ($query, $category) {
-        return $query->whereHas('categories', function($q) use ($category) {
+        return $query->whereHas('categories', function ($q) use ($category) {
             $q->where('categories.id', $category);
         });
     })
     ->when($tag, function ($query, $tag) {
-        return $query->whereHas('tags', function($q) use ($tag) {
+        return $query->whereHas('tags', function ($q) use ($tag) {
             $q->where('tags.id', $tag);
         });
     })
+    // Apply name order if selected
+    ->when($name_order, function ($query, $name_order) {
+        return $query->orderBy('title', $name_order);
+    })
+    // Apply date order if selected (and name_order not present)
+    ->when(!$name_order && $date_order, function ($query) use ($date_order) {
+        return $query->orderBy('created_at', $date_order);
+    })
     ->get();
+
     $categories = Category::all();
     $tags = Tag::all();
-
 
     if ($request->ajax()) {
         return view('recipes._recipe_cards', compact('recipes'))->render();
     }
 
-    return view('recipes.index', compact('recipes', 'search', 'categories', 'tags', 'category', 'tag'));
-   
-    }
+    return view('recipes.index', compact(
+        'recipes', 'search', 'categories', 'tags', 
+        'category', 'tag', 'name_order', 'date_order'
+    ));
+}
 
     /**
      * Show the form for creating a new resource.

@@ -1,8 +1,8 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @foreach ($recipes as $recipe)
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-auto"> <!-- Change h-full to h-auto -->
             <!-- Recipe Image -->
-            <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}" class="w-full h-52 object-cover rounded-t-lg">
+            <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}" class="w-full h-48 object-cover rounded-t-lg"> <!-- Reduced image height to h-48 -->
 
             <!-- Card Body -->
             <div class="p-5 flex flex-col flex-grow">
@@ -11,35 +11,28 @@
                     {{ $recipe->title }}
                 </h3>
 
-                
-
                 <!-- Recipe Description -->
                 <p class="text-gray-600 mb-4" id="recipe-description-{{ $recipe->id }}">
                     {{ Str::limit($recipe->description, 100) }}
                 </p>
 
                 <div class="flex flex-wrap gap-2 mb-4">
-                @foreach ($recipe->categories as $category)
-                    <span class="text-green-950 font-bold text-2xl">{{ $category->name }}</span>
-                @endforeach
-            </div>
+                    @foreach ($recipe->categories as $category)
+                        <span class="text-green-950 font-bold text-2xl">{{ $category->name }}</span>
+                    @endforeach
+                </div>
 
-            
                 <!-- Tags -->
                 @if($recipe->tags->count())
                     <div class="flex flex-wrap gap-2 mb-4" id="tags-{{ $recipe->id }}">
                         @foreach ($recipe->tags as $tag)
                             <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full tag-item-{{ $tag->id }}">
                                 {{ $tag->name }}
-                             
                             </span>
                         @endforeach
                     </div>
                 @endif
 
-                
-
-            
                 <!-- Spacer to push buttons to the bottom -->
                 <div class="flex-grow"></div>
 
