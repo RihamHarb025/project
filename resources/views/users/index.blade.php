@@ -1,12 +1,15 @@
 @extends('layouts.main')
+
 @section('content')
 
-<div class="search-bar">
-    <input type="text" id="userSearch" placeholder="Search users by name..." class="w-full px-4 py-3 border rounded-xl">
-</div>
+<div class="container mx-auto px-6 py-8"> <!-- Added padding to the container -->
+    <div class="search-bar">
+        <input type="text" id="userSearch" placeholder="Search users by name..." class="w-full px-6 py-3 border rounded-xl"> <!-- Increased padding for input -->
+    </div>
 
-<div id="searchResults" class="mt-4">
-    @include('users.partials.search_results', ['users' => $users])
+    <div id="searchResults" class="mt-6"> <!-- Increased margin-top for results -->
+        @include('users.partials.search_results', ['users' => $users])
+    </div>
 </div>
 
 <script>

@@ -74,6 +74,11 @@
                 <div class="p-5">
                     <span class="text-lg font-medium">{{ $recipe->title }}</span>
                 </div>
+                <div class="p-5">
+                    <a href="{{route('recipes.show',$recipe->id)}}">
+                        <button class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">View Recipe</button>
+                    </a>
+                </div>
 
                 <!-- Delete Button -->
                 <div class="p-5 flex items-center justify-between mt-auto">

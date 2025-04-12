@@ -41,21 +41,24 @@
       </div>
     </div> -->
 
-    <div class="flex justify-center gap-10 mt-20 flex-wrap justify-center">
+    <div class="flex justify-center gap-12 mt-20 flex-wrap justify-center">
     @foreach($categories as $category)
-        <div class="max-w-sm bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-transform transform hover:scale-105 hover:translate-y-4 duration-300 ease-in-out">
-            <div class="p-6">
-                <div class="flex justify-center mb-4">
-                    <img src="{{ $category->image }}" alt="Icon" class="w-20 h-20 rounded-full object-cover shadow-lg border-2 border-green-100">
+        <div class="max-w-xl bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-transform transform hover:scale-105 hover:translate-y-4 duration-300 ease-in-out">
+            <div class="p-8"> <!-- Padding for better spacing -->
+                <div class="flex justify-center mb-6"> <!-- Margin for spacing -->
+                    <img src="{{ $category->image }}" alt="Icon" class="w-40 h-40 rounded-full object-cover shadow-lg border-2 border-green-100"> <!-- Increased image size -->
                 </div>
-                <h2 class="text-2xl font-bold text-center text-green-950 mb-2">{{ $category->name }}</h2>
-                <p class="text-green-700 font-semibold text-center text-base mb-4">{{ $category->description }}</p>
-                <!-- You can add a "View More" button or link here if needed -->
-                <a href="#" class="block text-center bg-green-500 text-white font-semibold py-2 px-4 rounded-full bg-green-900 hover:bg-green-950 transition duration-300 ease-in-out ">View Recipes</a>
+                <h2 class="text-4xl font-bold text-center text-green-950 mb-4">{{ $category->name }}</h2> <!-- Increased font size for name -->
+                <p class="text-green-700 font-semibold text-center text-lg mb-6">{{ $category->description }}</p> <!-- Font size for description -->
+                <a href="#" class="bg-green-900 text-white rounded-full text-lg px-5 py-2 hover:bg-green-950 transition duration-300 ease-in-out">
+                    View Recipes
+                </a>
             </div>
         </div>
     @endforeach
 </div>
+
+
   
 </section>
 
@@ -75,7 +78,7 @@
                 </div>
                 <h2 class="text-2xl font-bold text-center text-green-950 mb-2">{{ $recipe->title }}</h2>
                 <p class="text-green-900 font-semibold text-center text-base mb-4">{{ $recipe->description }}</p>
-                <p class="text-sm text-green-700 italic text-center">{{ $recipe->categories->isNotEmpty() ? $recipe->categories->first()->name : 'No category' }}</p>
+                <p class="text-xl text-green-900 italic text-center font-bold">{{ $recipe->categories->isNotEmpty() ? $recipe->categories->first()->name : 'No category' }}</p>
             </div>
         </div>
     @endforeach

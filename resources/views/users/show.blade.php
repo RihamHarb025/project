@@ -33,10 +33,10 @@
 
             <!-- Follow Button -->
             <button 
-    id="followBtn" 
-    class="bg-green-900 text-white rounded-full px-6 py-2 mt-3 hover:bg-green-950 transition duration-300">
-    {{ Auth::check() && Auth::user()->isFollowing($user) ? 'Unfollow' : 'Follow' }}
-</button>
+                id="followBtn" 
+                class="bg-green-900 text-white rounded-full px-6 py-2 mt-3 hover:bg-green-950 transition duration-300">
+                {{ Auth::check() && Auth::user()->isFollowing($user) ? 'Unfollow' : 'Follow' }}
+            </button>
         </div>
     </div>
 
@@ -49,8 +49,15 @@
                     @foreach($recipes as $recipe)
                         <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full">
                             <img src="{{ asset($recipe->image) }}" alt="{{ $recipe->title }}" class="w-full h-36 object-cover rounded-t-lg">
-                            <div class="p-5">
+                            <div class="p-5 flex flex-col justify-between flex-grow">
                                 <span class="text-lg font-medium">{{ $recipe->title }}</span>
+
+                                <!-- View Recipe Button inside the card -->
+                                <a href="{{ route('recipes.show', $recipe->id) }}">
+                                    <button class="bg-green-900 text-white rounded-full px-6 py-2 mt-3 hover:bg-green-950 transition duration-300">
+                                        View Recipe
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     @endforeach
@@ -70,14 +77,14 @@
             <p class="text-gray-700 mb-4">Sign up or log in to follow this user.</p>
             <div class="flex justify-center gap-4">
                 <a href="{{ route('register') }}">
-                <button class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">
-          Register
-        </button>
+                    <button class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">
+                        Register
+                    </button>
                 </a>
                 <a href="{{ route('login') }}">
-                <button class="border-2 border-green-900 text-green-900 rounded-full px-6 py-2 hover:bg-green-900 hover:text-white transition duration-300">
-          Login
-        </button>
+                    <button class="border-2 border-green-900 text-green-900 rounded-full px-6 py-2 hover:bg-green-900 hover:text-white transition duration-300">
+                        Login
+                    </button>
                 </a>
             </div>
             <button id="closeModal" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-full">Close</button>
@@ -101,5 +108,3 @@
     });
 </script>
 @endsection
-
-
