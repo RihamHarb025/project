@@ -2,8 +2,8 @@
     @foreach ($recipes as $recipe)
         <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-auto"> <!-- Change h-full to h-auto -->
             <!-- Recipe Image -->
-            <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}" class="w-full h-48 object-cover rounded-t-lg"> <!-- Reduced image height to h-48 -->
-
+            <img src="{{ asset($recipe->image) }}" alt="{{ $recipe->title }}" class="w-full h-48 object-cover rounded-t-lg"> <!-- Reduced image height to h-48 -->
+           
             <!-- Card Body -->
             <div class="p-5 flex flex-col flex-grow">
                 <!-- Recipe Title -->

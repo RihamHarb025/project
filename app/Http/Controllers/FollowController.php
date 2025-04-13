@@ -24,7 +24,7 @@ class FollowController extends Controller
     public function showProfile()
 {
     $user = Auth::user()->load('followers', 'followings'); // Eager load the followers and following relationships
-    return view('profile.show', compact('user'));
+    return view('users.show', compact('user'));
 }
 
 

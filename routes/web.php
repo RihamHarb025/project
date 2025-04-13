@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+   
 });
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -36,7 +37,7 @@ Route::post('/follow/{user}', [FollowController::class, 'toggle'])->name('follow
 Route::get('/profile/{user}/followers', [FollowController::class, 'followers'])->name('follow.followers');
 Route::get('/profile/{user}/followings', [FollowController::class, 'followings'])->name('follow.followings');
 Route::post('/follow/{userId}', [FollowController::class, 'toggle'])->name('follow.toggle');
-Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
+// Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
 // Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 

@@ -75,7 +75,7 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-    
+        // dd($request->file('image'));
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
@@ -84,16 +84,17 @@ class RecipeController extends Controller
             'tags.*' => 'exists:tags,id',
             'image' => 'nullable|image|max:2048',
         ]);
-    
+       
         // Handle image upload
         if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('imgs'), $imageName);
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // dd($image->move(public_path('imgs'), $imageName)); 
+        
             $imagePath = 'imgs/' . $imageName;
         } else {
             $imagePath = null;
         }
-       
         $recipe = Recipe::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -180,11 +181,14 @@ class RecipeController extends Controller
     {
         //
         $recipe = Recipe::findOrFail($id);
-    if (Auth::user()->is_admin) {
+    $user = Auth::user();
+
+    // Let the user delete if they are the owner OR admin
+    if ($user->id === $recipe->user_id || $user->is_admin) {
         $recipe->delete();
-        return response()->json(['message' => 'Recipe deleted successfully']);
+        return redirect()->route('profile.edit')->with('success', 'Recipe deleted successfully');
     }
 
-    return response()->json(['error' => 'Unauthorized'], 403);
+    return redirect()->route('profile.edit')->with('error', 'Unauthorized');
     }
 }

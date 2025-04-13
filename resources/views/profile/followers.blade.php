@@ -15,7 +15,7 @@
                         <span class="text-lg font-semibold text-gray-900">{{ $follower->name }}</span>
                     </div>
 
-                    <a href="{{ route('profile.show', $follower->id) }}"
+                    <a href="{{ route('users.show', $follower->id) }}"
                        class="text-sm text-white bg-green-900 px-4 py-1.5 rounded-md hover:bg-green-950 transition">
                         View Profile
                     </a>
