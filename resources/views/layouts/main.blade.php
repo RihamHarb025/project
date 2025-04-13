@@ -42,7 +42,7 @@
     Recipes
     <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
   </a>
-  <a href="about" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+  <a href="{{route('aboutUs')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
     About Us
     <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
   </a>

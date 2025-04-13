@@ -12,6 +12,11 @@ use App\Http\Controllers\UserController;
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes',RecipeController::class);
 
+Route::get('/aboutUs', function () {
+    return view('aboutUs'); 
+})->name('aboutUs');
+
+
 Route::get('/about', function () {
     return view('recipes.about');
 });
