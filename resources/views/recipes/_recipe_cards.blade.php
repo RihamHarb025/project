@@ -41,6 +41,19 @@
                    class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out text-center mt-4 mx-auto block w-3/4">
                     View Recipe
                 </a>
+                @auth
+                    @if(auth()->user()->is_admin)
+                        <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" 
+                              onsubmit="return confirm('Are you sure you want to delete this recipe?');" 
+                              class="mt-2 mx-auto w-3/4">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white rounded-full px-6 py-2 hover:bg-red-700 w-full">
+                                Delete Recipe
+                            </button>
+                        </form>
+                    @endif
+                @endauth
             </div>
 
             <!-- Footer: User Profile Section -->

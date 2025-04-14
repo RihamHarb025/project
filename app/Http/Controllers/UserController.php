@@ -45,20 +45,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($username)
+    public function show(User $user)
     {
         //
-        $user = User::where('username', $username)->first();
-    
-    // Fetch the user's recipes
-        $recipes = $user->recipes;  // Assuming the relationship is defined in the User model
+        $recipes = $user->recipes;  // Assuming you have the 'recipes' relationship defined in the User model
 
-        return view('users.show', compact('user', 'recipes'));
+    return view('users.show', compact('user', 'recipes'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
         //
@@ -75,8 +69,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
+        if (auth()->user()->is_admin) {
+            // Delete the user
+            $user->delete();
+            return redirect()->route('users.index')->with('success', 'User banned successfully.');
+        }
+    
+        // If the user is not authorized (not admin)
+        return redirect()->route('users.index')->with('error', 'Unauthorized action.');
     }
 }

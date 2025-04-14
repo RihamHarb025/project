@@ -62,6 +62,11 @@
     Explore
     <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
   </a>
+  <a href="{{route('admin.index')}}">
+  <button class="bg-sky-500 text-black">
+    Control Panel
+  </button>
+  </a>
   @auth
         <!-- Display User's Profile Image -->
         <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 group">

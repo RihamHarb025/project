@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class AdminMiddleware
 {
@@ -13,11 +15,18 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
 {
-    if (auth()->check() && auth()->user()->is_admin) {
-        return $next($request);
+    if (Auth::check()) {
+        dd('User is logged in.');
+        if (Auth::user()->is_admin) {
+            return $next($request);
+        } else {
+            dd('User is not an admin.');
+        }
     }
-    abort(403, 'Unauthorized action.');
+
+    dd('User is not logged in.');
+    return abort(403, 'Unauthorized action.');
 }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes',RecipeController::class);
@@ -39,7 +40,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/{username}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
 Route::post('/follow/{user}', [FollowController::class, 'toggle'])->name('follow.toggle');
@@ -52,12 +54,15 @@ Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like'])->name('recipes.like');
-
-    Route::middleware(['auth', 'admin'])->group(function () {
-        Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
-        // Route::delete('/admin/recipes/{id}', [AdminController::class, 'destroy'])->name('admin.recipes.destroy');
-    });
 });
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/admin', AdminController::class);
+});
+Route::middleware(['auth'])->group(function () {
+    Route::resource('users', UserController::class);
+});
 
 require __DIR__.'/auth.php';

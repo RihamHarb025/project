@@ -179,16 +179,21 @@ class RecipeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
         $recipe = Recipe::findOrFail($id);
-    $user = Auth::user();
-
-    // Let the user delete if they are the owner OR admin
-    if ($user->id === $recipe->user_id || $user->is_admin) {
-        $recipe->delete();
-        return redirect()->route('profile.edit')->with('success', 'Recipe deleted successfully');
-    }
-
-    return redirect()->route('profile.edit')->with('error', 'Unauthorized');
+        $user = Auth::user();
+    
+        // Let the user delete if they are the owner OR admin
+        if ($user->id === $recipe->user_id || $user->is_admin) {
+            $recipe->delete();
+    
+            // Redirect based on role
+            if ($user->is_admin) {
+                return redirect()->route('recipes.index')->with('success', 'Recipe deleted successfully');
+            } else {
+                return redirect()->route('profile.edit')->with('success', 'Recipe deleted successfully');
+            }
+        }
+    
+        return redirect()->route('profile.edit')->with('error', 'Unauthorized');
     }
 }

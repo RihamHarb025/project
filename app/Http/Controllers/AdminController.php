@@ -60,6 +60,16 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $recipe = Recipe::findOrFail($id);
+        $user = Auth::user();
+
+        // Let the admin delete the recipe
+        if ($user->is_admin) {
+            $recipe->delete();
+            return redirect()->route('admin.index')->with('success', 'Recipe deleted successfully');
+        }
+
+        return redirect()->route('admin.index')->with('error', 'Unauthorized');
+
     }
 }
