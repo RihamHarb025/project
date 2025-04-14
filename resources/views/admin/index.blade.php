@@ -26,8 +26,7 @@
           <h4 class="text-green-950 font-bold mb-4 text-2xl">Quick Actions</h4>
           <ul class="space-y-4">
             <li class="flex items-center">
-              <span class="mr-2 text-blue-600">✅</span>
-              <button class="text-blue-500 hover:text-blue-700">Feature/Unfeature Recipe</button>
+              <button class="bg-blue-500 text-white rounded-lg p-2 hover:bg-blue-700">Feature/Unfeature Recipe</button>
             </li>
             <li class="flex items-center">
                 <a href="{{route('recipes.index')}}">
@@ -45,8 +44,7 @@
                 </a>
             </li>
             <li class="flex items-center">
-              <span class="mr-2 text-green-600">🆕</span>
-              <button class="text-green-500 hover:text-green-700">Add New Tag/Category</button>
+              <button class="bg-green-600 text-white rounded-lg p-2 hover:bg-green-700">Add New Tag/Category</button>
             </li>
             <li class="flex items-center">
               <span class="mr-2 text-purple-600">📦</span>
@@ -57,23 +55,23 @@
 
         <!-- Analytics Cards -->
         <div class="bg-white p-4 rounded-xl shadow">
-          <h4 class="text-gray-700 font-bold mb-4">Analytics</h4>
+          <h4 class="text-green-950 font-bold mb-4 text-2xl">Analytics</h4>
           <div class="space-y-4">
             <div class="flex justify-between">
-              <p class="text-gray-500">Total Users</p>
-              <h3 class="text-2xl font-bold">1,234</h3>
+              <p class="text-green-900 font-semibold">Total Users</p>
+              <h3 class="text-2xl text-green-950 font-bold">{{ number_format($totalUsers) }}</h3>
             </div>
             <div class="flex justify-between">
-              <p class="text-gray-500">Total Recipes</p>
-              <h3 class="text-2xl font-bold">567</h3>
+              <p class="text-green-900 font-semibold">Total Recipes</p>
+              <h3 class="text-2xl text-green-950 font-bold">{{ $totalRecipes }}</h3>
             </div>
             <div class="flex justify-between">
-              <p class="text-gray-500">Featured Recipes</p>
-              <h3 class="text-2xl font-bold">12</h3>
+              <p class="text-green-900 font-semibold">Featured Recipes</p>
+              <h3 class="text-2xl text-green-950 font-bold">12</h3>
             </div>
             <div class="flex justify-between">
-              <p class="text-gray-500">Most Liked Recipe</p>
-              <h3 class="text-2xl font-bold">Chocolate Cake</h3>
+              <p class="text-green-900 font-semibold">Most Liked Recipe</p>
+              <h3 class="text-2xl text-green-950 font-bold"> {{ $mostLikedRecipe ? $mostLikedRecipe->title : 'No recipes yet' }}</h3>
             </div>
           </div>
         </div>
