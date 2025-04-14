@@ -52,6 +52,11 @@ Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like'])->name('recipes.like');
+
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
+        // Route::delete('/admin/recipes/{id}', [AdminController::class, 'destroy'])->name('admin.recipes.destroy');
+    });
 });
 
 
