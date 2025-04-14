@@ -64,5 +64,9 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
 });
+Route::middleware(['auth'])->group(function () {
+    Route::post('/users/{id}/ban', [UserController::class, 'ban'])->name('users.ban');
+    Route::post('/users/{id}/unban', [UserController::class, 'unban'])->name('users.unban');
+});
 
 require __DIR__.'/auth.php';

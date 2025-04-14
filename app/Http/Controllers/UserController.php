@@ -81,4 +81,22 @@ class UserController extends Controller
         // If the user is not authorized (not admin)
         return redirect()->route('users.index')->with('error', 'Unauthorized action.');
     }
+    public function ban($id)
+{
+    $user = User::findOrFail($id);
+
+    $user->banned = true;
+    $user->save();
+
+    return redirect()->back()->with('success', 'User has been banned successfully.');
+}
+public function unban($id)
+{
+    $user = User::findOrFail($id);
+
+    $user->banned = false;
+    $user->save();
+
+    return redirect()->back()->with('success', 'User has been unbanned.');
+}
 }
