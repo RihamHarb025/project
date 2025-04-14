@@ -106,44 +106,53 @@
       </div>
 
       <div class="bg-white p-6 rounded-xl shadow">
-        <h4 class="text-gray-700 font-bold mb-4">User Management</h4>
-        <table class="w-full text-sm text-left">
-          <thead class="text-gray-500">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody class="text-gray-700">
-            <tr class="border-t">
-              <td>John Doe</td>
-              <td>johndoe@example.com</td>
-              <td>Admin</td>
-              <td><button class="text-red-500 hover:text-red-700">Ban</button></td>
-            </tr>
-            <tr class="border-t">
-              <td>Jane Smith</td>
-              <td>janesmith@example.com</td>
-              <td>User</td>
-              <td><button class="text-blue-500 hover:text-blue-700">Make Admin</button></td>
-            </tr>
-            <tr class="border-t">
-              <td>Michael Brown</td>
-              <td>michaelb@example.com</td>
-              <td>Admin</td>
-              <td><button class="text-yellow-500 hover:text-yellow-700">Unban</button></td>
-            </tr>
-            <tr class="border-t">
-              <td>Emily White</td>
-              <td>emilywhite@example.com</td>
-              <td>User</td>
-              <td><button class="text-red-500 hover:text-red-700">Ban</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <h4 class="text-gray-700 text-lg font-bold mb-6">User Management</h4>
+  <table class="w-full text-base text-left table-auto">
+    <thead class="text-gray-500 uppercase tracking-wide border-b">
+      <tr>
+        <th class="py-3 px-4">Name</th>
+        <th class="py-3 px-4">Email</th>
+        <th class="py-3 px-4">Role</th>
+        <th class="py-3 px-4">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-700">
+      <tr class="border-b hover:bg-gray-50 transition">
+        <td class="py-3 px-4">John Doe</td>
+        <td class="py-3 px-4">johndoe@example.com</td>
+        <td class="py-3 px-4">Admin</td>
+        <td class="py-3 px-4">
+          <button class="text-red-500 hover:text-red-700 font-medium">Ban</button>
+        </td>
+      </tr>
+      <tr class="border-b hover:bg-gray-50 transition">
+        <td class="py-3 px-4">Jane Smith</td>
+        <td class="py-3 px-4">janesmith@example.com</td>
+        <td class="py-3 px-4">User</td>
+        <td class="py-3 px-4">
+          <button class="text-blue-500 hover:text-blue-700 font-medium">Make Admin</button>
+        </td>
+      </tr>
+      <tr class="border-b hover:bg-gray-50 transition">
+        <td class="py-3 px-4">Michael Brown</td>
+        <td class="py-3 px-4">michaelb@example.com</td>
+        <td class="py-3 px-4">Admin</td>
+        <td class="py-3 px-4">
+          <button class="text-yellow-500 hover:text-yellow-700 font-medium">Unban</button>
+        </td>
+      </tr>
+      <tr class="border-b hover:bg-gray-50 transition">
+        <td class="py-3 px-4">Emily White</td>
+        <td class="py-3 px-4">emilywhite@example.com</td>
+        <td class="py-3 px-4">User</td>
+        <td class="py-3 px-4">
+          <button class="text-red-500 hover:text-red-700 font-medium">Ban</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
     </main>
   </div>
 </div>
