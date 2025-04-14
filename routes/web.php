@@ -16,6 +16,10 @@ Route::get('/aboutUs', function () {
     return view('aboutUs'); 
 })->name('aboutUs');
 
+Route::get('/contact', function () {
+    return view('contact'); 
+})->name('contact');
+
 
 Route::get('/about', function () {
     return view('recipes.about');
