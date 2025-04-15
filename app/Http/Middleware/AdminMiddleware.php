@@ -18,5 +18,9 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         return $next($request);
+
     }
+
 }
+
+

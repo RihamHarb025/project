@@ -37,11 +37,19 @@
             </a>
 
             <!-- Follow Button -->
-            <button 
-                id="followBtn" 
-                class="bg-green-900 text-white rounded-full px-6 py-2 mt-3 hover:bg-green-950 transition duration-300">
-                {{ Auth::check() && Auth::user()->isFollowing($user) ? 'Unfollow' : 'Follow' }}
-            </button>
+            @if(Auth::check())
+                <button 
+                    id="followBtn" 
+                    class="bg-green-900 text-white rounded-full px-6 py-2 mt-3 hover:bg-green-950 transition duration-300">
+                    {{ Auth::user()->isFollowing($user) ? 'Unfollow' : 'Follow' }}
+                </button>
+            @else
+                    <p class="mt-3 text-green-900 font-bold">
+                <a href="{{ route('register') }}" class="hover:underline">
+                    Register to connect with this user
+                </a>
+            </p>
+            @endif
         </div>
     </div>
 

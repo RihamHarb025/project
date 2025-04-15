@@ -52,7 +52,17 @@ Route::get('/profile/{user}/followings', [FollowController::class, 'followings']
 Route::post('/follow/{userId}', [FollowController::class, 'toggle'])->name('follow.toggle');
 // Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
 // Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+
+
+
 Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+
+Route::middleware(['auth'])->group(function () {
+    // This will apply auth middleware for creating a recipe
+    Route::get('recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
+    Route::post('recipes', [RecipeController::class, 'store'])->name('recipes.store');
+});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/recipes/{recipe}/like', [RecipeController::class, 'like'])->name('recipes.like');
@@ -63,8 +73,12 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('/admin', AdminController::class);
 });
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+
 Route::middleware(['auth'])->group(function () {
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->except(['index', 'show']); // Exclude the routes that don't need auth
 });
 Route::middleware(['auth'])->group(function () {
     Route::post('/users/{id}/ban', [UserController::class, 'ban'])->name('users.ban');
