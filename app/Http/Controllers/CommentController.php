@@ -10,6 +10,12 @@ class CommentController extends Controller
     //
     public function store(Request $request, $recipeId)
     {
+        if (auth()->user()->banned) {
+            return response()->json([
+                'error' => 'Your account is banned. You cannot comment.',
+            ], 403); // 403 Forbidden status code
+        }
+
         $request->validate([
             'body' => 'required|string|max:1000',
         ]);

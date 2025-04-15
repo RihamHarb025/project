@@ -2,6 +2,19 @@
 
 @section('content')
 
+
+<div class="container mx-auto p-6">
+        <!-- Modal for Banned Users -->
+        @if(session('banned'))
+            <div id="bannedModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div class="bg-white rounded-lg p-8 max-w-md shadow-lg text-center">
+                    <h2 class="text-2xl font-bold text-red-600 mb-4">⚠️ Access Denied</h2>
+                    <p class="text-gray-700 mb-6">You have been banned and cannot create recipes at the moment.</p>
+                    <a href="{{ route('home') }}" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-900 transition">Go Back</a>
+                </div>
+            </div>
+        @endif
+
 <section class="mt-16 flex flex-col items-center bg-cover bg-center bg-[url('{{ asset('imgs/basilBg.png') }}')]"> <!-- Add background image -->
     <!-- Single Glassy container that includes the headings and form -->
     <div class="mt-5 max-w-3xl w-full bg-white/70 backdrop-blur-lg p-8 shadow-xl rounded-2xl border border-white/30">

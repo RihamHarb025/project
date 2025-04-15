@@ -10,7 +10,12 @@
         <div>
             <h2 class="text-3xl font-bold text-green-900">{{ $user->name }}</h2>
             <p class="text-gray-700">{{ $user->bio ?? 'No bio available' }}</p>
-
+            @if($user->banned)
+                <div class="mt-4 p-4 bg-red-100 text-red-700 border-l-4 border-red-500">
+                    <strong>⚠️ This user is banned.</strong>
+                    <p>This user is currently banned and cannot create recipes or interact in certain ways.</p>
+                </div>
+            @endif
             <!-- Followers Count and Link -->
             <a href="{{ route('follow.followers', $user->id) }}">
                 <p class="mt-2 text-gray-600 bg-orange-300 rounded-lg p-2">

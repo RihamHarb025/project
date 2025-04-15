@@ -63,7 +63,9 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->banned) {
+            return redirect()->back()->with('banned_warning', 'You are currently banned from creating recipes.');
+        }
         $categories = Category::all();
         $tags = Tag::all(); 
     
@@ -75,7 +77,12 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->file('image'));
+        
+        if (auth()->user()->is_banned) {
+            return redirect()->route('users.show', ['user' => auth()->id()])
+                             ->with('error', 'You are banned and cannot create recipes.');
+        }
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
