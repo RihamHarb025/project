@@ -87,6 +87,7 @@
     <p class="text-gray-600 text-center mb-6">Please register or log in to continue.</p>
 
     <div class="flex justify-center gap-4">
+      
       <a href="{{ route('register') }}">
         <button class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">
           Register

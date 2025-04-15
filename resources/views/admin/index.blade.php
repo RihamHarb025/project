@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-gray-100 p-6">
   <div class="flex">
-    <!-- Sidebar -->
+
     <aside class="w-64 bg-white rounded-2xl p-6 shadow-md">
       <div class="text-2xl font-bold text-blue-700 mb-8">Admin Panel</div>
       <nav class="space-y-4">
@@ -17,11 +17,9 @@
       </nav>
     </aside>
 
-    <!-- Main Content -->
     <main class="flex-1 ml-6">
       <!-- Quick Actions, Analytics, and Membership Cards in a grid layout -->
       <div class="grid grid-cols-3 gap-6 mb-6">
-        <!-- Quick Actions -->
         <div class="bg-white p-4 rounded-xl shadow">
           <h4 class="text-green-950 font-bold mb-4 text-2xl">Quick Actions</h4>
           <ul class="space-y-4">
@@ -53,7 +51,6 @@
           </ul>
         </div>
 
-        <!-- Analytics Cards -->
         <div class="bg-white p-4 rounded-xl shadow">
           <h4 class="text-green-950 font-bold mb-4 text-2xl">Analytics</h4>
           <div class="space-y-4">
@@ -75,28 +72,22 @@
             </div>
           </div>
         </div>
-
-        <!-- Membership Card (New Card for Users and Earnings) -->
         <div class="bg-white p-4 rounded-xl shadow">
-          <h4 class="text-gray-700 font-bold mb-4">Membership</h4>
+          <h4 class="text-green-950 font-bold mb-4 text-2xl">Membership</h4>
           <div class="space-y-4">
-            <!-- Amount of Users Subscribed -->
             <div class="flex justify-between">
-              <p class="text-gray-500">Amount of Users Subscribed</p>
+              <p class="text-green-900 font-semibold">Amount of Users Subscribed</p>
               <h3 class="text-2xl font-bold">12,345</h3>
             </div>
-            <!-- Amount of Money Earned -->
             <div class="flex justify-between">
-              <p class="text-gray-500">Amount of Money Earned</p>
+              <p class="text-green-900 font-semibold">Amount of Money Earned</p>
               <h3 class="text-2xl font-bold">$45,678</h3>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Other sections below -->
       <div class="bg-white p-6 rounded-xl shadow mb-6">
-        <h4 class="text-gray-700 font-bold mb-4">Recent Activity</h4>
+        <h4 class="text-green-950 font-bold mb-4 text-2xl">Recent Activity</h4>
         <ul class="space-y-4">
           <li>New recipe added: <strong>Chocolate Cake</strong></li>
           <li>User <strong>johndoe@example.com</strong> signed up</li>
@@ -106,14 +97,14 @@
       </div>
 
       <div class="bg-white p-6 rounded-xl shadow">
-  <h4 class="text-gray-700 text-lg font-bold mb-6">User Management</h4>
+  <h4 class="text-green-950 font-bold mb-4 text-2xl">User Management</h4>
   <table class="w-full text-base text-left table-auto">
     <thead class="text-gray-500 uppercase tracking-wide border-b">
       <tr>
-        <th class="py-3 px-4">Name</th>
-        <th class="py-3 px-4">Email</th>
-        <th class="py-3 px-4">Role</th>
-        <th class="py-3 px-4">Actions</th>
+        <th class="py-3 px-4 text-green-950 font-bold mb-4 text-2xl">Name</th>
+        <th class="py-3 px-4 py-3 px-4 text-green-950 font-bold mb-4 text-xl">Email</th>
+        <th class="py-3 px-4 py-3 px-4 text-green-950 font-bold mb-4 text-xl">Role</th>
+        <th class="py-3 px-4 py-3 px-4 text-green-950 font-bold mb-4 text-xl">Actions</th>
       </tr>
     </thead>
     <tbody class="text-gray-700">
