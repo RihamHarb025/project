@@ -143,8 +143,9 @@
     </tbody>
   </table>
 </div>
-<div class="p-6">
-    <h2 class="text-3xl font-bold mb-4">Contact Messages</h2>
+<br></br>
+<div class="bg-white p-6 rounded-xl shadow">
+    <h4 class="text-3xl font-bold mb-4">Contact Messages</h2>
     <table class="w-full table-auto border border-gray-300">
         <thead class="bg-green-800 text-white">
             <tr>

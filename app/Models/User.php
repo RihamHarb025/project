@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'is_admin', 
         'bio', 
-        'image-profile', 
+        'image_profile', 
     ];
     public function tags()
 {

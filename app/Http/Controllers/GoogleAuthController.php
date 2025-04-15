@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 class GoogleAuthController extends Controller
 {
+    
     public function redirect(){
         return Socialite::driver('google')->redirect();
     }
