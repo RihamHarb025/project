@@ -59,7 +59,7 @@
             <!-- Footer: User Profile Section -->
             <div class="bg-gray-50 py-4 px-5 flex items-center justify-between mt-2 rounded-b-lg">
                 <div class="flex items-center space-x-4">
-                    <a href="{{ route('users.show', ['username' => $recipe->user->username]) }}" class="flex items-center space-x-2">
+                    <a href="{{ route('users.show', ['user' => $recipe->user->id]) }}" class="flex items-center space-x-2">
                         <img src="{{ $recipe->user->profile_picture }}" alt="{{ $recipe->user->name }}" class="w-10 h-10 rounded-full object-cover">
                         <span class="text-green-900 font-semibold">{{ $recipe->user->name }}</span>
                     </a>
