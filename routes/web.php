@@ -9,18 +9,21 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\http\Controllers\GoogleAuthController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes',RecipeController::class);
 
 Route::get('/aboutUs', function () {
     return view('aboutUs'); 
-})->name('aboutUs');
+})->name('aboutUs')->middleware('auth');
 
 Route::get('/contact', function () {
     return view('contact'); 
 })->name('contact');
 
+Route::get('/auth/google/redirect',[GoogleAuthController::class,'redirect'])->name('redirect');
+Route::get('/auth/google/call-back',[GoogleAuthController::class,'callback'])->name('call-back');
 
 Route::get('/about', function () {
     return view('recipes.about');
@@ -38,7 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
    
 });
-
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
