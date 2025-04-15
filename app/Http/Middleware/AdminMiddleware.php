@@ -26,7 +26,7 @@ class AdminMiddleware
         }
     }
 
-    dd('User is not logged in.');
+    
     return abort(403, 'Unauthorized action.');
 }
 }
