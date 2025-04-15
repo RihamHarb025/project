@@ -25,7 +25,7 @@ class AdminController extends Controller
             'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
             'users' => null,
             'search' => null,
-            '$messages' => ContactMessage::latest()->get()
+            'messages' => ContactMessage::latest()->get()
         ]);
 
 

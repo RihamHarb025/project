@@ -5,15 +5,15 @@
   <div class="flex">
 
     <aside class="w-64 bg-white rounded-2xl p-6 shadow-md">
-      <div class="text-2xl font-bold text-blue-700 mb-8">Admin Panel</div>
+      <div class="text-3xl font-bold text-green-950 mb-8">Admin Panel</div>
       <nav class="space-y-4">
         <a href="#" class="flex items-center space-x-2 text-blue-600 font-semibold">
-          <span>📊</span><span>Dashboard</span>
+          <span class="text-2xl text-green-900 font-semibold">Dashboard</span>
         </a>
-        <a href="#" class="block text-gray-600 hover:text-blue-500">Manage Recipes</a>
-        <a href="#" class="block text-gray-600 hover:text-blue-500">Manage Users</a>
-        <a href="#" class="block text-gray-600 hover:text-blue-500">Analytics</a>
-        <a href="#" class="block text-gray-600 hover:text-blue-500">Settings</a>
+        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Manage Recipes</a>
+        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Manage Users</a>
+        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Analytics</a>
+        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Settings</a>
       </nav>
     </aside>
 
@@ -45,8 +45,9 @@
               <button class="bg-green-600 text-white rounded-lg p-2 hover:bg-green-700" id="openModalBtn">Add New Tag/Category</button>
             </li>
             <li class="flex items-center">
-              <span class="mr-2 text-purple-600">📦</span>
-              <button class="text-purple-500 hover:text-purple-700">Add New Recipe</button>
+            <a href="{{route('recipes.create')}}">
+              <button class="bg-purple-500 text-white rounded-lg p-2 hover:bg-purple-700">Add New Recipe</button>
+              </a>
             </li>
           </ul>
         </div>
@@ -108,14 +109,48 @@
         </div>
       </div>
       <div class="bg-white p-6 rounded-xl shadow mb-6">
-        <h4 class="text-green-950 font-bold mb-4 text-2xl">Recent Activity</h4>
-        <ul class="space-y-4">
-          <li>New recipe added: <strong>Chocolate Cake</strong></li>
-          <li>User <strong>johndoe@example.com</strong> signed up</li>
-          <li>Recipe <strong>Apple Pie</strong> deleted</li>
-          <li>Admin action: <strong>Featured</strong> <strong>Vegan Salad</strong></li>
-        </ul>
-      </div>
+  <h4 class="text-green-950 font-bold mb-4 text-2xl">Recent Activity</h4>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    
+    <!-- Recent Recipes -->
+    <div>
+      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Recipes</h5>
+      <ul class="space-y-2 text-sm text-gray-700">
+        <li>New recipe added: <strong>Chocolate Cake</strong></li>
+        <li>Recipe <strong>Apple Pie</strong> deleted</li>
+        <li>Featured <strong>Vegan Salad</strong></li>
+      </ul>
+    </div>
+
+    <!-- Recent Users -->
+    <div>
+      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Users</h5>
+      <ul class="space-y-2 text-sm text-gray-700">
+        <li>User <strong>johndoe@example.com</strong> signed up</li>
+        <li>User <strong>janedoe@example.com</strong> signed up</li>
+      </ul>
+    </div>
+
+    <!-- Recent Comments -->
+    <div>
+      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Comments</h5>
+      <ul class="space-y-2 text-sm text-gray-700">
+        <li><strong>Jane</strong> commented on <strong>Pumpkin Soup</strong></li>
+        <li><strong>Alex</strong> commented on <strong>Blueberry Muffins</strong></li>
+      </ul>
+    </div>
+
+    <!-- Recent Likes -->
+    <div>
+      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Likes</h5>
+      <ul class="space-y-2 text-sm text-gray-700">
+        <li><strong>Sam</strong> liked <strong>Avocado Toast</strong></li>
+        <li><strong>Chris</strong> liked <strong>Garlic Bread</strong></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
 
       <div class="bg-white p-6 rounded-xl shadow">
   <h4 class="text-green-950 font-bold mb-4 text-2xl">User Management</h4>
