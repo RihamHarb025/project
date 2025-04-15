@@ -38,7 +38,7 @@
                                 </button>
                             </form>
                         @endif
-                        @if(auth()->user()->is_admin)
+                        @if(auth()->check() && auth()->user()->is_admin)
             <form action="{{ route('users.ban', ['id' => $user->id]) }}" method="POST" onsubmit="return confirm('Ban this user?')">
                 @csrf
                 <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-700 transition">

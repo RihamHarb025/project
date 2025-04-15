@@ -63,7 +63,7 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        if (auth()->user()->banned) {
+        if (auth()->check() && auth()->user()->banned) {
             return redirect()->back()->with('banned_warning', 'You are currently banned from creating recipes.');
         }
         $categories = Category::all();
