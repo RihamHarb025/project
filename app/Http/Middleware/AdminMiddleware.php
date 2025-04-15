@@ -15,18 +15,12 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next)
-{
-    if (Auth::check()) {
-        dd('User is logged in.');
-        if (Auth::user()->is_admin) {
-            return $next($request);
-        } else {
-            dd('User is not an admin.');
-        }
+    public function handle(Request $request, Closure $next): Response
+    {
+        return $next($request);
+
     }
 
-    
-    return abort(403, 'Unauthorized action.');
 }
-}
+
+
