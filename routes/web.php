@@ -9,6 +9,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminUserController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes',RecipeController::class);
@@ -81,6 +84,20 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/users/{id}/ban', [UserController::class, 'ban'])->name('users.ban');
     Route::post('/users/{id}/unban', [UserController::class, 'unban'])->name('users.unban');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/tags', [TagController::class, 'store'])->name('tags.store');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [AdminUserController::class, 'index'])->name('admin.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/admin/users/{id}/ban', [AdminUserController::class, 'ban'])->name('admin.users.ban');
+    Route::post('/admin/users/{id}/unban', [AdminUserController::class, 'unban'])->name('admin.users.unban');
 });
 
 require __DIR__.'/auth.php';

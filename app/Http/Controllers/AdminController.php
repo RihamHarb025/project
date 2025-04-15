@@ -17,7 +17,13 @@ class AdminController extends Controller
         $totalRecipes = Recipe::count();
         $mostLikedRecipe = Recipe::withCount('likes')->orderByDesc('likes_count')->first();
 
-        return view('admin.index', compact('totalUsers','totalRecipes','mostLikedRecipe'));
+        return view('admin.index', [
+            'totalUsers' => User::count(),
+            'totalRecipes' => Recipe::count(),
+            'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
+            'users' => null,
+            'search' => null,
+        ]);
     }
 
     /**
