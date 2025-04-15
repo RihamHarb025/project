@@ -123,6 +123,7 @@
                     <a href="{{ route('login') }}" class="transition-link text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
                         Already have an account? Log In
                     </a>
+                    <a href="{{route('redirect')}}">Sign in with Google</a>
                 </div>
             </form>
         </div>

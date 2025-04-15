@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Recipe;
+use App\Models\ContactMessage;
 
 use Illuminate\Http\Request;
 
@@ -17,13 +18,17 @@ class AdminController extends Controller
         $totalRecipes = Recipe::count();
         $mostLikedRecipe = Recipe::withCount('likes')->orderByDesc('likes_count')->first();
 
+
         return view('admin.index', [
             'totalUsers' => User::count(),
             'totalRecipes' => Recipe::count(),
             'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
             'users' => null,
             'search' => null,
+            '$messages' => ContactMessage::latest()->get()
         ]);
+
+
     }
 
     /**
@@ -65,7 +70,11 @@ class AdminController extends Controller
     {
         //
     }
-
+    public function showMessages()
+    {
+        $messages = ContactMessage::latest()->get();
+        return view('admin.messages', compact('messages'));
+    }
     /**
      * Remove the specified resource from storage.
      */

@@ -12,6 +12,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminUserController;
+use App\http\Controllers\GoogleAuthController;
+use App\Http\Controllers\ContactController;
+
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes',RecipeController::class);
@@ -20,17 +23,18 @@ Route::get('/aboutUs', function () {
     return view('aboutUs'); 
 })->name('aboutUs');
 
-Route::get('/contact', function () {
+Route::get('/contactUs', function () {
     return view('contact'); 
 })->name('contact');
 
+Route::get('/mealplan', function () {
+    return view('recipes.mealplan'); 
+})->name('recipes.mealplan');
 
-Route::get('/about', function () {
-    return view('recipes.about');
-});
-Route::get('/contact', function () {
-    return view('recipes.contact');
-});
+Route::get('/auth/google/redirect',[GoogleAuthController::class,'redirect'])->name('redirect');
+Route::get('/auth/google/call-back',[GoogleAuthController::class,'callback'])->name('call-back');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -41,7 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
    
 });
-
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
@@ -86,6 +89,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/users/{id}/unban', [UserController::class, 'unban'])->name('users.unban');
 });
 
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/tags', [TagController::class, 'store'])->name('tags.store');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
@@ -99,5 +103,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/users/{id}/ban', [AdminUserController::class, 'ban'])->name('admin.users.ban');
     Route::post('/admin/users/{id}/unban', [AdminUserController::class, 'unban'])->name('admin.users.unban');
 });
+
+Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.form');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/admin/messages', [AdminController::class, 'showMessages']);
+
 
 require __DIR__.'/auth.php';

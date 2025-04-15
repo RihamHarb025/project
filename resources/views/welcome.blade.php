@@ -10,7 +10,7 @@
         <h3 id="animated-text" class="text-2xl text-green-900 font-bold font-sans">The best recipes</h3>
         <h3 class="text-2xl text-green-900 font-bold font-sans">for you and your family</h3>
       </div>
-      <button class="bg-green-900 text-white rounded-full text-2xl px-6 py-3  hover:bg-green-950 transition duration-300 ease-in-out">Get Started</button>
+      <a href="{{route('register')}}" class="bg-green-900 text-white rounded-full text-2xl px-6 py-3  hover:bg-green-950 transition duration-300 ease-in-out">Get Started</a>
     </div>
   </div>
 </section>

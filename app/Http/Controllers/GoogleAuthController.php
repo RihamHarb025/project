@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 class GoogleAuthController extends Controller
 {
+    
     public function redirect(){
         return Socialite::driver('google')->redirect();
     }
@@ -18,6 +22,7 @@ class GoogleAuthController extends Controller
             [
                 'name'=>$googleUser->name,
                 'email'=>$googleUser->email,
+                'password' => Hash::make(Str::random(24)),
             ]
             );
             Auth::login($user);
