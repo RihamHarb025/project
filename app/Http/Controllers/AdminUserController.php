@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ContactMessage;
+use App\Models\Recipe;
+
 
 class AdminUserController extends Controller
 {
@@ -33,8 +35,8 @@ class AdminUserController extends Controller
                 'users' => $users,
                 'search' => $search,
                 'totalUsers' => User::count(),
-                'totalRecipes' => null,
-                'mostLikedRecipe' => null,
+                'totalRecipes' => Recipe::count(),
+                'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
                 'messages' => ContactMessage::latest()->get()
             ]);
         } catch (\Exception $e) {

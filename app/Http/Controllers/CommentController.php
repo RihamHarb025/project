@@ -34,5 +34,35 @@ class CommentController extends Controller
             ]
         ]);
     }
+    public function update(Request $request, Comment $comment)
+{
+    if (Auth::id() !== $comment->user_id) {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
 
+    $request->validate([
+        'body' => 'required|string|max:1000',
+    ]);
+
+    $comment->body = $request->body;
+    $comment->save();
+
+    return response()->json([
+        'message' => 'Comment updated successfully!',
+        'comment' => [
+            'body' => $comment->body,
+            'updated_at' => $comment->updated_at->diffForHumans(),
+        ]
+    ]);
+}
+public function destroy(Comment $comment)
+{
+    if (Auth::id() !== $comment->user_id) {
+        return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    $comment->delete();
+
+    return response()->json(['message' => 'Comment deleted successfully!']);
+}
 }

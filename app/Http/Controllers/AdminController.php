@@ -20,14 +20,13 @@ class AdminController extends Controller
 
 
         return view('admin.index', [
-            'totalUsers' => User::count(),
-            'totalRecipes' => Recipe::count(),
-            'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
+            'totalUsers' => $totalUsers,
+            'totalRecipes' => $totalRecipes,
+            'mostLikedRecipe' => $mostLikedRecipe,
             'users' => null,
             'search' => null,
             'messages' => ContactMessage::latest()->get()
         ]);
-
 
     }
 

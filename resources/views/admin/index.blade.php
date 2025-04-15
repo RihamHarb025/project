@@ -7,13 +7,10 @@
     <aside class="w-64 bg-white rounded-2xl p-6 shadow-md">
       <div class="text-3xl font-bold text-green-950 mb-8">Admin Panel</div>
       <nav class="space-y-4">
-        <a href="#" class="flex items-center space-x-2 text-blue-600 font-semibold">
-          <span class="text-2xl text-green-900 font-semibold">Dashboard</span>
-        </a>
-        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Manage Recipes</a>
-        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Manage Users</a>
-        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Analytics</a>
-        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Settings</a>
+        <!-- <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Manage Recipes</a> -->
+        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Main Dashboard</a>
+        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Check Messages</a>
+
       </nav>
     </aside>
 
