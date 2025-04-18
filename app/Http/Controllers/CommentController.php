@@ -35,30 +35,34 @@ class CommentController extends Controller
             ]
         ]);
     }
-    public function update(Request $request, Comment $comment)
-{
-    if (auth()->id() !== $comment->user_id) {
-        return response()->json(['error' => 'Unauthorized'], 403);
+    public function update(Request $request, $recipeId, $commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+
+        if (auth()->id() !== $comment->user_id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $request->validate([
+            'body' => 'required|string|max:1000',
+        ]);
+
+        $comment->update([
+            'body' => $request->body,
+        ]);
+
+        return response()->json(['success' => true, 'updated_body' => $comment->body]);
     }
+    public function destroy($recipeId, $commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
 
-    $request->validate([
-        'body' => 'required|string|max:1000',
-    ]);
+        if (auth()->id() !== $comment->user_id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
 
-    $comment->update([
-        'body' => $request->body,
-    ]);
+        $comment->delete();
 
-    return response()->json(['success' => true]);
-}
-public function destroy(Comment $comment)
-{
-    if (Auth::id() !== $comment->user_id) {
-        return response()->json(['error' => 'Unauthorized'], 403);
+        return response()->json(['message' => 'Comment deleted successfully!']);
     }
-
-    $comment->delete();
-
-    return response()->json(['message' => 'Comment deleted successfully!']);
-}
 }

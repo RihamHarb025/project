@@ -64,8 +64,10 @@ Route::middleware(['auth'])->group(function () {
 // Comment routes
 Route::middleware(['auth'])->group(function () {
     Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->name('comments.store');
-    Route::put('/recipes/{recipe}/comments', [CommentController::class, 'update'])->name('comments.update');
-    Route::delete('/recipes/{recipe}/comments', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::put('/recipes/{recipe}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+
+// Route to delete a comment
+    Route::delete('/recipes/{recipe}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 // Recipe creation
