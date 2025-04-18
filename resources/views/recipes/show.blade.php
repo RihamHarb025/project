@@ -89,11 +89,11 @@
                         </button>
                     </div>
 
-                    <form class="mt-2 hidden edit-comment-form" id="edit-form-{{ $comment->id }}">
-                        @csrf
-                        <textarea id="edit-body-{{ $comment->id }}" class="w-full p-2 border rounded">{{ $comment->body }}</textarea>
-                        <button type="submit" class="mt-1 px-3 py-1 bg-green-600 text-white rounded">Update</button>
-                    </form>
+                    <form class="mt-2 hidden edit-comment-form" id="edit-form-{{ $comment->id }}" data-id="{{ $comment->id }}">
+    @csrf
+    <textarea id="edit-body-{{ $comment->id }}" class="w-full p-2 border rounded">{{ $comment->body }}</textarea>
+    <button type="submit" class="mt-1 px-3 py-1 bg-green-600 text-white rounded">Update</button>
+</form>
                 @endif
             @endauth
         </div>
@@ -101,65 +101,67 @@
 </div>
         </div>
     </div>
+    </body>
 
-    @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-    // Show edit form
-    $('.edit-btn').on('click', function () {
+  $(document).ready(function () {
+
+// Show edit form
+$('.edit-btn').on('click', function () {
         const id = $(this).data('id');
         $(`#comment-body-${id}`).hide();
         $(`#edit-form-${id}`).show();
     });
 
-    // Submit updated comment
+    // Submit updated comment when the form is submitted
     $('.edit-comment-form').on('submit', function (e) {
         e.preventDefault();
-        const commentDiv = $(this).closest('.comment');
-        const commentId = commentDiv.data('id');
+        
+        const commentId = $(this).data('id'); // Get the comment ID from the form's data-id
         const newBody = $(`#edit-body-${commentId}`).val();
 
+        // Make AJAX request to update the comment
         $.ajax({
-            url: `/comments/${commentId}`,
-            type: 'POST',
+            url: `/recipes/{{ $recipe->id }}/comments/${commentId}`, // Correct URL with dynamic recipe ID
+            type: 'PUT',
             data: {
                 _token: '{{ csrf_token() }}',
-                _method: 'PUT',
                 body: newBody
             },
-            success: function () {
+            success: function (response) {
+                // Update the comment text with the new body
                 $(`#comment-body-${commentId}`).text(newBody).show();
                 $(`#edit-form-${commentId}`).hide();
             },
-            error: function () {
+            error: function (xhr) {
                 alert('Something went wrong while updating 😢');
+                console.error(xhr.responseText); // Log the error for debugging
             }
         });
     });
 
-    // Delete comment
-    $('.delete-btn').on('click', function () {
-        const id = $(this).data('id');
-        if (!confirm('Delete this comment?')) return;
+    
+// Delete comment
+$('.delete-btn').on('click', function () {
+    const commentId = $(this).data('id');
+    if (!confirm('Are you sure you want to delete this comment?')) return;
 
-        $.ajax({
-            url: `/comments/${id}`,
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                _method: 'DELETE',
-            },
-            success: function () {
-                $(`#comment-${id}`).remove();
-            },
-            error: function () {
-                alert('Failed to delete comment 🥲');
-            }
-        });
+    $.ajax({
+        url: `/recipes/${commentId}/comments/${commentId}`,
+        type: 'DELETE',
+        data: {
+            _token: '{{ csrf_token() }}'
+        },
+        success: function () {
+            $(`#comment-${commentId}`).remove();
+        },
+        error: function () {
+            alert('Failed to delete comment 🥲');
+        }
     });
 });
-    </script>
-    @endpush
-</body>
+});
+</script>
+
 @endsection

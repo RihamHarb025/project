@@ -57,8 +57,10 @@ Route::post('/follow/{userId}', [FollowController::class, 'toggle'])->name('foll
 // Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile.show');
 // Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 
-Route::put('/recipes/{recipe}/comments', [CommentController::class, 'update'])->middleware('auth')->name('comments.update');
-Route::delete('/recipes/{recipe}/comments', [CommentController::class, 'destroy'])->middleware('auth')->name('comments.destroy');
+Route::put('/recipes/{recipe}/comments/{comment}', [CommentController::class, 'update'])->middleware('auth')->name('comments.update');
+
+// Route to delete a comment
+Route::delete('/recipes/{recipe}/comments/{comment}', [CommentController::class, 'destroy'])->middleware('auth')->name('comments.destroy');
 
 Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 
