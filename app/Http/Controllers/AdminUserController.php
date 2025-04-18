@@ -26,11 +26,11 @@ class AdminUserController extends Controller
                 });
             })->get();
         
-            if ($request->ajax()) {
-                return response()->json([
-                    'html' => view('admin.index', compact('users'))->render(),
-                ]);
-            }
+            // if ($request->ajax()) {
+            //     return response()->json([
+            //         'html' => view('admin.index', compact('users'))->render(),
+            //     ]);
+            // }
         
             return view('admin.index', [
                 'users' => $users,

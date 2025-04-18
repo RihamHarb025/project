@@ -9,7 +9,6 @@
       <nav class="space-y-4">
         <!-- <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Manage Recipes</a> -->
         <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Main Dashboard</a>
-        <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Check Messages</a>
 
       </nav>
     </aside>
@@ -155,7 +154,7 @@
   </div>
 </div>
 
-      <div class="bg-white p-6 rounded-xl shadow">
+<div class="bg-white p-6 rounded-xl shadow">
   <h4 class="text-green-950 font-bold mb-4 text-2xl">User Management</h4>
 
   {{-- Search Bar --}}
@@ -164,7 +163,7 @@
   </form>
 
   <table class="w-full text-base text-left table-auto" id="usersTable">
-    <thead class="text-gray-500 uppercase tracking-wide border-b">
+    <thead class="text-gray-500 border-b">
       <tr>
         <th class="py-3 px-4 text-green-950 font-bold text-xl">Name</th>
         <th class="py-3 px-4 text-green-950 font-bold text-xl">Email</th>
@@ -173,44 +172,18 @@
       </tr>
     </thead>
     <tbody class="text-gray-700">
-      @forelse ($users as $user)
-        <tr class="border-b hover:bg-gray-50 transition">
-          <td class="py-3 px-4">{{ $user->name }}</td>
-          <td class="py-3 px-4">{{ $user->email }}</td>
-          <td class="py-3 px-4">
-            @if($user->is_admin)
-              Admin
-            @else
-              User
-            @endif
-          </td>
-          <td class="py-3 px-4">
-            @if ($user->banned)
-              <form action="{{ route('admin.users.unban', $user->id) }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="bg-orange-500 text-white rounded-lg p-2 hover:bg-orange-700">Unban</button>
-              </form>
-            @else
-              <form action="{{ route('admin.users.ban', $user->id) }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="bg-orange-500 text-white rounded-lg p-2 hover:bg-orange-700">Ban</button>
-              </form>
-            @endif
-          </td>
-        </tr>
-      @empty
-        <tr>
-          <td colspan="4" class="py-4 text-center text-gray-500">No users found.</td>
-        </tr>
-      @endforelse
+      {{-- Include the partial for displaying user rows --}}
+      @include('admin.partials.users-table')
     </tbody>
   </table>
 </div>
+
+
 <br></br>
 <div class="bg-white p-6 rounded-xl shadow">
     <h4 class="text-3xl font-bold mb-4">Contact Messages</h2>
     <table class="w-full table-auto border border-gray-300">
-        <thead class="bg-green-800 text-white">
+        <thead class="bg-white-800 text-green-950 font-semibold text-xl">
             <tr>
                 <th class="p-2">Name</th>
                 <th class="p-2">Email</th>
@@ -237,23 +210,19 @@
 <script>
   $(document).ready(function () {
 
-    $('#searchInput').on('keyup', function(e) {
-    var searchValue = $(this).val();
-
-    // Prevent form submission
-    e.preventDefault();
-    console.log('Sending AJAX request with search: ', searchValue);
-    $.ajax({
-        url: "{{ route('admin.index') }}",
+    $('#searchInput').on('input', function() {
+      let searchValue = $(this).val(); // Get the search value
+      $.ajax({
+        url: '{{ route('admin.index') }}',  // Your search route
         method: 'GET',
-        data: {
-            search: searchValue
-        },
+        data: { search: searchValue },  // Send search input as query parameter
         success: function(response) {
-            $('#usersTable').html(response.html);
+          // On success, replace the HTML in the table body with the new results
+          $('#usersTable tbody').html(response.html);
         }
+      });
     });
-        });
+
     $('#openModalBtn').on('click', function () {
       $('#addTagCategoryModal').removeClass('hidden');
     });
