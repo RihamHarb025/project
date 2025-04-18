@@ -7,23 +7,37 @@
     <div class="w-1/4 bg-white p-6 rounded-lg shadow-lg mr-10">
         <h3 class="text-xl font-semibold text-gray-900 mb-4">Filters</h3>
         
-        <form id="filter-form" class="flex space-x-4 mb-6">
+        <form id="filter-form" class="flex flex-col space-y-4 mb-6">
             <!-- Date Filter -->
-            <select name="date_order" id="date_order" class="bg-white text-gray-800 border rounded-md p-2">
+            <select name="date_order" id="date_order" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition duration-300 ease-in-out">
             <option value="">Sort by Date</option>
         <option value="desc" {{ request('date_order') == 'desc' ? 'selected' : '' }}>Most Recent</option>
         <option value="asc" {{ request('date_order') == 'asc' ? 'selected' : '' }}>Oldest First</option>
             </select>
 
             <!-- Order Filter -->
-            <select name="name_order" id="name_order" class="bg-white text-gray-800 border rounded-md p-2">
+            <select name="name_order" id="name_order" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition duration-300 ease-in-out">
             <option value="">Sort by Name</option>
         <option value="asc" {{ request('name_order') == 'asc' ? 'selected' : '' }}>A to Z</option>
         <option value="desc" {{ request('name_order') == 'desc' ? 'selected' : '' }}>Z to A</option>
             </select>
+<br>
+            <div class="mt-6">
+            <p class="text-lg font-semibold text-gray-800 mb-2">Select Tags</p>
+            <div class="max-h-60 overflow-y-auto space-y-2">
+                @foreach($tags as $tag)
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}" 
+                            {{ in_array($tag->id, request('tags', [])) ? 'checked' : '' }}
+                            class="form-checkbox h-5 w-5 text-green-600 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600">
+                        <label for="tag_{{ $tag->id }}" class="text-gray-700">{{ $tag->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
         </form>
+      
     </div>
-
     <!-- Recipe Container -->
     <div class="container mt-5 w-3/4">
         <form id="searchForm" class="mb-6 w-full bg-white p-6 rounded-lg shadow-lg">
@@ -52,7 +66,7 @@
                 </select>
 
                 <!-- Tag Dropdown -->
-                <select name="tag" id="tag"
+                <!-- <select name="tag" id="tag"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition duration-300 ease-in-out">
                     <option value="">Select Tag</option>
                     @foreach($tags as $tag)
@@ -60,7 +74,7 @@
                             {{ $tag->name }}
                         </option>
                     @endforeach
-                </select>
+                </select> -->
             </div>
         </form>
 
@@ -75,7 +89,7 @@
 <script>
  $(document).ready(function () {
     // Trigger form submit when any dropdown or input changes
-    $('#filter-form select, #searchInput, #category, #tag').on('change keyup', function () {
+    $('#filter-form select, #searchInput, #category, input[name="tags[]"]').on('change keyup', function () {
       $('#filter-form').submit();
     });
 
@@ -88,8 +102,12 @@
       var dateOrder = $('#date_order').val();
       var search = $('#searchInput').val();
       var category = $('#category').val();
-      var tag = $('#tag').val();
-
+    //   var tag = $('#tag').val();
+    var tags = [];
+        $('input[name="tags[]"]:checked').each(function() {
+            tags.push($(this).val());
+        });
+        console.log('Selected Tags:', tags);
       // Perform the AJAX request
       $.ajax({
         url: '{{ route('recipes.index') }}',
@@ -97,7 +115,7 @@
         data: {
           search: search,
           category: category,
-          tag: tag,
+          tags: tags,
           name_order: nameOrder,
           date_order: dateOrder
         },

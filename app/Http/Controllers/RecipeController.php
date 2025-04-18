@@ -16,12 +16,16 @@ class RecipeController extends Controller
 
     public function index(Request $request)
 {
+
     $search = $request->input('search');
     $category = $request->input('category');
-    $tag = $request->input('tag');
+    $tags = $request->input('tags', []);  // Default to an empty array if no tags are selected
     $name_order = $request->input('name_order'); // 'asc' or 'desc' (A-Z or Z-A)
     $date_order = $request->input('date_order'); // 'asc' or 'desc' (Oldest or Newest)
-
+    \Log::info('Search:', [$search]);
+    \Log::info('Category:', [$category]);
+    \Log::info('Tags:', [$tags]);
+    // Start the query for recipes
     $recipes = Recipe::when($search, function ($query, $search) {
         return $query->where('title', 'like', '%' . $search . '%');
     })
@@ -30,9 +34,10 @@ class RecipeController extends Controller
             $q->where('categories.id', $category);
         });
     })
-    ->when($tag, function ($query, $tag) {
-        return $query->whereHas('tags', function ($q) use ($tag) {
-            $q->where('tags.id', $tag);
+    // Adjusted filter for tags
+    ->when(count($tags), function ($query) use ($tags) {
+        return $query->whereHas('tags', function ($q) use ($tags) {
+            $q->whereIn('tags.id', $tags);
         });
     })
     // Apply name order if selected
@@ -45,16 +50,22 @@ class RecipeController extends Controller
     })
     ->get();
 
+    // Get categories and tags for the view
     $categories = Category::all();
     $tags = Tag::all();
 
+    // Log the tags for debugging purposes
+    // \Log::info('Selected Tags:', $tags);
+
+    // If it's an AJAX request, return the filtered recipe cards
     if ($request->ajax()) {
         return view('recipes._recipe_cards', compact('recipes'))->render();
     }
 
+    // Return the full view
     return view('recipes.index', compact(
         'recipes', 'search', 'categories', 'tags', 
-        'category', 'tag', 'name_order', 'date_order'
+        'category', 'tags', 'name_order', 'date_order'
     ));
 }
 

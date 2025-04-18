@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
         $imagePath = null;
         if ($request->hasFile('image-profile')) {
             // Store image in the public disk (storage/app/public)
-            $imagePath = $request->file('image-profile')->store('profile_images', 'public');
+            $imagePath = $request->file('image-profile')->store('imgs', 'public');
         }
 
         $user = User::create([

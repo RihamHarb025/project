@@ -7,13 +7,14 @@
              class="w-24 h-24 rounded-full border-4 border-green-900 shadow-md" 
              alt="Profile Picture">
 
+
         <div>
             <h2 class="text-3xl font-bold text-green-900">{{ Auth::user()->name }}</h2>
             <p class="text-gray-700">{{ Auth::user()->bio ?? 'No bio available' }}</p>
             @if($user->banned)
                 <div class="mt-4 p-4 bg-red-100 text-red-700 border-l-4 border-red-500">
-                    <strong>⚠️ This user is banned.</strong>
-                    <p>This user is currently banned and cannot create recipes or interact in certain ways.</p>
+                    <strong> You Are banned.</strong>
+                    <p>You are currently banned and cannot create recipes or interact in certain ways.</p>
                 </div>
             @endif
 
