@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -36,7 +37,7 @@ class CommentController extends Controller
     }
     public function update(Request $request, Comment $comment)
 {
-    if (Auth::id() !== $comment->user_id) {
+    if (auth()->id() !== $comment->user_id) {
         return response()->json(['error' => 'Unauthorized'], 403);
     }
 
@@ -44,16 +45,11 @@ class CommentController extends Controller
         'body' => 'required|string|max:1000',
     ]);
 
-    $comment->body = $request->body;
-    $comment->save();
-
-    return response()->json([
-        'message' => 'Comment updated successfully!',
-        'comment' => [
-            'body' => $comment->body,
-            'updated_at' => $comment->updated_at->diffForHumans(),
-        ]
+    $comment->update([
+        'body' => $request->body,
     ]);
+
+    return response()->json(['success' => true]);
 }
 public function destroy(Comment $comment)
 {

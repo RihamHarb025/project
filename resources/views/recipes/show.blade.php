@@ -66,81 +66,99 @@
                 <form id="comment-form" action="{{ route('comments.store', $recipe->id) }}" method="POST" class="space-y-4">
                     @csrf
                     <textarea name="body" required rows="4" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-800" placeholder="Write your comment..."></textarea>
-                    <button type="submit" class="w-full bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">Submit Comment</button>
+                    <button type="submit" class="w-full bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300 mb-5">Submit Comment</button>
                 </form>
             @else
                 <p class="text-gray-600 mb-4">You must be <a href="{{ route('login') }}" class="text-green-800 font-semibold hover:underline">logged in</a> to comment.</p>
             @endauth
 
             <div id="comments-section">
-                @foreach ($recipe->comments as $comment)
-                    <div class="mb-4 p-3 bg-gray-100 rounded relative" id="comment-{{ $comment->id }}">
-                        <p class="text-sm text-gray-800" id="comment-body-{{ $comment->id }}">{{ $comment->body }}</p>
-                        <p class="text-xs text-gray-500">{{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}</p>
+    @foreach ($recipe->comments as $comment)
+        <div class="mb-4 p-3 bg-gray-100 rounded relative comment" id="comment-{{ $comment->id }}" data-id="{{ $comment->id }}">
+            <p class="text-sm text-gray-800 comment-body" id="comment-body-{{ $comment->id }}">{{ $comment->body }}</p>
+            <p class="text-xs text-gray-500">{{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}</p>
 
-                        @auth
-                            @if(auth()->id() === $comment->user_id)
-                                <div class="absolute top-2 right-2 flex gap-2">
-                                    <button onclick="showEditForm({{ $comment->id }})" class="text-gray-500 text-sm"><i class="fa-solid fa-pen"></i></button>
-                                    <button onclick="deleteComment({{ $comment->id }})" class="text-red-500 text-sm"><i class="fa-solid fa-trash"></i></button>
-                                </div>
-
-                                <form onsubmit="event.preventDefault(); updateComment({{ $comment->id }});" class="mt-2 hidden" id="edit-form-{{ $comment->id }}">
-                                    <textarea id="edit-body-{{ $comment->id }}" class="w-full p-2 border rounded">{{ $comment->body }}</textarea>
-                                    <button type="submit" class="mt-1 px-3 py-1 bg-green-600 text-white rounded">Update</button>
-                                </form>
-                            @endif
-                        @endauth
+            @auth
+                @if(auth()->id() === $comment->user_id)
+                    <div class="absolute top-2 right-2 flex gap-2">
+                        <button class="text-gray-500 text-sm edit-btn" data-id="{{ $comment->id }}">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="text-red-500 text-sm delete-btn" data-id="{{ $comment->id }}">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
                     </div>
-                @endforeach
-            </div>
+
+                    <form class="mt-2 hidden edit-comment-form" id="edit-form-{{ $comment->id }}">
+                        @csrf
+                        <textarea id="edit-body-{{ $comment->id }}" class="w-full p-2 border rounded">{{ $comment->body }}</textarea>
+                        <button type="submit" class="mt-1 px-3 py-1 bg-green-600 text-white rounded">Update</button>
+                    </form>
+                @endif
+            @endauth
+        </div>
+    @endforeach
+</div>
         </div>
     </div>
 
     @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function showEditForm(commentId) {
-            $(`#edit-form-${commentId}`).toggle();
-        }
+        $(document).ready(function () {
+    // Show edit form
+    $('.edit-btn').on('click', function () {
+        const id = $(this).data('id');
+        $(`#comment-body-${id}`).hide();
+        $(`#edit-form-${id}`).show();
+    });
 
-        function updateComment(commentId) {
-            const body = $(`#edit-body-${commentId}`).val();
-            $.ajax({
-                url: `/comments/${commentId}`,
-                type: 'PUT',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    body: body
-                },
-                success: function(response) {
-                    $(`#comment-body-${commentId}`).text(response.body);
-                    $(`#edit-form-${commentId}`).hide();
-                },
-                error: function() {
-                    alert('Failed to update comment.');
-                }
-            });
-        }
+    // Submit updated comment
+    $('.edit-comment-form').on('submit', function (e) {
+        e.preventDefault();
+        const commentDiv = $(this).closest('.comment');
+        const commentId = commentDiv.data('id');
+        const newBody = $(`#edit-body-${commentId}`).val();
 
-        function deleteComment(commentId) {
-            if (!confirm('Are you sure you want to delete this comment?')) return;
-            $.ajax({
-                url: `/comments/${commentId}`,
-                type: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function() {
-                    $(`#comment-${commentId}`).fadeOut(300, function() {
-                        $(this).remove();
-                    });
-                },
-                error: function() {
-                    alert('Failed to delete comment.');
-                }
-            });
-        }
+        $.ajax({
+            url: `/comments/${commentId}`,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                _method: 'PUT',
+                body: newBody
+            },
+            success: function () {
+                $(`#comment-body-${commentId}`).text(newBody).show();
+                $(`#edit-form-${commentId}`).hide();
+            },
+            error: function () {
+                alert('Something went wrong while updating 😢');
+            }
+        });
+    });
+
+    // Delete comment
+    $('.delete-btn').on('click', function () {
+        const id = $(this).data('id');
+        if (!confirm('Delete this comment?')) return;
+
+        $.ajax({
+            url: `/comments/${id}`,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                _method: 'DELETE',
+            },
+            success: function () {
+                $(`#comment-${id}`).remove();
+            },
+            error: function () {
+                alert('Failed to delete comment 🥲');
+            }
+        });
+    });
+});
     </script>
     @endpush
 </body>

@@ -33,87 +33,62 @@
       <i class="fas fa-bars text-2xl"></i>
     </button>
 
-    <nav id="menu" class="md:flex gap-16 ml-24  hidden">
-  <a href="{{ route('welcome') }}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    Home
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
-  <a href="{{ route('recipes.index') }}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    Recipes
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
-  <a href="{{route('aboutUs')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    About Us
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
-  <a href="{{route('contact')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    Contact Us
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
-  <a href="{{route('recipes.create')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    Create Recipe
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
-  <a href="{{route('recipes.mealplan')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    Meal Plans
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
-  <a href="{{route('users.index')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
-    Explore
-    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
-  </a>
-  <a href="{{route('admin.index')}}">
-  <button class="bg-sky-500 text-black">
-    Control Panel
-  </button>
-  </a>
-  @auth
-        <!-- Display User's Profile Image -->
-        <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 group">
-    <img src="{{ Auth::user()->profile_image ? asset(Auth::user()->profile_image) : asset('imgs/defaultprofile.png') }}" alt="Profile" class="h-10 w-10 rounded-full border-2 border-transparent group-hover:border-green-950 transition-all duration-300 ease-in-out">
-</a>
+    <nav id="menu" class="md:flex gap-16 ml-24 hidden">
+      <a href="{{ route('welcome') }}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+        Home
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="{{ route('recipes.index') }}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+        Recipes
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="{{route('recipes.create')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+        Create Recipe
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="{{route('recipes.mealplan')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+        Meal Plans
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="{{route('users.index')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+        Explore
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="{{route('aboutUs')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+        About Us
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="{{route('contact')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+        Contact Us
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+     
+      @if(auth()->user() && auth()->user()->is_admin)
+      <a href="{{route('admin.index')}}">
+        <button class="bg-green-900 text-white rounded-full hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+          Control Panel
+        </button>
+      </a>
+      @endif
+
+      @auth
+        <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 group ml-32">
+          <img src="{{ Auth::user()->profile_image ? asset(Auth::user()->profile_image) : asset('imgs/defaultprofile.png') }}" alt="Profile" class="h-10 w-10 rounded-full border-2 border-transparent group-hover:border-green-950 transition-all duration-300 ease-in-out">
+        </a>
       @endauth
-</nav>
-<div id="register-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] hidden">
-  <!-- Modal Content -->
-  <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative">
-    <!-- Close Button -->
-    <button id="close-modal" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl font-bold">
-      &times;
-    </button>
-
-    <!-- Modal Body -->
-    <h2 class="text-2xl font-semibold text-center mb-4 text-green-900">You need to be logged in</h2>
-    <p class="text-gray-600 text-center mb-6">Please register or log in to continue.</p>
-
-    <div class="flex justify-center gap-4">
-      
-      <a href="{{ route('register') }}">
-        <button class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">
-          Register
-        </button>
-      </a>
-      <a href="{{ route('login') }}">
-        <button class="border-2 border-green-900 text-green-900 rounded-full px-6 py-2 hover:bg-green-900 hover:text-white transition duration-300">
-          Login
-        </button>
-      </a>
-      
-    </div>
-  </div>
-</div>
+    </nav>
 
     <div class="flex items-center gap-5 ml-auto">
       @guest
         <a href="{{ route('register') }}">
-        <button class="bg-green-900 text-white rounded-full hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
-  Register
-</button>
+          <button class="bg-green-900 text-white rounded-full hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+            Register
+          </button>
         </a>
         <a href="{{ route('login') }}">
-        <button class="text-green-950 rounded-full border-2 border-green-950 hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
-  Login
-</button>
+          <button class="text-green-950 rounded-full border-2 border-green-950 hover:bg-green-950 hover:text-white px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+            Login
+          </button>
         </a>
       @endguest
 
@@ -121,33 +96,34 @@
         <form action="{{ route('logout') }}" method="POST" class="inline">
           @csrf
           <button type="button" id="logout-btn" class="bg-green-900 text-white rounded-full hover:bg-green-950 px-6 py-2 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
-    Logout
-  </button>
+            Logout
+          </button>
         </form>
       @endauth
+
       <div id="logout-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] hidden">
-  <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative">
-    <!-- Close Button -->
-    <button id="cancel-logout" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl font-bold">
-      &times;
-    </button>
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative">
+          <!-- Close Button -->
+          <button id="cancel-logout" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl font-bold">
+            &times;
+          </button>
 
-    <h2 class="text-xl font-semibold text-center mb-4 text-green-900">Confirm Logout</h2>
-    <p class="text-gray-700 text-center mb-6">Are you sure you want to log out?</p>
+          <h2 class="text-xl font-semibold text-center mb-4 text-green-900">Confirm Logout</h2>
+          <p class="text-gray-700 text-center mb-6">Are you sure you want to log out?</p>
 
-    <div class="flex justify-center gap-4">
-      <form id="logout-form" action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">
-          Yes, Logout
-        </button>
-      </form>
-      <button id="cancel-btn" type="button" class="border-2 border-green-900 text-green-900 rounded-full px-6 py-2 hover:bg-green-900 hover:text-white transition duration-300">
-        Cancel
-      </button>
-    </div>
-  </div>
-</div>
+          <div class="flex justify-center gap-4">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+              @csrf
+              <button type="submit" class="bg-green-900 text-white rounded-full px-6 py-2 hover:bg-green-950 transition duration-300">
+                Yes, Logout
+              </button>
+            </form>
+            <button id="cancel-btn" type="button" class="border-2 border-green-900 text-green-900 rounded-full px-6 py-2 hover:bg-green-900 hover:text-white transition duration-300">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
