@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('bio')->nullable();
             $table->string('preference')->nullable(); 
             $table->string('image_profile')->nullable();
+            $table->boolean('is_premium')->default(false);
             $table->unsignedBigInteger('followers_count')->default(0);
             $table->rememberToken();
             $table->timestamps();

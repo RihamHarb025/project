@@ -46,7 +46,7 @@
         Create Recipe
         <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
       </a>
-      <a href="{{route('recipes.mealplan')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
+      <a href="{{route('mealplan')}}" class="group relative font-bold hover:text-green-950 transition-colors duration-200 ease-in-out">
         Meal Plans
         <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-950 transition-all duration-300 group-hover:w-full"></span>
       </a>
@@ -148,7 +148,7 @@
       <ul class="space-y-2">
         <li><a href="{{ route('welcome') }}" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Home</a></li>
         <li><a href="{{ route('recipes.index') }}" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Recipes</a></li>
-        <li><a href="{{route('recipes.mealplan')}}" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Premium</a></li>
+        <li><a href="{{route('mealplan')}}" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Premium</a></li>
         <li><a href="{{route('aboutUs')}}" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">About</a></li>
         <li><a href="{{route('contact')}}" class="text-green-900 hover:text-green-950 transition duration-300 font-bold">Contact</a></li>
       </ul>
