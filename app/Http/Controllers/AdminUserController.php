@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ContactMessage;
 use App\Models\Recipe;
+use App\Models\Comment;
 
 
 class AdminUserController extends Controller
@@ -37,7 +38,10 @@ class AdminUserController extends Controller
                 'totalUsers' => User::count(),
                 'totalRecipes' => Recipe::count(),
                 'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
-                'messages' => ContactMessage::latest()->get()
+                'messages' => ContactMessage::latest()->get(),
+                'recentRecipes' => Recipe::with('user')->latest()->take(3)->get(),
+                'recentUsers' => User::latest()->take(3)->get(),
+                'recentComments' => Comment::with(['user', 'recipe'])->latest()->take(3)->get()
             ]);
         } catch (\Exception $e) {
             // Log the error

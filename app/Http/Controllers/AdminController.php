@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Recipe;
 use App\Models\ContactMessage;
+use App\Models\Comment;
 
 use Illuminate\Http\Request;
 
@@ -17,15 +18,20 @@ class AdminController extends Controller
         $totalUsers = User::count(); // Count all registered users
         $totalRecipes = Recipe::count();
         $mostLikedRecipe = Recipe::withCount('likes')->orderByDesc('likes_count')->first();
-
+        $recentRecipes = Recipe::with('user')->latest()->take(3)->get();
+        $recentUsers = User::latest()->take(3)->get();
+        $recentComments = Comment::with(['user', 'recipe'])->latest()->take(3)->get();
 
         return view('admin.index', [
             'totalUsers' => $totalUsers,
             'totalRecipes' => $totalRecipes,
             'mostLikedRecipe' => $mostLikedRecipe,
-            'users' => null,
-            'search' => null,
-            'messages' => ContactMessage::latest()->get()
+            'users' => $users,
+            'search' => $search,
+            'messages' => ContactMessage::latest()->get(),
+            'recentRecipes'=>$recentRecipes,
+            'recentUsers'=> $recentUsers,
+            'recentComments'=>$recentComents
         ]);
 
     }
@@ -45,6 +51,7 @@ class AdminController extends Controller
     {
         //
     }
+
 
     /**
      * Display the specified resource.

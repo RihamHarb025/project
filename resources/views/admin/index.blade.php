@@ -105,46 +105,52 @@
           </div>
         </div>
       </div>
+
+
       <div class="bg-white p-6 rounded-xl shadow mb-6">
   <h4 class="text-green-950 font-bold mb-4 text-2xl">Recent Activity</h4>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     
     <!-- Recent Recipes -->
     <div>
-      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Recipes</h5>
-      <ul class="space-y-2 text-sm text-gray-700">
-        <li>New recipe added: <strong>Chocolate Cake</strong></li>
-        <li>Recipe <strong>Apple Pie</strong> deleted</li>
-        <li>Featured <strong>Vegan Salad</strong></li>
-      </ul>
-    </div>
+  <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Recipes</h5>
+  <ul class="space-y-2 text-sm text-gray-700">
+    @forelse ($recentRecipes as $recipe)
+      <li>
+        New recipe added: 
+        <strong>{{ $recipe->title }}</strong> by 
+        <span class="text-green-700 font-medium">{{ $recipe->user->name }}</span>
+      </li>
+    @empty
+      <li>No recent recipes</li>
+    @endforelse
+  </ul>
+</div>
 
     <!-- Recent Users -->
-    <div>
-      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Users</h5>
-      <ul class="space-y-2 text-sm text-gray-700">
-        <li>User <strong>johndoe@example.com</strong> signed up</li>
-        <li>User <strong>janedoe@example.com</strong> signed up</li>
-      </ul>
-    </div>
+    <div class="ml-10">
+  <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Users</h5>
+  <ul class="space-y-2 text-sm text-gray-700">
+    @foreach($recentUsers as $user)
+      <li>User <strong>{{ $user->username }}</strong> signed up</li>
+    @endforeach
+  </ul>
+</div>
 
     <!-- Recent Comments -->
-    <div>
-      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Comments</h5>
-      <ul class="space-y-2 text-sm text-gray-700">
-        <li><strong>Jane</strong> commented on <strong>Pumpkin Soup</strong></li>
-        <li><strong>Alex</strong> commented on <strong>Blueberry Muffins</strong></li>
-      </ul>
-    </div>
+    <div class="ml-5">
+  <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Comments</h5>
+  <ul class="space-y-2 text-sm text-gray-700">
+    @foreach($recentComments as $comment)
+      <li>
+        <strong>{{ $comment->user->name }}</strong> commented on 
+        <strong>{{ $comment->recipe->title }}</strong>
+        <em class="block text-xs text-gray-500">"{{ Str::limit($comment->body, 50) }}"</em>
+      </li>
+    @endforeach
+  </ul>
+</div>
 
-    <!-- Recent Likes -->
-    <div>
-      <h5 class="text-lg font-semibold text-green-800 mb-2">Recent Likes</h5>
-      <ul class="space-y-2 text-sm text-gray-700">
-        <li><strong>Sam</strong> liked <strong>Avocado Toast</strong></li>
-        <li><strong>Chris</strong> liked <strong>Garlic Bread</strong></li>
-      </ul>
-    </div>
 
   </div>
 </div>
@@ -155,7 +161,6 @@
   {{-- Search Bar --}}
   <form action="{{ route('admin.index') }}" method="GET" class="mb-4">
       <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search users..." class="border rounded px-4 py-2 w-1/3" />
-      <button type="submit" class="ml-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Search</button>
   </form>
 
   <table class="w-full text-base text-left table-auto" id="usersTable">
