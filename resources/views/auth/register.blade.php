@@ -94,22 +94,34 @@
                 </div>
 
                 <!-- Password -->
-                <div>
-                    <x-input-label for="password" value="Password" class="text-sm font-semibold text-gray-700" />
-                    <x-text-input id="password" name="password" type="password" required
-                        class="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
-                        placeholder="Create a secure password" />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
+              <!-- Password -->
+<div>
+    <x-input-label for="password" value="Password" class="text-sm font-semibold text-gray-700" />
+    <div class="relative">
+        <x-text-input id="password" name="password" type="password" required
+            class="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
+            placeholder="Create a secure password" />
+        <button type="button" id="togglePassword" class="absolute top-3 right-4 text-gray-600">
+            <i class="fas fa-eye text-green-900 hover:text-green-950"></i>
+        </button>
+    </div>
+    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+</div>
 
-                <!-- Confirm Password -->
-                <div>
-                    <x-input-label for="password_confirmation" value="Confirm Password" class="text-sm font-semibold text-gray-700" />
-                    <x-text-input id="password_confirmation" name="password_confirmation" type="password" required
-                        class="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
-                        placeholder="Retype your password" />
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                </div>
+<!-- Confirm Password -->
+<div>
+    <x-input-label for="password_confirmation" value="Confirm Password" class="text-sm font-semibold text-gray-700" />
+    <div class="relative">
+        <x-text-input id="password_confirmation" name="password_confirmation" type="password" required
+            class="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
+            placeholder="Retype your password" />
+        <button type="button" id="toggleConfirmPassword" class="absolute top-3 right-4 text-gray-600">
+            <i class="fas fa-eye text-green-900 hover:text-green-950"></i>
+        </button>
+    </div>
+    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+</div>
+
 
                 <!-- Register Button -->
                 <div class="mt-6">
@@ -134,6 +146,35 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+
+        $('#togglePassword').on('click', function () {
+            var passwordField = $('#password');
+            var passwordFieldType = passwordField.attr('type');
+
+            // Toggle the type of the password field between 'password' and 'text'
+            if (passwordFieldType === 'password') {
+                passwordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        // Toggle password visibility for the confirm password field
+        $('#toggleConfirmPassword').on('click', function () {
+            var confirmPasswordField = $('#password_confirmation');
+            var confirmPasswordFieldType = confirmPasswordField.attr('type');
+
+            // Toggle the type of the confirm password field between 'password' and 'text'
+            if (confirmPasswordFieldType === 'password') {
+                confirmPasswordField.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                confirmPasswordField.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
         // Initial page load animation
         $('.page-wrapper').addClass('page-enter page-enter-active');
 

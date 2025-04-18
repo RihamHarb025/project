@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
             'tags' => ['nullable', 'array'],
             'tags.*' => ['exists:tags,id'],
         ]);
+        // dd($request->all());
         
         $imagePath = null;
         if ($request->hasFile('image-profile')) {
@@ -54,7 +55,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'username' => $request->username,
             'bio' => $request->bio ?? null,  // Default to null if not provided
-            'image-profile' => $request->file('image-profile') ?? null,
+           'image-profile' => $imagePath ?? null,
             'is_admin' => false,
         ]);
         
@@ -64,7 +65,7 @@ class RegisteredUserController extends Controller
 
 
         event(new Registered($user));
-
+        
         Auth::login($user);
 
         return redirect(route('profile.edit'));

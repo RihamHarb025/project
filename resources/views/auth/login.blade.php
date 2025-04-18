@@ -55,13 +55,25 @@
                 </div>
 
                 <!-- Password -->
-                <div>
-                    <x-input-label for="password" value="Password" class="text-sm font-semibold text-gray-700" />
-                    <x-text-input id="password" name="password" type="password" required
-                        class="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
-                        placeholder="Enter your password" />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
+               <!-- Password -->
+<div class="relative">
+    <x-input-label for="password" value="Password" class="text-sm font-semibold text-gray-700" />
+    
+    <div class="relative">
+        <x-text-input id="password" name="password" type="password" required
+            class="mt-1 block w-full pr-12 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
+            placeholder="Enter your password" />
+
+        <!-- Eye Icon inside the input field -->
+        <button type="button" id="togglePassword"
+            class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-green-800 text-lg">
+            <i class="fa-solid fa-eye text-green-900 hover:text-green-950" id="eyeIcon"></i>
+        </button>
+    </div>
+
+    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+</div>
+
 
                 <!-- Login Button -->
                 <div class="mt-6">
@@ -85,6 +97,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+
+        $('#togglePassword').on('click', function () {
+    const passwordInput = $('#password');
+    const eyeIcon = $('#eyeIcon');
+
+    const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+    passwordInput.attr('type', type);
+
+    // Toggle between eye and eye-slash
+    eyeIcon.toggleClass('fa-eye fa-eye-slash');
+});
         // Entrance animation
         $('.page-wrapper').addClass('page-enter page-enter-active');
 
