@@ -173,7 +173,7 @@
     </thead>
     <tbody class="text-gray-700">
       {{-- Include the partial for displaying user rows --}}
-      @include('admin.partials.users-table')
+      @include('admin.partials.users-table',['users' => $users])
     </tbody>
   </table>
 </div>
@@ -210,17 +210,20 @@
 <script>
   $(document).ready(function () {
 
-    $('#searchInput').on('input', function() {
-      let searchValue = $(this).val(); // Get the search value
-      $.ajax({
-        url: '{{ route('admin.index') }}',  // Your search route
-        method: 'GET',
-        data: { search: searchValue },  // Send search input as query parameter
-        success: function(response) {
-          // On success, replace the HTML in the table body with the new results
-          $('#usersTable tbody').html(response.html);
-        }
-      });
+    $('#searchInput').on('keyup', function () {
+        var query = $(this).val();
+
+        $.ajax({
+            url: "{{ route('users.index') }}",
+            type: "GET",
+            data: { search: query },
+            success: function (data) {
+                $('#usersTableWrapper').html(data);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+            }
+        });
     });
 
     $('#openModalBtn').on('click', function () {

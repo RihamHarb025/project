@@ -16,39 +16,30 @@ class AdminUserController extends Controller
      */
     public function index(Request $request)
     {
-        try {
-            $search = $request->input('search');
+        $search = $request->search;
+
+    $users = User::when($search, function ($query, $search) {
+        return $query->where('name', 'like', "%{$search}%")
+                     ->orWhere('email', 'like', "%{$search}%");
+    })->paginate(10); // or use ->get() if not paginated
     
-            $users = User::when($search, function ($query, $search) {
-                return $query->where(function ($q) use ($search) {
-                    $q->where('name', 'like', '%' . $search . '%')
-                      ->orWhere('username', 'like', '%' . $search . '%');
-                });
-            })->get();
-        
-            // if ($request->ajax()) {
-            //     return response()->json([
-            //         'html' => view('admin.index', compact('users'))->render(),
-            //     ]);
-            // }
-        
-            return view('admin.index', [
-                'users' => $users,
-                'search' => $search,
-                'totalUsers' => User::count(),
-                'totalRecipes' => Recipe::count(),
-                'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
-                'messages' => ContactMessage::latest()->get(),
-                'recentRecipes' => Recipe::with('user')->latest()->take(3)->get(),
-                'recentUsers' => User::latest()->take(3)->get(),
-                'recentComments' => Comment::with(['user', 'recipe'])->latest()->take(3)->get()
-            ]);
-        } catch (\Exception $e) {
-            // Log the error
-            \Log::error('Error fetching users: ' . $e->getMessage());
-            
-            return response()->json(['error' => 'An error occurred. Please try again later.']);
-        }
+    if ($request->ajax()) {
+        return view('admin.partials.users-table', compact('users'))->render();
+    }
+    
+        return view('admin.index', [
+            'users' => $users,
+            'search' => $search,
+            'totalUsers' => User::count(),
+            'totalRecipes' => Recipe::count(),
+            'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),
+            'messages' => ContactMessage::latest()->get(),
+            'recentRecipes' => Recipe::with('user')->latest()->take(3)->get(),
+            'recentUsers' => User::latest()->take(3)->get(),
+            'recentComments' => Comment::with(['user', 'recipe'])->latest()->take(3)->get()
+        ]);
+
+
     }
     public function ban($id)
     {
