@@ -23,7 +23,7 @@
             @endforeach
         </ul>
     @else
-        <p class="text-gray-800 text-lg font-medium">You are not following anyone yet.</p>
+        <p class="text-gray-800 text-lg font-medium">No followings.</p>
     @endif
 </section>
 @endsection

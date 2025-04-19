@@ -16,6 +16,7 @@ use App\Http\Controllers\GoogleAuthController;  // Fixed case sensitivity
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\MealPlanController;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes', RecipeController::class);

@@ -30,20 +30,14 @@ public function subscribe(Request $request)
 {
     $request->validate([
         'name' => 'required|string',
-        'stripeToken' => 'required',
-        'plan' => 'required|numeric'
+        'plan' => 'required|string',
+        'card_number' => 'required|string', // We're not validating card numbers seriously
     ]);
 
-    try {
-        
-        
-        $user = auth()->user();
-        $user->is_premium = true;
-        $user->save();
+    $user = auth()->user();
+    $user->is_premium = true;
+    $user->save();
 
-        return redirect()->route('mealplan')->with('success', 'Payment successful! Welcome to Premium.');
-    } catch (\Exception $e) {
-        return back()->with('error', 'Payment failed: ' . $e->getMessage());
-    }
+    return redirect()->route('mealplan')->with('success', 'Payment successful! You are now a premium member!');
 }
 }

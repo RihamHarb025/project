@@ -17,16 +17,22 @@ class GoogleAuthController extends Controller
     public function callback(){
         $googleUser = Socialite::driver('google')->user();
 
-        $user = User::updateOrCreate(
-            ['google_id' => $googleUser->id],
-            [
-                'name'=>$googleUser->name,
-                'email'=>$googleUser->email,
-                'password' => Hash::make(Str::random(24)),
-            ]
-            );
+        // Check if the user already exists by email
+        $user = User::where('email', $googleUser->email)->first();
+    
+        if ($user) {
+            // User exists, log them in
             Auth::login($user);
-
-            return redirect('dashboard');
-    }
+        } else {
+            // User doesn't exist, create a new one
+            $user = User::create([
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'google_id' => $googleUser->id,
+                'password' => Hash::make(Str::random(24)), // You can store random password
+            ]);
+            Auth::login($user);
+        }
+            return redirect('profile/edit');
+    } 
 }

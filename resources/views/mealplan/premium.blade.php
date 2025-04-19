@@ -26,7 +26,7 @@
                     </ul>
                 </div>
                 <div class="card-footer bg-white border-0">
-                    <a href="#" class="btn btn-outline-primary w-100">
+                    <a href="#" class="bg-green-900 w-100 text-white py-2 px-2 rounded-lg mb-5 hover:bg-green-950">
                         View Plan <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                 </div>

@@ -13,7 +13,7 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $totalUsers = User::count(); // Count all registered users
         $totalRecipes = Recipe::count();
@@ -22,6 +22,18 @@ class AdminController extends Controller
         $recentUsers = User::latest()->take(3)->get();
         $recentComments = Comment::with(['user', 'recipe'])->latest()->take(3)->get();
 
+        $search = $request->search;
+
+    $users = User::when($search, function ($query, $search) {
+        return $query->where('name', 'like', "%{$search}%")
+                     ->orWhere('email', 'like', "%{$search}%");
+    })->paginate(10); // or use ->get() if not paginated
+    
+    if ($request->ajax()) {
+        return view('admin.partials.users-table', compact('users'))->render();
+    }
+    
+        
         return view('admin.index', [
             'totalUsers' => $totalUsers,
             'totalRecipes' => $totalRecipes,
@@ -31,7 +43,7 @@ class AdminController extends Controller
             'messages' => ContactMessage::latest()->get(),
             'recentRecipes'=>$recentRecipes,
             'recentUsers'=> $recentUsers,
-            'recentComments'=>$recentComents
+            'recentComments'=>$recentComments
         ]);
 
     }

@@ -34,7 +34,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('recipe_tag');
+        Schema::dropIfExists('category_recipe'); 
+        Schema::dropIfExists('likes');  // Drop the likes table
+        Schema::dropIfExists('comments'); 
         Schema::dropIfExists('recipes');
-        $table->dropColumn('categories');
     }
 };
