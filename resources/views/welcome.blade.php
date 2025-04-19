@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-<section class="w-full bg-orange-50 h-[800px] relative  flex justify-center items-center">
+<section class="w-full bg-green-50 h-[800px] relative  flex justify-center items-center">
   <div class="w-full h-[800px] relative flex justify-center items-center bg-[url('{{asset('imgs/overlay.png')}}')] bg-cover bg-center">
   
     <div class="flex flex-col justify-center items-center gap-5">
