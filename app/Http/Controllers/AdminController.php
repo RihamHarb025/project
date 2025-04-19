@@ -6,6 +6,7 @@ use App\Models\Recipe;
 use App\Models\ContactMessage;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Payment;
 
 use Illuminate\Http\Request;
 
@@ -22,6 +23,8 @@ class AdminController extends Controller
         $recentRecipes = Recipe::with('user')->latest()->take(3)->get();
         $recentUsers = User::latest()->take(3)->get();
         $recentComments = Comment::with(['user', 'recipe'])->latest()->take(3)->get();
+        $totalPaidUsers = Payment::distinct('user_id')->count('user_id');
+        $totalRevenue = Payment::sum('amount');
 
 
         $search = $request->search;
@@ -43,7 +46,9 @@ class AdminController extends Controller
             'messages' => ContactMessage::latest()->get(),
             'recentRecipes'=>$recentRecipes,
             'recentUsers'=> $recentUsers,
-            'recentComments'=>$recentComments
+            'recentComments'=>$recentComments,
+            'totalPaidUsers'=>$totalPaidUsers,
+            'totalRevenue'=>$totalRevenue
         ]);
 
     }

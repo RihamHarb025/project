@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Payment;
 
 class PremiumController extends Controller
 {
@@ -38,6 +39,22 @@ public function subscribe(Request $request)
     $user = auth()->user();
     $user->is_premium = true;
     $user->save();
+
+    $amount = 0;
+
+    // Match plan to price
+    if ($request->plan === '1-Month Plan') {
+        $amount = 9.99;
+    } elseif ($request->plan === '3-Month Plan') {
+        $amount = 24.99;
+    }
+
+    // Save payment record
+    Payment::create([
+        'user_id' => $user->id,
+        'plan' => $request->plan,
+        'amount' => $amount,
+    ]);
 
     return redirect()->route('mealplan')->with('success', 'Payment successful! You are now a premium member!');
 

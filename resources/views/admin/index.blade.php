@@ -90,16 +90,17 @@
             </div>
           </div>
         </div>
+        
         <div class="bg-white p-4 rounded-xl shadow">
           <h4 class="text-green-950 font-bold mb-4 text-2xl">Membership</h4>
           <div class="space-y-4">
             <div class="flex justify-between">
               <p class="text-green-900 font-semibold">Amount of Users Subscribed</p>
-              <h3 class="text-2xl font-bold">12,345</h3>
+              <h3 class="text-2xl font-bold">{{$totalPaidUsers}}</h3>
             </div>
             <div class="flex justify-between">
               <p class="text-green-900 font-semibold">Amount of Money Earned</p>
-              <h3 class="text-2xl font-bold">$45,678</h3>
+              <h3 class="text-2xl font-bold">{{$totalRevenue}} $</h3>
             </div>
           </div>
         </div>
