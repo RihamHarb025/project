@@ -88,38 +88,51 @@
 
 
 
-<section class="mt-40">
+<section class="mt-40 relative z-0 overflow-hidden">
   <div class="flex flex-col items-center gap-4 mt-20">
     <h2 class="text-5xl text-green-950 max-w-2xl text-center font-bold font-serif">Enjoy Tasty Nest with</h2>
-    <h4 class="text-3xl text-green-900 text-center font-bold">PREMIUM</h4>
+    <h4 class="text-3xl bg-gradient-to-r from-[#fff4cc] via-[#ffd700] to-[#e6ac00] top-4 right-4 text-black text-center font-bold tracking-wider px-6 py-2 rounded-full shadow-md">PREMIUM </h4>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl mx-auto mt-16">
-  
-    <div class="bg-orange-400 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-1 h-[500px] flex flex-col justify-between">
-      <h2 class="text-4xl font-bold text-green-950 opacity-80 font-serif">Meal Plans</h2>
-      <p class="mt-6 text-xl text-green-900 font-semibold">With Tasty Nest Premium, get personalized meal plans for every week. Take the stress out of planning meals for you and your family!</p>
-      <img src="{{asset('imgs/meal-plan-example.jpg')}}" alt="Meal Plan" class="mt-6 rounded-lg w-full h-[300px] object-cover">
-    </div>
-
-    <div class="bg-orange-400 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-2 h-[500px] flex flex-col justify-between">
-      <h2 class="text-4xl font-bold text-green-950 opacity-80 font-serif">Exclusive Recipes</h2>
-      <p class="mt-6 text-xl text-green-900 font-semibold">Gain access to over 100+ exclusive recipes that will elevate your cooking skills and taste buds.</p>
-      <img src="https://via.placeholder.com/500x300?text=Exclusive+Recipes" alt="Exclusive Recipes" class="mt-6 rounded-lg w-full h-[200px] object-cover">
-    </div>
-
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl mx-auto mt-20 px-6 lg:px-0">
     
-    <div class="bg-orange-400 bg-opacity-50 p-8 text-white rounded-lg sm:col-span-2 p-8 lg:col-span-3 h-[300px] flex flex-col justify-between">
-      <h2 class="text-4xl font-bold text-green-950 opacity-80 font-serif">All the Benefits of Premium</h2>
-      <p class="mt-6 text-xl text-green-900">Subscribe to Tasty Nest Premium and enjoy meal plans, exclusive recipes, grocery shopping lists, and much more to make your cooking life easier!</p>
-      <img src="https://via.placeholder.com/1000x400?text=All+Benefits" alt="All Benefits" class="mt-6 rounded-lg w-full h-[200px] object-cover">
+    <!-- Meal Plans -->
+    <div class="relative bg-green-50 bg-opacity-70 backdrop-blur-md p-8 rounded-3xl shadow-xl h-[500px] hover:scale-[1.03] transition-all duration-300 ease-in-out border-4 border-white">
+      <div class="absolute top-4 right-4 bg-gradient-to-r from-[#fff4cc] via-[#ffd700] to-[#e6ac00] top-4 right-4 text-black text-sm font-bold px-3 py-1 rounded-full shadow-md">Meal Magic</div>
+      <h2 class="text-3xl font-bold text-green-950 font-serif mb-4">Meal Plans</h2>
+      <p class="text-green-900 font-medium mb-6">Get personalized meal plans every week. Save time and eat better — no more "what’s for dinner?" stress.</p>
+      <div class="overflow-hidden rounded-xl mt-auto">
+        <img src="{{asset('imgs/meal-plan-example.jpg')}}" alt="Meal Plan" class="w-full h-[240px] object-cover transition-transform duration-300 hover:scale-105">
+      </div>
     </div>
+
+    <!-- Exclusive Recipes -->
+    <div class="relative bg-green-50 bg-opacity-70 backdrop-blur-md p-8 rounded-3xl shadow-xl h-[500px] sm:col-span-2 lg:col-span-2 hover:scale-[1.03] transition-all duration-300 ease-in-out border-4 border-white">
+      <div class="absolute bg-gradient-to-r from-[#fff4cc] via-[#ffd700] to-[#e6ac00] top-4 right-4 text-black text-sm font-bold px-3 py-1 rounded-full shadow-md">Exclusive</div>
+      <h2 class="text-3xl font-bold text-green-950 font-serif mb-4">Save Time and Eat Better</h2>
+      <p class="text-green-900 font-medium mb-6">No more “what’s for dinner?” moments. Each week, get a ready-to-go plan with delicious, balanced meals. Grocery lists included — because we love saving you time. </p>
+      <div class="overflow-hidden rounded-xl mt-auto">
+        <img src="{{asset('imgs/womancooking.jpg')}}" alt="Woman Cooking" class=" mt-4 w-full h-[240px] object-cover transition-transform duration-300 hover:scale-105">
+      </div>
+    </div>
+
+    <!-- All Benefits -->
+    <div class="relative bg-green-50 bg-opacity-70 backdrop-blur-md p-8 rounded-3xl shadow-xl h-[400px] sm:col-span-2 lg:col-span-3 hover:scale-[1.02] transition-all duration-300 ease-in-out border-4 border-white">
+  <div class="absolute top-4 right-4 bg-gradient-to-r from-[#fff4cc] via-[#ffd700] to-[#e6ac00] text-black text-sm font-bold px-3 py-1 rounded-full shadow-md">All-in-One</div>
+  <h2 class="text-3xl font-bold text-green-950 font-serif mb-4">All the Benefits of Premium</h2>
+  <p class="text-green-900 font-medium mb-6 text-xl">Enjoy full access to everything Tasty Nest offers:</p>
+  
+  <!-- List of benefits -->
+  <ul class="list-disc pl-6 text-green-900 mb-6 text-lg font-semibold">
+    <li>Personalized weekly meal plans</li>
+    <li>Exclusive recipes to elevate your cooking</li>
+    <li>Grocery shopping lists for stress-free shopping</li>
+    <li>Save time and eat better every day</li>
+  </ul>
 
 </div>
-
-
-
-
+  </div>
 </section>
+
 
 @endsection
