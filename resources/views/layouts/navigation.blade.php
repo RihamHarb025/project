@@ -17,7 +17,16 @@
                     </x-nav-link>
                 </div>
             </div>
-
+            @auth
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('mealplan') }}">
+            Meal Plans
+            @if(auth()->user()->is_premium)
+                <span class="badge bg-success ms-1">PRO</span>
+            @endif
+        </a>
+    </li>
+@endauth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">

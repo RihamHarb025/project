@@ -47,7 +47,11 @@
                 </div>
             @endif
         </div>
-
+        <div>
+            <x-input-label for="bio" :value="__('bio')"/>
+            <x-text-input id="bio" name="bio" type="text" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg bg-white text-gray-800 focus:border-green-950 focus:ring-2 focus:ring-green-950" :value="old('bio', $user->bio)" required autofocus autocomplete="bio" />
+            <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+        </div>
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
