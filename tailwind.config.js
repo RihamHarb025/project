@@ -11,6 +11,7 @@ export default {
 
     theme: {
         extend: {
+            
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans], // for body
                 serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
