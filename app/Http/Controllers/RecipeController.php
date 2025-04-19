@@ -177,20 +177,38 @@ class RecipeController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $recipe = Recipe::findOrFail($id);
-
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',  // Assuming tags table exists
+            'category' => 'nullable|exists:categories,id',
         ]);
-
-        $recipe->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            
+    
+        // Find the recipe
+        $recipe = Recipe::findOrFail($id);
+    
+        // Update the recipe fields
+        $recipe->title = $request->input('title');
+        $recipe->description = $request->input('description');
+        $recipe->save();
+    
+        // Sync the tags (detach first, then attach)
+        $recipe->tags()->sync($request->input('tags', []));
+    
+        // Update the category
+        $recipe->categories()->sync([$request->input('category')]);
+    
+        // Prepare updated tags for the response
+        $updatedTags = $recipe->tags->map(function ($tag) {
+            return '<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">' . $tag->name . '</span>';
+        })->implode('');
+    
+        // Return success response with updated tags
+        return response()->json([
+            'success' => true,
+            'updatedTags' => $updatedTags
         ]);
-
-        return redirect()->route('recipes.index')->with('success', 'Recipe updated successfully');
     }
 
     /**

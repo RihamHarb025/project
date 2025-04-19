@@ -79,7 +79,7 @@
             <p class="text-xs text-gray-500">{{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}</p>
 
             @auth
-                @if(auth()->id() === $comment->user_id)
+            @if(auth()->id() === $comment->user_id || auth()->user()->is_admin)
                     <div class="absolute top-2 right-2 flex gap-2">
                         <button class="text-gray-500 text-sm edit-btn" data-id="{{ $comment->id }}">
                             <i class="fa-solid fa-pen"></i>
