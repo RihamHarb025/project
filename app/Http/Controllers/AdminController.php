@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Recipe;
 use App\Models\ContactMessage;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -22,6 +23,7 @@ class AdminController extends Controller
         $recentUsers = User::latest()->take(3)->get();
         $recentComments = Comment::with(['user', 'recipe'])->latest()->take(3)->get();
 
+
         $search = $request->search;
 
     $users = User::when($search, function ($query, $search) {
@@ -32,8 +34,6 @@ class AdminController extends Controller
     if ($request->ajax()) {
         return view('admin.partials.users-table', compact('users'))->render();
     }
-    
-        
         return view('admin.index', [
             'totalUsers' => $totalUsers,
             'totalRecipes' => $totalRecipes,

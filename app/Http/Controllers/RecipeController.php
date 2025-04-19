@@ -100,16 +100,16 @@ class RecipeController extends Controller
             'category_id' => 'required|exists:categories,id',
             'tags' => 'array',
             'tags.*' => 'exists:tags,id',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,pdf|max:2048',
         ]);
        
         // Handle image upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            // dd($image->move(public_path('imgs'), $imageName)); 
+             //dd($image->move(public_path('imgs'), $imageName)); 
         
-            $imagePath = 'imgs/' . $imageName;
+             $imagePath = $image->store('imgs', 'public');
         } else {
             $imagePath = null;
         }
@@ -125,7 +125,8 @@ class RecipeController extends Controller
             $recipe->tags()->attach($request->tags);
         }
     
-        
+        $recipe->categories()->attach($request->category_id);
+
         return redirect()->route('recipes.index')->with('success', 'Recipe added successfully!');
     }
 

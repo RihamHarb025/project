@@ -35,4 +35,7 @@ class GoogleAuthController extends Controller
         }
             return redirect('profile/edit');
     } 
-}
+
+    }
+
+

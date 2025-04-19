@@ -187,6 +187,7 @@
     &copy; 2025 Tasty Nest. All Rights Reserved.
   </div>
 </footer>
+<script src="https://js.stripe.com/v3/"></script>
 
   <script src="{{ asset('js/script.js') }}"></script>
 </body>

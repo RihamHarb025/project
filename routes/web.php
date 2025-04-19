@@ -18,6 +18,9 @@ use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\MealPlanController;
 use Laravel\Socialite\Facades\Socialite;
 
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
+
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::resource('recipes', RecipeController::class);
 

@@ -6,7 +6,17 @@ use Illuminate\Http\Request;
 
 class MealPlanController extends Controller
 {
-    public function index()
+    public function premium()
+    {
+        // If the user is not premium, redirect to a different page (e.g., the plans page or home)
+        if (!auth()->user()->is_premium) {
+            return redirect()->route('premium.plans')->with('error', 'You need to subscribe to a premium plan to access this page.');
+        }
+
+        // Show the premium meal plans page
+        return view('mealplan.premium');
+    }
+   public function index()
 {
     if (!auth()->check()) {
         return redirect()->route('login');
