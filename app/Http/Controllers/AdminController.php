@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Recipe;
 use App\Models\ContactMessage;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -22,6 +23,11 @@ class AdminController extends Controller
         $recentUsers = User::latest()->take(3)->get();
         $recentComments = Comment::with(['user', 'recipe'])->latest()->take(3)->get();
 
+        $search = request()->query('search');
+        $users = $search
+            ? User::where('name', 'like', "%{$search}%")->get()
+            : User::all();
+    
         return view('admin.index', [
             'totalUsers' => $totalUsers,
             'totalRecipes' => $totalRecipes,
@@ -31,7 +37,7 @@ class AdminController extends Controller
             'messages' => ContactMessage::latest()->get(),
             'recentRecipes'=>$recentRecipes,
             'recentUsers'=> $recentUsers,
-            'recentComments'=>$recentComents
+            'recentComments'=>$recentComments
         ]);
 
     }

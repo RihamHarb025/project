@@ -87,6 +87,9 @@
                     <a href="{{ route('register') }}" class="transition-link text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
                         New user? Register
                     </a>
+                    <a href="{{ route('password.request') }}" class="transition-link text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
+                       Forgot Password
+                    </a>
                 </div>
             </form>
         </div>

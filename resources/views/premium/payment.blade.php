@@ -19,4 +19,5 @@
         <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 rounded transition">Pay ${{ number_format($selectedPlan['price'], 2) }}</button>
     </form>
 </div>
+
 @endsection
