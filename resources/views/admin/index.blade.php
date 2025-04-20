@@ -19,9 +19,7 @@
         <div class="bg-white p-4 rounded-xl shadow">
           <h4 class="text-green-950 font-bold mb-4 text-2xl">Quick Actions</h4>
           <ul class="space-y-4">
-            <li class="flex items-center">
-              <button class="bg-blue-500 text-white rounded-lg p-2 hover:bg-blue-700">Feature/Unfeature Recipe</button>
-            </li>
+           
             <li class="flex items-center">
                 <a href="{{route('recipes.index')}}">
               <button class="bg-red-500 text-white rounded-lg p-2 hover:bg-red-700">Delete Recipe</button>
@@ -37,9 +35,7 @@
               <button class="bg-orange-500 text-white rounded-lg p-2 hover:bg-orange-700">Ban User</button>
                 </a>
             </li>
-            <li class="flex items-center">
-              <button class="bg-green-600 text-white rounded-lg p-2 hover:bg-green-700" id="openModalBtn">Add New Tag/Category</button>
-            </li>
+          
             <li class="flex items-center">
             <a href="{{route('recipes.create')}}">
               <button class="bg-purple-500 text-white rounded-lg p-2 hover:bg-purple-700">Add New Recipe</button>

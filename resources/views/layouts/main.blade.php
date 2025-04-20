@@ -24,7 +24,7 @@
 <header id="header" class="text-green-900 p-3 w-full">
   <div class="flex py-4 px-6 justify-between items-center relative">
     <div class="flex items-center gap-4">
-      <a href="#" class="text-lg font-bold">
+      <a href="{{route('welcome')}}" class="text-lg font-bold">
         <img src="{{ asset('imgs/logo.png') }}" alt="Logo" class="h-16 md:h-20 transition-all duration-300 transform hover:scale-110 hover:translate-y-2">
       </a>
     </div>

@@ -40,7 +40,7 @@
                 </div>
                 <h2 class="text-4xl font-bold text-center text-green-950 mb-4">{{ $category->name }}</h2> 
                 <p class="text-green-700 font-semibold text-center text-lg mb-6">{{ $category->description }}</p> 
-                <a href="#" class="bg-green-900 text-white rounded-full text-lg px-5 py-2 hover:bg-green-950 transition duration-300 ease-in-out">
+                <a href="{{route('recipes.index')}}" class="bg-green-900 text-white rounded-full text-lg px-5 py-2 hover:bg-green-950 transition duration-300 ease-in-out">
                     View Recipes
                 </a>
             </div>
