@@ -2,8 +2,8 @@
     <ul class="space-y-4">
         @foreach($users as $user)
             @if(!empty($user->username))
-                <li class="flex items-center justify-between p-4 border border-gray-300 rounded-xl bg-white shadow hover:shadow-lg transition duration-300">
-                    <div class="flex items-center gap-4">
+                <li class="flex flex-col sm:flex-row items-center justify-between p-4 border border-gray-300 rounded-xl bg-white shadow hover:shadow-lg transition duration-300">
+                    <div class="flex items-center gap-4 w-full sm:w-auto">
                         <!-- User Avatar -->
                         <img src="{{ $user->profile_picture ?? asset('imgs/default-avatar.png') }}" 
                              class="w-12 h-12 rounded-full border border-green-400 shadow-sm object-cover" 
@@ -19,9 +19,9 @@
                     </div>
 
                     <!-- Buttons Container -->
-                    <div class="flex gap-4 ml-auto">
+                    <div class="flex gap-4 ml-auto mt-4 sm:mt-0 sm:flex-col sm:ml-6 sm:gap-2">
                         <!-- View Profile Button -->
-                        <a href="{{ route('users.show', ['user' => $user->id]) }}"
+                        <a href="{{ route('users.show', ['user' => $user->id]) }}" 
                            class="text-white bg-green-900 px-4 py-2 rounded-md hover:bg-green-950 transition">
                             View Profile
                         </a>
@@ -39,13 +39,13 @@
                             </form>
                         @endif
                         @if(auth()->check() && auth()->user()->is_admin)
-            <form action="{{ route('users.ban', ['id' => $user->id]) }}" method="POST" onsubmit="return confirm('Ban this user?')">
-                @csrf
-                <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-700 transition">
-                    Ban User
-                </button>
-            </form>
-        @endif
+                            <form action="{{ route('users.ban', ['id' => $user->id]) }}" method="POST" onsubmit="return confirm('Ban this user?')">
+                                @csrf
+                                <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-700 transition">
+                                    Ban User
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </li>
             @endif

@@ -19,13 +19,10 @@ class RecipeController extends Controller
     
         $search = $request->input('search');
         $category = $request->input('category');
-        $tags = $request->input('tags', []);  // Default to an empty array if no tags are selected
-        $name_order = $request->input('name_order'); // 'asc' or 'desc' (A-Z or Z-A)
-        $date_order = $request->input('date_order'); // 'asc' or 'desc' (Oldest or Newest)
-        \Log::info('Search:', [$search]);
-        \Log::info('Category:', [$category]);
-        \Log::info('Tags:', [$tags]);
-        // Start the query for recipes
+        $tags = $request->input('tags', []);  
+        $name_order = $request->input('name_order');
+        $date_order = $request->input('date_order'); 
+       
         $recipes = Recipe::when($search, function ($query, $search) {
             return $query->where('title', 'like', '%' . $search . '%');
         })
@@ -34,35 +31,32 @@ class RecipeController extends Controller
                 $q->where('categories.id', $category);
             });
         })
-        // Adjusted filter for tags
+       
         ->when(count($tags), function ($query) use ($tags) {
             return $query->whereHas('tags', function ($q) use ($tags) {
                 $q->whereIn('tags.id', $tags);
             });
         })
-        // Apply name order if selected
+       
         ->when($name_order, function ($query, $name_order) {
             return $query->orderBy('title', $name_order);
         })
-        // Apply date order if selected (and name_order not present)
+        
         ->when(!$name_order && $date_order, function ($query) use ($date_order) {
             return $query->orderBy('created_at', $date_order);
         })
         ->get();
     
-        // Get categories and tags for the view
+      
         $categories = Category::all();
         $tags = Tag::all();
     
-        // Log the tags for debugging purposes
-        // \Log::info('Selected Tags:', $tags);
     
-        // If it's an AJAX request, return the filtered recipe cards
         if ($request->ajax()) {
             return view('recipes._recipe_cards', compact('recipes'))->render();
         }
     
-        // Return the full view
+       
         return view('recipes.index', compact(
             'recipes', 'search', 'categories', 'tags', 
             'category', 'tags', 'name_order', 'date_order'
@@ -103,11 +97,11 @@ class RecipeController extends Controller
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,pdf|max:2048',
             ]);
            
-            // Handle image upload
+            
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
-                 //dd($image->move(public_path('imgs'), $imageName)); 
+                
             
                  $imagePath = $image->store('imgs', 'public');
             } else {
@@ -201,11 +195,10 @@ class RecipeController extends Controller
             $recipe = Recipe::findOrFail($id);
             $user = Auth::user();
         
-            // Let the user delete if they are the owner OR admin
             if ($user->id === $recipe->user_id || $user->is_admin) {
                 $recipe->delete();
         
-                // Redirect based on role
+              
                 if ($user->is_admin) {
                     return redirect()->route('recipes.index')->with('success', 'Recipe deleted successfully');
                 } else {
