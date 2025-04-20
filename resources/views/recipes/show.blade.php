@@ -107,36 +107,34 @@
     <script>
   $(document).ready(function () {
 
-// Show edit form
+
 $('.edit-btn').on('click', function () {
         const id = $(this).data('id');
         $(`#comment-body-${id}`).hide();
         $(`#edit-form-${id}`).show();
     });
 
-    // Submit updated comment when the form is submitted
     $('.edit-comment-form').on('submit', function (e) {
         e.preventDefault();
         
-        const commentId = $(this).data('id'); // Get the comment ID from the form's data-id
+        const commentId = $(this).data('id'); 
         const newBody = $(`#edit-body-${commentId}`).val();
 
-        // Make AJAX request to update the comment
         $.ajax({
-            url: `/recipes/{{ $recipe->id }}/comments/${commentId}`, // Correct URL with dynamic recipe ID
+            url: `/recipes/{{ $recipe->id }}/comments/${commentId}`,
             type: 'PUT',
             data: {
                 _token: '{{ csrf_token() }}',
                 body: newBody
             },
             success: function (response) {
-                // Update the comment text with the new body
+              
                 $(`#comment-body-${commentId}`).text(newBody).show();
                 $(`#edit-form-${commentId}`).hide();
             },
             error: function (xhr) {
                 alert('Something went wrong while updating 😢');
-                console.error(xhr.responseText); // Log the error for debugging
+                console.error(xhr.responseText); 
             }
         });
     });

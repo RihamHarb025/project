@@ -17,7 +17,7 @@ class PremiumController extends Controller
         return view('premium.plans', compact('plans'));
     }
 
-    // Display the payment page for the selected plan
+
     public function paymentPage($plan)
     {
         $selectedPlan = [
@@ -33,7 +33,7 @@ public function subscribe(Request $request)
     $request->validate([
         'name' => 'required|string',
         'plan' => 'required|string',
-        'card_number' => 'required|string', // We're not validating card numbers seriously
+        'card_number' => 'required|string',
     ]);
 
     $user = auth()->user();
@@ -42,14 +42,13 @@ public function subscribe(Request $request)
 
     $amount = 0;
 
-    // Match plan to price
+   
     if ($request->plan === '1-Month Plan') {
         $amount = 9.99;
     } elseif ($request->plan === '3-Month Plan') {
         $amount = 24.99;
     }
 
-    // Save payment record
     Payment::create([
         'user_id' => $user->id,
         'plan' => $request->plan,
@@ -58,7 +57,7 @@ public function subscribe(Request $request)
 
     return redirect()->route('mealplan')->with('success', 'Payment successful! You are now a premium member!');
 
-    // Handle the subscription after payment
+  
    
     }
 }

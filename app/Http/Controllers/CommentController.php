@@ -14,7 +14,7 @@ class CommentController extends Controller
         if (auth()->user()->banned) {
             return response()->json([
                 'error' => 'Your account is banned. You cannot comment.',
-            ], 403); // 403 Forbidden status code
+            ], 403); 
         }
 
         $request->validate([

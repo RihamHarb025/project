@@ -7,14 +7,14 @@
     <aside class="w-64 bg-white rounded-2xl p-6 shadow-md">
       <div class="text-3xl font-bold text-green-950 mb-8">Admin Panel</div>
       <nav class="space-y-4">
-        <!-- <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Manage Recipes</a> -->
+      
         <a href="#" class="block text-green-900 hover:text-green-950 font-semibold">Main Dashboard</a>
 
       </nav>
     </aside>
 
     <main class="flex-1 ml-6">
-      <!-- Quick Actions, Analytics, and Membership Cards in a grid layout -->
+     
       <div class="grid grid-cols-3 gap-6 mb-6">
         <div class="bg-white p-4 rounded-xl shadow">
           <h4 class="text-green-950 font-bold mb-4 text-2xl">Quick Actions</h4>

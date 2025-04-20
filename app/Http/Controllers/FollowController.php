@@ -18,12 +18,12 @@ class FollowController extends Controller
     public function followings($id)
     {
         $user = User::findOrFail($id);
-        $followings = $user->following; // Get the following of the user
+        $followings = $user->following;
         return view('profile.following', compact('user', 'followings'));
     }
     public function showProfile()
 {
-    $user = Auth::user()->load('followers', 'followings'); // Eager load the followers and following relationships
+    $user = Auth::user()->load('followers', 'followings'); 
     return view('users.show', compact('user'));
 }
 
@@ -32,17 +32,14 @@ class FollowController extends Controller
 {
    
     $currentUser = Auth::user();
-
-    // Check if the current user is already following the user
     if ($currentUser->isFollowing($user)) {
-        // Unfollow
         $currentUser->following()->detach($user);
-        // Decrease the follower count for the user being followed
+
         $user->decrement('followers_count');
     } else {
-        // Follow
+
         $currentUser->following()->attach($user);
-        // Increase the follower count for the user being followed
+      
         $user->increment('followers_count');
     }
 

@@ -30,7 +30,7 @@ class TagSeeder extends Seeder
             'High-Fiber',
         ];
         foreach ($tags as $tag) {
-            // Check if the tag already exists
+
             if (!Tag::where('name', $tag)->exists()) {
                 Tag::create(['name' => $tag]);
             }

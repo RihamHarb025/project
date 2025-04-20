@@ -21,13 +21,13 @@ class UserController extends Controller
                   ->orWhere('username', 'like', '%' . $search . '%');
             });
         })
-        ->get(); // Fetch the results, even if search is empty
+        ->get();
     
         if ($request->ajax()) {
-            return view('users.partials.search_results', compact('users'))->render(); // return just the list for AJAX
+            return view('users.partials.search_results', compact('users'))->render(); 
         }
     
-        return view('users.index', compact('users', 'search')); // full page if not AJAX
+        return view('users.index', compact('users', 'search')); 
     }
 
     public function create()
@@ -49,7 +49,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
-        $recipes = $user->recipes;  // Assuming you have the 'recipes' relationship defined in the User model
+        $recipes = $user->recipes; 
 
     return view('users.show', compact('user', 'recipes'));
     }
@@ -74,12 +74,10 @@ class UserController extends Controller
     {
         //
         if (auth()->user()->is_admin) {
-            // Delete the user
             $user->delete();
             return redirect()->route('users.index')->with('success', 'User banned successfully.');
         }
     
-        // If the user is not authorized (not admin)
         return redirect()->route('users.index')->with('error', 'Unauthorized action.');
     }
     public function ban($id)

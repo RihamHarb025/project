@@ -28,7 +28,7 @@
 <section class="page-wrapper w-full bg-green-50 py-20 flex justify-center items-center min-h-screen px-4">
     <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden h-[600px]">
         
-        <!-- Left: Welcome Message -->
+       
         <div class="bg-[url('{{ asset('imgs/basilBg.png') }}')] bg-cover bg-center flex items-center justify-center p-12">
             <div class="bg-white/70 p-8 rounded-xl shadow-xl text-center max-w-md">
                 <h2 class="text-5xl text-green-950 mb-6 font-serif font-bold leading-snug">Welcome Back</h2>
@@ -38,14 +38,13 @@
             </div>
         </div>
 
-        <!-- Right: Login Form -->
+        
         <div class="p-12 flex items-center justify-center">
             <form method="POST" action="{{ route('login') }}" class="space-y-6 w-full max-w-md">
                 @csrf
 
                 <h2 class="text-3xl font-bold text-green-950 mb-6 text-center">Log In</h2>
 
-                <!-- Email -->
                 <div>
                     <x-input-label for="email" value="Email" class="text-sm font-semibold text-gray-700" />
                     <x-text-input id="email" name="email" type="email" required autofocus
@@ -54,8 +53,6 @@
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
-                <!-- Password -->
-               <!-- Password -->
 <div class="relative">
     <x-input-label for="password" value="Password" class="text-sm font-semibold text-gray-700" />
     
@@ -64,7 +61,6 @@
             class="mt-1 block w-full pr-12 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-zinc-400"
             placeholder="Enter your password" />
 
-        <!-- Eye Icon inside the input field -->
         <button type="button" id="togglePassword"
             class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-green-800 text-lg">
             <i class="fa-solid fa-eye text-green-900 hover:text-green-950" id="eyeIcon"></i>
@@ -75,14 +71,13 @@
 </div>
 
 
-                <!-- Login Button -->
+                
                 <div class="mt-6">
                     <x-primary-button class="bg-green-900 text-orange-300 hover:bg-green-950 px-6 py-3 w-full text-center">
                         Log In
                     </x-primary-button>
                 </div>
 
-                <!-- Footer -->
                 <div class="flex flex-col md:flex-row items-center justify-between mt-8 gap-4">
                     <a href="{{ route('register') }}" class="transition-link text-green-900 font-bold hover:text-green-950 hover:underline transition-all duration-300 ease-in-out">
                         New user? Register

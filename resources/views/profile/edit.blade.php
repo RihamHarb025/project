@@ -26,7 +26,7 @@
                 </div>
             @endif
 
-            <!-- Followers Count and Link -->
+           
             <a href="{{ route('follow.followers', Auth::user()->id) }}">
                 <p class="mt-2 text-gray-600 p-2">
                     <strong>Followers:</strong>
@@ -34,7 +34,7 @@
                 </p>
             </a>
 
-            <!-- Following Count and Link -->
+           
             <a href="{{ route('follow.followings', Auth::user()->id) }}">
                 <p class="mt-2 text-gray-600 p-2">
                     <strong>Following:</strong>
@@ -42,7 +42,7 @@
                 </p>
             </a>
 
-            <!-- Follow/Unfollow Button -->
+           
             @if(Auth::id() !== $user->id)
                 <form action="{{ route('follow.toggle', $user->id) }}" method="POST" class="mt-2">
                     @csrf
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <!-- User Actions & Recipes -->
+    
     <div class="mt-6 space-y-6">
         <div class="p-6 bg-white shadow-md rounded-lg">
             <h3 class="text-2xl font-bold text-green-800 mb-4">Update Profile Information</h3>
@@ -67,7 +67,6 @@
             @include('profile.partials.update-password-form')
         </div>
 
-        <!-- User Recipes -->
         <div class="p-6 bg-white shadow-md rounded-lg">
             <h3 class="text-2xl font-bold text-green-800 mb-4">Your Recipes</h3>
             @if($recipes && $recipes->count() > 0)

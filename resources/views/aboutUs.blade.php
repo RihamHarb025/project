@@ -1,12 +1,12 @@
 @extends('layouts.main')
 @section('content')
 <section class="relative w-full h-[600px] overflow-hidden bg-green-50">
-    <!-- Smaller Decorative Image in Corner -->
+    
     <img src="{{ asset('imgs/overlay2.png') }}" 
          alt="Corner Decoration" 
          class="absolute top-0 left-0 w-112 h-112 z-10 opacity-90" />
 
-    <!-- Text Content -->
+    
     <div class="w-full h-full flex items-center justify-end z-20 pr-8 md:pr-32">
         <div class="text-right max-w-2xl space-y-6 px-4">
             <h1 class="text-5xl md:text-7xl text-green-950 font-serif font-bold">
@@ -72,9 +72,9 @@
         </p>
     </div>
 
-    <!-- Timeline Container -->
+   
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <!-- Steps -->
+     
         <div class="space-y-8">
             <div class="hover:shadow-lg p-6 transition-all duration-300 rounded-xl bg-white shadow-md">
                 <div class="flex items-center mb-4">
@@ -99,13 +99,13 @@
             </div>
         </div>
 
-        <!-- Image Section -->
+     
         <div class="flex justify-center">
             <img src="{{ asset('imgs/saladAboutus.jpg') }}" alt="Cute Cooking Illustration" class="max-w-md w-full rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300">
         </div>
     </div>
 
-    <!-- Testimonial Section -->
+   
     <div class="mt-32 text-center">
         <blockquote class="text-2xl italic text-green-950 max-w-xl mx-auto font-bold">
             “Tasty Nest was born from a simple love for food and connection. Every dish is a story, and every recipe is an invitation to join our journey.”

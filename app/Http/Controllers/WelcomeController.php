@@ -16,8 +16,8 @@ class WelcomeController extends Controller
         //
         $categories = Category::all();
         $recipes = Recipe::with('categories')
-        ->inRandomOrder()  // Get random recipes
-        ->take(6)  // Limit to 6 recipes
+        ->inRandomOrder() 
+        ->take(6)
         ->get();
         return view('welcome', compact('categories', 'recipes'));
     }

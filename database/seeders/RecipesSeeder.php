@@ -14,7 +14,7 @@ class RecipesSeeder extends Seeder
      */
     public function run(): void
     {
-        // Define the recipes
+    
         $recipes = [
             [
                 'title' => 'Vegan Avocado Toast',
@@ -118,9 +118,8 @@ class RecipesSeeder extends Seeder
             ]
         ];
         $user = \App\Models\User::first();
-        // Iterate through each recipe
+        
         foreach ($recipes as $data) {
-            // Create the recipe first
             $recipe = Recipe::create([
                 'title' => $data['title'],
                 'description' => $data['description'],
@@ -134,21 +133,19 @@ class RecipesSeeder extends Seeder
             ]);
 
             $category = Category::firstOrCreate(
-                ['name' => $data['category_name']],  // Find or create the category
-                ['image' => 'imgs/' . strtolower(str_replace(' ', '_', $data['category_name'])) . '.jpeg']  // You can customize image logic if needed
+                ['name' => $data['category_name']],  
+                ['image' => 'imgs/' . strtolower(str_replace(' ', '_', $data['category_name'])) . '.jpeg']  
             );
     
-            // Step 3: Attach the category to the recipe using the pivot table
-            $recipe->categories()->syncWithoutDetaching([$category->id]); // syncWithoutDetaching ensures the relationship is added
+            
+            $recipe->categories()->syncWithoutDetaching([$category->id]); 
     
-            // Step 4: Ensure the tags exist (create if not)
+            
             foreach ($data['tags'] as $tagName) {
-                $tag = Tag::firstOrCreate(['name' => $tagName]);  // Find or create each tag
-                $recipe->tags()->attach($tag->id);  // Attach the tag to the recipe
+                $tag = Tag::firstOrCreate(['name' => $tagName]);  
+                $recipe->tags()->attach($tag->id);
             }
-            // Attach tags to the recipe
-            // $tags = Tag::whereIn('name', $data['tags'])->pluck('id'); // Get tag IDs
-            // $recipe->tags()->attach($tags); 
+         
         }
     }
 }

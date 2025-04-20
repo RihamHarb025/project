@@ -21,7 +21,7 @@ class AdminUserController extends Controller
     $users = User::when($search, function ($query, $search) {
         return $query->where('name', 'like', "%{$search}%")
                      ->orWhere('email', 'like', "%{$search}%");
-    })->paginate(10); // or use ->get() if not paginated
+    })->paginate(10); 
     
     if ($request->ajax()) {
         return view('admin.partials.users-table', compact('users'))->render();
@@ -44,7 +44,7 @@ class AdminUserController extends Controller
     public function ban($id)
     {
         $user = User::findOrFail($id);
-        $user->banned = true; // Assuming you have an `is_banned` column
+        $user->banned = true; 
         $user->save();
 
         return redirect()->route('admin.index')->with('success', 'User banned successfully');

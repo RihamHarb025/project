@@ -17,7 +17,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        $totalUsers = User::count(); // Count all registered users
+        $totalUsers = User::count(); 
         $totalRecipes = Recipe::count();
         $mostLikedRecipe = Recipe::withCount('likes')->orderByDesc('likes_count')->first();
         $recentRecipes = Recipe::with('user')->latest()->take(3)->get();
@@ -32,7 +32,7 @@ class AdminController extends Controller
     $users = User::when($search, function ($query, $search) {
         return $query->where('name', 'like', "%{$search}%")
                      ->orWhere('email', 'like', "%{$search}%");
-    })->paginate(10); // or use ->get() if not paginated
+    })->paginate(10);
     
     if ($request->ajax()) {
         return view('admin.partials.users-table', compact('users'))->render();
@@ -106,7 +106,6 @@ class AdminController extends Controller
         $recipe = Recipe::findOrFail($id);
         $user = Auth::user();
 
-        // Let the admin delete the recipe
         if ($user->is_admin) {
             $recipe->delete();
             return redirect()->route('admin.index')->with('success', 'Recipe deleted successfully');

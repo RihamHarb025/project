@@ -10,7 +10,7 @@ class ProfileSetupController extends Controller
 
     public function index()
     {
-        return view('profile.setup'); // The view for setting up profile
+        return view('profile.setup'); 
     }
 
 }

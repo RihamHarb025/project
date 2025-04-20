@@ -5,7 +5,7 @@
     <!-- Outer Container with border/shadow -->
     <div class="w-full max-w-6xl bg-white shadow-2xl border-2 border-green-950/20 rounded-3xl p-10">
 
-        <!-- Step Indicator -->
+        <!-- Step Indicator step 1/2  la tsir 2/2 -->
         <div class="w-full max-w-md mb-8 mx-auto">
             <div class="flex justify-between text-lg text-green-950">
                 <span>Step 1/2</span>
@@ -28,7 +28,6 @@
             @endforeach
         </div>
 
-        <!-- Extra spacing at the bottom -->
         <div class="mt-24"></div>
 
     </div>

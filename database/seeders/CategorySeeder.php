@@ -23,7 +23,6 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            // Check if category exists before inserting
             if (!DB::table('categories')->where('name', $category['name'])->exists()) {
                 DB::table('categories')->insert([
                     'name' => $category['name'],

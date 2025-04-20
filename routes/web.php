@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminUserController;
-use App\Http\Controllers\GoogleAuthController;  // Fixed case sensitivity
+use App\Http\Controllers\GoogleAuthController; 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\MealPlanController;
