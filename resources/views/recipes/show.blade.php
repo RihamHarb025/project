@@ -79,7 +79,7 @@
             <p class="text-xs text-gray-500">{{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}</p>
 
             @auth
-            @if(auth()->id() === $comment->user_id || auth()->user()->is_admin)
+                @if(auth()->id() === $comment->user_id)
                     <div class="absolute top-2 right-2 flex gap-2">
                         <button class="text-gray-500 text-sm edit-btn" data-id="{{ $comment->id }}">
                             <i class="fa-solid fa-pen"></i>
@@ -107,34 +107,36 @@
     <script>
   $(document).ready(function () {
 
-
+// Show edit form
 $('.edit-btn').on('click', function () {
         const id = $(this).data('id');
-        $(`#comment-body-${id}`).hide();
-        $(`#edit-form-${id}`).show();
+        $(#comment-body-${id}).hide();
+        $(#edit-form-${id}).show();
     });
 
+    // Submit updated comment when the form is submitted
     $('.edit-comment-form').on('submit', function (e) {
         e.preventDefault();
         
-        const commentId = $(this).data('id'); 
-        const newBody = $(`#edit-body-${commentId}`).val();
+        const commentId = $(this).data('id'); // Get the comment ID from the form's data-id
+        const newBody = $(#edit-body-${commentId}).val();
 
+        // Make AJAX request to update the comment
         $.ajax({
-            url: `/recipes/{{ $recipe->id }}/comments/${commentId}`,
+            url: /recipes/{{ $recipe->id }}/comments/${commentId}, // Correct URL with dynamic recipe ID
             type: 'PUT',
             data: {
                 _token: '{{ csrf_token() }}',
                 body: newBody
             },
             success: function (response) {
-              
-                $(`#comment-body-${commentId}`).text(newBody).show();
-                $(`#edit-form-${commentId}`).hide();
+                // Update the comment text with the new body
+                $(#comment-body-${commentId}).text(newBody).show();
+                $(#edit-form-${commentId}).hide();
             },
             error: function (xhr) {
                 alert('Something went wrong while updating 😢');
-                console.error(xhr.responseText); 
+                console.error(xhr.responseText); // Log the error for debugging
             }
         });
     });
@@ -146,13 +148,13 @@ $('.delete-btn').on('click', function () {
     if (!confirm('Are you sure you want to delete this comment?')) return;
 
     $.ajax({
-        url: `/recipes/${commentId}/comments/${commentId}`,
+        url: /recipes/${commentId}/comments/${commentId},
         type: 'DELETE',
         data: {
             _token: '{{ csrf_token() }}'
         },
         success: function () {
-            $(`#comment-${commentId}`).remove();
+            $(#comment-${commentId}).remove();
         },
         error: function () {
             alert('Failed to delete comment 🥲');
