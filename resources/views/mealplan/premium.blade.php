@@ -26,13 +26,68 @@
                     </ul>
                 </div>
                 <div class="card-footer bg-white border-0">
-                    <a href="#" class="bg-green-900 w-100 text-white py-2 px-2 rounded-lg mb-5 hover:bg-green-950">
-                        View Plan <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                <a href="#" class=" bg-green-900 rounded-md text-white p-2 view-plan-btn hover:bg-green-950"
+                data-name="{{ $plan['name'] }}"
+                data-image="{{ $plan['image'] }}"
+                data-description="{{ $plan['description'] }}"
+                data-features='@json($plan["features"])'>
+                View Plan <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+
                 </div>
             </div>
         </div>
         @endforeach
     </div>
 </div>
+<div id="planModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-6 relative">
+    <button id="closeModal" class="absolute top-4 right-4 text-gray-600 hover:text-black text-2xl">&times;</button>
+    <h2 id="modalTitle" class="text-3xl font-bold text-green-950 mb-4"></h2>
+    <img id="modalImage" class="w-full h-64 object-cover rounded-lg mb-4" />
+    <p id="modalDescription" class="text-gray-600 mb-4"></p>
+    <ul id="modalFeatures" class="list-disc list-inside mb-4 text-sm text-gray-800"></ul>
+    <p class="text-right text-lg font-semibold text-green-950">Price: $<span id="modalPrice"></span></p>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+  $('.view-plan-btn').click(function (e) {
+    e.preventDefault();
+
+    const name = $(this).data('name');
+    const image = $(this).data('image');
+    const description = $(this).data('description');
+    const price = $(this).data('price');
+    const features = $(this).data('features');
+
+    $('#modalTitle').text(name);
+    $('#modalImage').attr('src', image);
+    $('#modalDescription').text(description);
+    $('#modalPrice').text(price);
+
+    let featureList = $('#modalFeatures');
+    featureList.empty();
+    features.forEach(f => {
+      featureList.append(`<li>${f}</li>`);
+    });
+    $('#planModal').removeClass('hidden').hide().fadeIn(200);
+  });
+  $('#closeModal').click(function () {
+    $('#planModal').fadeOut(200, function () {
+      $(this).addClass('hidden');
+    });
+  });
+
+  $('#planModal').click(function (e) {
+    if (e.target.id === 'planModal') {
+      $(this).fadeOut(200, function () {
+        $(this).addClass('hidden');
+      });
+    }
+  });
+});
+</script>
+
 @endsection

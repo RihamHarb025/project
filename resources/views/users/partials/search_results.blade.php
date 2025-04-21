@@ -46,7 +46,7 @@
                                       method="POST" 
                                       onsubmit="return confirm('Unban this user?');">
                                     @csrf
-                                    <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-blue-700 transition">
+                                    <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-700 transition">
                                         Unban User
                                     </button>
                                 </form>

@@ -18,7 +18,7 @@
             @endif
             <!-- Followers Count and Link -->
             <a href="{{ route('follow.followers', $user->id) }}">
-                <p class="mt-2 text-gray-600 bg-orange-300 rounded-lg p-2">
+                <p class="mt-2 text-gray-600 rounded-lg p-2">
                     <strong>Followers:</strong>
                     <span>
                         {{ $user->followers->count() ?: 0 }}
@@ -28,7 +28,7 @@
 
             <!-- Following Count and Link -->
             <a href="{{ route('follow.followings', $user->id) }}">
-                <p class="mt-2 text-gray-600 bg-orange-300 rounded-lg p-2">
+                <p class="mt-2 text-gray-600 rounded-lg p-2">
                     <strong>Following:</strong>
                     <span>
                         {{ $user->following->count() ?: 0 }}

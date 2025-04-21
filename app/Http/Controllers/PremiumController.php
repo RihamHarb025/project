@@ -30,6 +30,11 @@ class PremiumController extends Controller
 
 public function subscribe(Request $request)
 {
+    $user = auth()->user();
+
+    if ($user->banned) {
+        return redirect()->back()->withErrors(['error' => 'You are banned and cannot subscribe to a premium plan.']);
+    }
     $request->validate([
         'name' => 'required|string',
         'plan' => 'required|string',
