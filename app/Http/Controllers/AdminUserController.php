@@ -16,20 +16,11 @@ class AdminUserController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->search;
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
 
-    $users = User::when($search, function ($query, $search) {
-        return $query->where('name', 'like', "%{$search}%")
-                     ->orWhere('email', 'like', "%{$search}%");
-    })->paginate(10); 
-    
-    if ($request->ajax()) {
-        return view('admin.partials.users-table', compact('users'))->render();
-    }
     
         return view('admin.index', [
             'users' => $users,
-            'search' => $search,
             'totalUsers' => User::count(),
             'totalRecipes' => Recipe::count(),
             'mostLikedRecipe' => Recipe::withCount('likes')->orderByDesc('likes_count')->first(),

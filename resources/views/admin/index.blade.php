@@ -36,6 +36,12 @@
                 <button class="bg-purple-500 text-white rounded-lg p-2 hover:bg-purple-700">Add New Recipe</button>
               </a>
             </li>
+            <li class="flex items-center">
+            <button id="openModalBtn" class="bg-blue-500 text-white rounded-lg p-2 hover:bg-blue-700">
+              Add Tag
+            </button>
+          </li>
+
           </ul>
         </div>
 
@@ -43,7 +49,7 @@
         <div id="addTagCategoryModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
           <div class="bg-white p-6 rounded-lg shadow-xl w-[90%] max-w-md">
             <div class="flex justify-between items-center mb-4">
-              <h2 class="text-xl font-semibold">Add Tag or Category</h2>
+              <h2 class="text-xl font-semibold">Add Tag</h2>
               <button id="closeModalBtn">&times;</button>
             </div>
             <div class="mb-4">
@@ -52,7 +58,6 @@
             </div>
             <div class="flex justify-end gap-4">
               <button id="addTagBtn" class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">Add Tag</button>
-              <button id="addCategoryBtn" class="px-4 py-2 rounded bg-purple-600 text-white hover:bg-purple-700">Add Category</button>
             </div>
           </div>
         </div>
@@ -143,10 +148,6 @@
       <div class="bg-white p-6 rounded-xl shadow">
         <h4 class="text-green-950 font-bold mb-4 text-2xl">User Management</h4>
 
-        {{-- Search Bar --}}
-        <form action="{{ route('admin.index') }}" method="GET" class="mb-4">
-          <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search users..." class="border rounded px-4 py-2 w-full md:w-1/3" />
-        </form>
 
         <table class="w-full text-base text-left table-auto" id="usersTable">
           <thead class="text-gray-500 border-b">

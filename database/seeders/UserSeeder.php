@@ -18,18 +18,30 @@ class UserSeeder extends Seeder
     {
         //
         $faker = Faker::create();
-        User::create([
-            'name' => 'adminuser',
-            'username' => 'adminuser',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('adminpassword'), 
-            'bio' => $faker->sentence(),
-            'image_profile' => 'https://via.placeholder.com/640x480.png/004422?text=admin',
-            'preference' => 'none',
-            'is_admin' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+
+        $images = [
+            'imgs/defaultGreen.jpeg',
+            'imgs/defaultRed.jpeg',
+            'imgs/defaultPurple.jpeg',
+            'imgs/defaultPink.jpeg',
+            'imgs/defaultBrown.jpeg',
+            'imgs/defaultSage.jpeg',
+            'imgs/defaultOrange.jpeg',
+            'imgs/defaultBlue.jpeg',
+                    
+        ];
+        // User::create([
+        //     'name' => 'adminuser',
+        //     'username' => 'adminuser',
+        //     'email' => 'admin@example.com',
+        //     'password' => Hash::make('adminpassword'), 
+        //     'bio' => $faker->sentence(),
+        //     'image_profile' => 'https://via.placeholder.com/640x480.png/004422?text=admin',
+        //     'preference' => 'none',
+        //     'is_admin' => true,
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
 
         
         $tags = Tag::pluck('name')->toArray(); 
@@ -40,7 +52,7 @@ class UserSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password123'), 
                 'bio' => $faker->sentence(),
-                'image_profile' => $faker->imageUrl(),
+                'image_profile' => $faker->randomElement($images),
                 'preference' => $faker->randomElement($tags),
                 'is_admin' => false,
                 'created_at' => now(),

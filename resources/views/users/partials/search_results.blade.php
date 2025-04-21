@@ -12,39 +12,54 @@
                         <div>
                             <!-- User Name and Username -->
                             <h3 class="text-lg font-semibold text-gray-900">
-                                {{ $user->name }} <span class="text-sm text-gray-500"><span>@</span>{{ $user->username }}</span>
+                                {{ $user->name }} 
+                                <span class="text-sm text-gray-500"><span>@</span>{{ $user->username }}</span>
                             </h3>
                             <p class="text-sm text-gray-600">{{ Str::limit($user->bio, 100) }}</p>
                         </div>
                     </div>
 
                     <!-- Buttons Container -->
-                    <div class="flex gap-4 ml-auto mt-4 sm:mt-0 sm:flex-col sm:ml-6 sm:gap-2">
+                    <div class="flex gap-4 ml-auto mt-4 sm:mt-0 sm:flex-row sm:gap-4 sm:ml-6">
                         <!-- View Profile Button -->
                         <a href="{{ route('users.show', ['user' => $user->id]) }}" 
                            class="text-white bg-green-900 px-4 py-2 rounded-md hover:bg-green-950 transition">
                             View Profile
                         </a>
 
-                        <!-- Ban User Button (Only for Admin) -->
+                        <!-- Admin Only Actions -->
                         @if(auth()->check() && auth()->user()->is_admin)
+                            <!-- Delete User -->
                             <form action="{{ route('users.destroy', ['user' => $user->id]) }}" 
                                   method="POST" 
-                                  onsubmit="return confirm('Are you sure you want to ban this user?');">
+                                  onsubmit="return confirm('Are you sure you want to delete this user?');">
                                 @csrf
                                 @method('DELETE')
                                 <button class="bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-700 transition">
                                     Delete User
                                 </button>
                             </form>
-                        @endif
-                        @if(auth()->check() && auth()->user()->is_admin)
-                            <form action="{{ route('users.ban', ['id' => $user->id]) }}" method="POST" onsubmit="return confirm('Ban this user?')">
-                                @csrf
-                                <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-700 transition">
-                                    Ban User
-                                </button>
-                            </form>
+
+                            <!-- Ban or Unban -->
+                            @if($user->banned)
+                                <form action="{{ route('users.unban', ['id' => $user->id]) }}" 
+                                      method="POST" 
+                                      onsubmit="return confirm('Unban this user?');">
+                                    @csrf
+                                    <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-blue-700 transition">
+                                        Unban User
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('users.ban', ['id' => $user->id]) }}" 
+                                      method="POST" 
+                                      onsubmit="return confirm('Ban this user?');">
+                                    @csrf
+                                    <button class="bg-orange-500 text-white rounded-lg px-4 py-2 hover:bg-orange-700 transition">
+                                        Ban User
+                                    </button>
+                                </form>
+                            @endif
                         @endif
                     </div>
                 </li>

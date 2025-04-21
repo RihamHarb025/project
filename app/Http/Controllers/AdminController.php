@@ -26,23 +26,13 @@ class AdminController extends Controller
         $totalPaidUsers = Payment::distinct('user_id')->count('user_id');
         $totalRevenue = Payment::sum('amount');
 
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
 
-        $search = $request->search;
-
-    $users = User::when($search, function ($query, $search) {
-        return $query->where('name', 'like', "%{$search}%")
-                     ->orWhere('email', 'like', "%{$search}%");
-    })->paginate(10);
-    
-    if ($request->ajax()) {
-        return view('admin.partials.users-table', compact('users'))->render();
-    }
         return view('admin.index', [
             'totalUsers' => $totalUsers,
             'totalRecipes' => $totalRecipes,
             'mostLikedRecipe' => $mostLikedRecipe,
             'users' => $users,
-            'search' => $search,
             'messages' => ContactMessage::latest()->get(),
             'recentRecipes'=>$recentRecipes,
             'recentUsers'=> $recentUsers,
