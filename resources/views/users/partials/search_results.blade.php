@@ -1,7 +1,7 @@
 @if($users->count() > 0)
     <ul class="space-y-4">
         @foreach($users as $user)
-            @if(!empty($user->username))
+            @if(!empty($user->username) && $user->id != auth()->id())  <!-- Exclude the current logged-in user -->
                 <li class="flex flex-col sm:flex-row items-center justify-between p-4 border border-gray-300 rounded-xl bg-white shadow hover:shadow-lg transition duration-300">
                     <div class="flex items-center gap-4 w-full sm:w-auto">
                         <!-- User Avatar -->
